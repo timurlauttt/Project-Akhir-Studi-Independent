@@ -1,0 +1,681 @@
+<!-- html dan css halaman ini dibuat oleh Urip Yoga Pangestu -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questify | Landing Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed">
+        <div class="container-fluid">
+          <!-- Logo and Questify Text -->
+          <a
+            class="navbar-brand ms-4 d-flex align-items-center fs-0 fw-bold"
+            href="#"
+          >
+            Questify
+            <img
+              src="{% static 'images/arcticons--flixquest.png' %}"
+              alt="logo"
+              class="ms"
+              width="30"
+              height="30"
+            />
+          </a>
+
+          <!-- Toggler for mobile view -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar items -->
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#home">Home</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#features">Features</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#courses">Courses</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#faq">FAQ</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+
+            <!-- Bahasa and Masuk for desktop view -->
+            <div class="d-none d-lg-flex align-items-center">
+              <img
+                src="{% static 'images/world-map.png' %}"
+                alt="language"
+                class="language-icon"
+                style="width: 20px"
+              />
+              <span class="me-5">Bahasa</span>
+              <a href="login.html" class="me-5 btn btn-outline-primary"
+                >Masuk</a
+              >
+            </div>
+
+            <!-- Dropdown for mobile view -->
+            <ul class="navbar-nav d-lg-none">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Lainnya
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#bahasa">Bahasa</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item btn btn-outline-primary"
+                      href="login.html"
+                      >Masuk</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="d-flex align-items-center"
+        style="background-color: white; padding-top: 90px"
+      >
+        <div
+          class="container-xxl text-left py-5 ms-5 me-5 w-100"
+          style="
+            height: calc(100vh - 100px);
+            background: linear-gradient(30deg, #5961f9, #ee9ae5);
+            border-radius: 25px 25px 125px 25px;
+          "
+        >
+          <img
+            src="{% static 'images/achievement.png' %}"
+            alt="logo_questify"
+            class="achievement-img img-fluid rounded float-end"
+            style="max-width: 40%; width: auto"
+          />
+          <h1 class="display-6 fw-bold mb-5" style="color: white">QUESTIFY</h1>
+          <h2 class="fw-normal" style="color: white">
+            Asah Kecepatan Berpikir
+          </h2>
+          <h2 class="fw-normal" style="color: white">Taklukkan Setiap Misi</h2>
+          <p class="lead mt-4" style="color: white">
+            Berpikir cepat adalah kunci sukses di dunia yang serba cepat. Di
+            Questify, kami menghadirkan misi dan kuis yang dirancang untuk
+            menguji kemampuan Anda, mendorong Anda untuk terus melampaui batas
+            kemampuan berpikir Anda.
+          </p>
+          <a
+            href="#"
+            class="btn btn-outline-primary btn-lg mt-3"
+            style="color: white; background-color: #dda0dd"
+            onmouseover="this.style.color='black'; this.style.backgroundColor='white';"
+            onmouseout="this.style.color='black'; this.style.backgroundColor='white';"
+          >
+            Get Started
+          </a>
+        </div>
+      </section>
+
+      <!-- Kenapa Pilih Kami Section -->
+      <section
+        id="features"
+        class="benefits container mt-5 p-4 shadow-lg rounded"
+      >
+        <div class="row align-items-center">
+          <div class="col-12 col-md-6 benefit-content mb-4 mb-md-0">
+            <h2
+              id="toggleFeatures"
+              class="h2 fw-bold"
+              style="cursor: pointer; color: black"
+            >
+              Mengapa kami lebih baik dari yang lain?
+              <span id="arrow" style="font-size: 24px">&#9660;</span>
+            </h2>
+            <div id="content" class="text-start" style="display: none">
+              <p class="text-muted">
+                Di Questify, kami menggabungkan misi berbasis tantangan yang
+                interaktif dan seru, memastikan pengguna terus termotivasi untuk
+                meningkatkan kemampuan berpikir cepat mereka. Setiap misi
+                dirancang untuk memberikan pengalaman yang menarik dan
+                bermanfaat, berbeda dari platform lain yang mungkin hanya
+                mengandalkan latihan biasa.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <!-- Center align benefit boxes on mobile with justify-content-center -->
+            <div id="benefit-boxes" class="row justify-content-center">
+              <div class="col-6 col-md-4 text-center benefit-box mb-3">
+                <img
+                  src="{% static 'images/election.png' %}"
+                  alt="Jadwal Tantangan Fleksibel"
+                  class="img-fluid mb-3"
+                />
+                <h3 class="fs-6 fw-bold">Jadwal Tantangan Fleksibel</h3>
+              </div>
+              <div class="col-6 col-md-4 text-center benefit-box mb-3">
+                <img
+                  src="{% static 'images/mobile-payment.png' %}"
+                  alt="Akses Terjangkau"
+                  class="img-fluid mb-3"
+                />
+                <h3 class="fs-6 fw-bold">Akses Terjangkau</h3>
+              </div>
+              <div class="col-6 col-md-4 text-center benefit-box mb-3">
+                <img
+                  src="{% static 'images/method.png' %}"
+                  alt="Kuis Reguler dan Evaluasi Kinerja"
+                  class="img-fluid mb-3"
+                />
+                <h3 class="fs-6 fw-bold">Kuis Reguler dan Evaluasi Kinerja</h3>
+              </div>
+              <div class="col-6 col-md-4 text-center benefit-box mb-3">
+                <img
+                  src="{% static 'images/dollar.png' %}"
+                  alt="Kuis Reguler dan Evaluasi Kinerja"
+                  class="img-fluid mb-3"
+                />
+                <h3 class="fs-6 fw-bold">Harga ekonomis</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Us Section -->
+      <section id="about" class="about-us container mt-5 p-4 rounded-3">
+        <div class="row align-items-center">
+          <div class="col-md-6 about-content">
+            <h2 class="fs-1 fw-bold mb-4" style="color: rgb(7, 7, 100)">
+              Tentang Kami
+            </h2>
+            <p class="fs-6 text-dark mb-3">
+              Questify adalah platform EdTech interaktif yang dirancang khusus
+              untuk anak-anak usia 7-13 tahun, bertujuan untuk mengasah
+              pemikiran cepat melalui misi dan kuis berbasis tantangan. Dengan
+              fitur yang memungkinkan penyesuaian tingkat kesulitan sesuai usia
+              dan kemampuan, Questify menawarkan pengalaman belajar yang
+              menyenangkan, adaptif, dan penuh permainan (gamified).
+            </p>
+            <p class="fs-6 text-dark mb-3">
+              Anak-anak dapat menguji kemampuan mereka dalam berbagai topik
+              sambil meningkatkan keterampilan berpikir kritis dan memecahkan
+              masalah secara efektif. Platform ini dirancang untuk membuat
+              belajar menjadi petualangan yang menarik, menantang, dan
+              menghibur, cocok untuk anak-anak yang ingin belajar sambil
+              bermain.
+            </p>
+          </div>
+          <div class="col-md-6 about-image text-center">
+            <img
+              src="{% static 'images/stationery.png' %}"
+              alt="About Us"
+              class="img-fluid rounded-3"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- fitur kelas section -->
+      <section id="courses" class="mt-8">
+        <div class="container container-harga my-5">
+          <h1 class="judul-sesi">Kursus Kami</h1>
+          <h2 class="subjudul-sesi">
+            Ini adalah semua kursus yang kami tawarkan di Questify
+          </h2>
+
+          <div class="row justify-content-center card-container">
+            <div class="col-md-4 col-12 mb-4">
+              <!-- Tambahan col-12 untuk mobile -->
+              <div class="card-harga card h-100">
+                <h2 class="judul-paket">Basic</h2>
+                <div class="violet-box">
+                  <p class="harga"><strong>50.000</strong><sub>/bulan</sub></p>
+                  <img
+                    src="{% static 'images\lock.png' %}"
+                    alt="Gambar Kunci"
+                    class="img-fluid"
+                    width="100px"
+                    height="100px"
+                  />
+                  <ul class="fitur">
+                    <li>
+                      <strong
+                        >Tantangan sederhana untuk pengenalan konsep</strong
+                      >
+                    </li>
+                    <li>
+                      <strong
+                        >Kuis dengan soal dasar untuk menguji pemahaman
+                        awal</strong
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div class="text-center">
+                    <a href="#" class="btn btn-primary">Beli Sekarang</a>
+                    <p class="text-kecil">untuk berlangganan penuh</p>
+                    <a href="pilihkelas.html" class="btn btn-secondary"
+                      >Coba Gratis</a
+                    >
+                    <p class="text-kecil">trial dengan akses terbatas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-12 mb-4">
+              <!-- Tambahan col-12 untuk mobile -->
+              <div class="card-harga card h-100">
+                <h2 class="judul-paket">Premium</h2>
+                <div class="violet-box">
+                  <p class="harga"><strong>150.000</strong><sub>/bulan</sub></p>
+                  <img
+                    src="{% static 'images\lock.png' %}"
+                    alt="Gambar Kunci"
+                    class="img-fluid"
+                    width="100px"
+                    height="100px"
+                  />
+                  <ul class="fitur">
+                    <li><strong>Tantangan lebih sulit dan beragam</strong></li>
+                    <li><strong>Akses ke materi premium</strong></li>
+                  </ul>
+                </div>
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div class="text-center">
+                    <a href="#" class="btn btn-primary">Beli Sekarang</a>
+                    <p class="text-kecil">untuk berlangganan penuh</p>
+                    <a href="pilihkelas.html" class="btn btn-secondary"
+                      >Coba Gratis</a
+                    >
+                    <p class="text-kecil">trial dengan akses terbatas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-12 mb-4">
+              <!-- Tambahan col-12 untuk mobile -->
+              <div class="card-harga card h-100">
+                <h2 class="judul-paket">Eksklusif</h2>
+                <div class="violet-box">
+                  <p class="harga"><strong>250.000</strong><sub>/bulan</sub></p>
+                  <img
+                    src="{% static 'images\lock.png' %}"
+                    alt="Gambar Kunci"
+                    class="img-fluid"
+                    width="100px"
+                    height="100px"
+                  />
+                  <ul class="fitur">
+                    <li><strong>Akses ke semua tantangan dan kuis</strong></li>
+                    <li><strong>Konsultasi langsung dengan ahli</strong></li>
+                  </ul>
+                </div>
+                <div
+                  class="card-body d-flex flex-column justify-content-between"
+                >
+                  <div class="text-center">
+                    <a href="#" class="btn btn-primary">Beli Sekarang</a>
+                    <p class="text-kecil">untuk berlangganan penuh</p>
+                    <a href="pilihkelas.html" class="btn btn-secondary"
+                      >Coba Gratis</a
+                    >
+                    <p class="text-kecil">trial dengan akses terbatas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- faq section -->
+      <section id="faq" class="container my-5">
+        <h2 class="fs-1 text-center fw-bold mb-4" style="color: rgb(7, 7, 100)">
+          Frequently Asked Questions
+        </h2>
+        <p class="fs-5 fw-bold text-dark text-center mb-3">
+          Lihat apa yang sering ditanyakan pelanggan kepada kami
+        </p>
+        <div class="accordion" id="faqAccordion">
+          <!-- Pertanyaan 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="fs-5 fw-bold accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+                style="background-color: #f9c2ed; color: black"
+              >
+                Apa itu Questify?
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#faqAccordion"
+            >
+              <div
+                class="accordion-body"
+                style="background-color: white; color: black"
+              >
+                Questify adalah platform EdTech interaktif yang dirancang untuk
+                anak-anak usia 7-13 tahun. Kami menawarkan misi dan kuis
+                berbasis tantangan yang dirancang untuk mengasah kemampuan
+                berpikir cepat dan memecahkan masalah secara efektif, sambil
+                tetap menyenangkan dan menghibur.
+              </div>
+            </div>
+          </div>
+
+          <!-- Pertanyaan 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="fs-5 fw-bold accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+                style="background-color: #f9c2ed; color: black"
+              >
+                Bagaimana cara kerja Questify?
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#faqAccordion"
+            >
+              <div
+                class="accordion-body"
+                style="background-color: white; color: black"
+              >
+                Questify memungkinkan anak-anak untuk memilih misi dan kuis yang
+                disesuaikan dengan usia dan kemampuan mereka. Platform ini
+                memungkinkan mereka untuk belajar melalui permainan,
+                meningkatkan keterampilan berpikir kritis, dan mendapatkan poin
+                atau penghargaan sesuai dengan pencapaian mereka.
+              </div>
+            </div>
+          </div>
+
+          <!-- Pertanyaan 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="fs-5 fw-bold accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+                style="background-color: #f9c2ed; color: black"
+              >
+                Apakah Questify cocok untuk semua anak?
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#faqAccordion"
+            >
+              <div
+                class="accordion-body"
+                style="background-color: white; color: black"
+              >
+                Ya, Questify dirancang untuk anak-anak usia 7 hingga 13 tahun.
+                Dengan tingkat kesulitan yang dapat disesuaikan, anak-anak dari
+                berbagai kemampuan dapat menikmati dan belajar sesuai dengan
+                kemampuan mereka, menjadikannya pengalaman yang menyenangkan dan
+                menantang.
+              </div>
+            </div>
+          </div>
+
+          <!-- Pertanyaan 4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button
+                class="fs-5 fw-bold accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+                style="background-color: #f9c2ed; color: black"
+              >
+                Apakah ada biaya untuk menggunakan Questify?
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              data-bs-parent="#faqAccordion"
+            >
+              <div
+                class="accordion-body"
+                style="background-color: white; color: black"
+              >
+                Kami menawarkan beberapa pilihan paket langganan yang dapat
+                disesuaikan dengan kebutuhan belajar anak. Anda dapat memilih
+                langganan bulanan atau tahunan sesuai dengan preferensi dan
+                anggaran Anda.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- motivational section -->
+      <section
+        class="motivational-card d-flex align-items-center justify-content-center mt-5 my-5 p-5"
+        style="border-radius: 50px"
+      >
+        <div
+          class="card rounded d-flex align-items-center justify-content-center w-100 h-100"
+          style="border-radius: 50px"
+        >
+          <div
+            class="d-flex flex-column align-items-center justify-content-center text-white p-5 w-100 h-100"
+            style="
+              background: linear-gradient(135deg, #7f67f5, #f67cba);
+              border-radius: 50px;
+            "
+          >
+            <div class="icon">
+              <i class="fas fa-hand-rock"></i>
+            </div>
+            <h1 class="display-6 text-center fw-bold my-3" style="color: white">
+              Kamu lebih kuat dari yang kamu pikirkan,
+            </h1>
+            <h1 class="display-6 text-center fw-bold my-3" style="color: white">
+              terus berjuang dan berikan yang terbaik!
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- contact-us section -->
+      <section id="contact" class="contact-form mt-3 p-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="card p-4 shadow-lg" style="border-radius: 15px">
+                <header class="text-center mb-4">
+                  <h1>Kontak Kami</h1>
+                  <p>Isi formulir ini untuk menghubungi kami</p>
+                </header>
+
+                {% if messages %} {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+                {% endfor %} {% endif %}
+
+                <form method="POST">
+                  {% csrf_token %}
+
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <label for="name" class="fw-bold">Nama</label>
+                      {{ form.name }}
+                      <!-- Form field dengan styling dari Django -->
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <label for="phone" class="fw-bold">No. Telp</label>
+                      {{ form.phone }}
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <label for="email" class="fw-bold">Email</label>
+                      {{ form.email }}
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col-12">
+                      <label for="comment" class="fw-bold">Komentar</label>
+                      {{ form.comment }}
+                    </div>
+                  </div>
+
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Kirim</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="background-color: rgb(7, 7, 100)" class="text-white py-5">
+      <div class="footer-content d-flex justify-content-between flex-wrap px-4">
+        <div class="footer-section col-12 col-md-4 p-4">
+          <h3 class="h3 mb-3">Questify</h3>
+          <p>
+            Questify adalah platform interaktif untuk mengasah kecepatan
+            berpikir melalui misi dan kuis berbasis tantangan. Kami berkomitmen
+            untuk memberikan pengalaman belajar yang menyenangkan dan penuh
+            permainan bagi anak-anak.
+          </p>
+        </div>
+        <div class="footer-section col-12 col-md-4 p-4 text-white">
+          <h3 class="h3 mb-3">Navigasi</h3>
+          <ul class="list-unstyled">
+            <li><a href="#home" class="text-white">Home</a></li>
+            <li><a href="#features" class="text-white">Features</a></li>
+            <li><a href="#about" class="text-white">About</a></li>
+            <li><a href="#courses" class="text-white">Courses</a></li>
+            <li><a href="#faq" class="text-white">FAQ</a></li>
+            <li><a href="#contact" class="text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section col-12 col-md-4 p-4">
+          <h3 class="h3 mb-3">Kontak Kami</h3>
+          <a href="#" style="color: white">
+            <p>
+              <i class="fas fa-envelope me-2" style="color: white"></i>Email :
+              info@questify.com
+            </p>
+          </a>
+          <a href="#" style="color: white">
+            <p>
+              <i class="fas fa-phone me-2" style="color: white"></i>Telepon :
+              +62 123 4567
+            </p>
+          </a>
+          <a href="#" style="color: white">
+            <p>
+              <i class="fas fa-map-marker-alt me-2" style="color: white"></i
+              >Alamat: Jakarta, Indonesia
+            </p>
+          </a>
+        </div>
+      </div>
+      <div
+        class="footer-bottom py-4 text-white text-center"
+        style="color: #34495e"
+      >
+        <p class="small">
+          &copy; 2024 Questify | Dibuat oleh
+          <strong class="text-white">Kelompok 5</strong>
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+/* css fitur kelas */
+/* Gaya untuk container utama */
+.container-harga {
+    text-align: center;
+    margin-bottom: 50px; /* Tambahkan margin bawah untuk jarak antar sesi */
+  }
+  
+  /* Gaya untuk masing-masing card */
+  .card-harga {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgb(250, 20, 250);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    width: 100%; /* Lebar fleksibel dengan Bootstrap */
+    box-sizing: border-box;
+  }
+  
+  .card-harga:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgb(250, 20, 250);
+  }
+  
+  .judul-paket {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: rgb(7, 7, 100);
+  }
+  
+  .harga {
+    font-size: 2em;
+    color: rgb(210, 100, 223);
+    margin: 10px 0;
+  }
+  
+  .fitur {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .fitur li {
+    margin: 10px 0;
+    color: rgb(7, 7, 100);
+    font-size: 15px;
+    position: relative;
+    padding-left: 25px;
+  }
+  
+  .fitur li::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background-color: #3feb78;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: translateY(-50%);
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 15px;
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .btn-primary {
+    background-color: violet;
+    margin-bottom: 10px;
+  }
+  
+  .btn-primary:hover {
+    background-color: rgb(7, 7, 100);
+  }
+  
+  .btn-secondary {
+    background-color: rgb(210, 100, 223);
+  }
+  
+  .btn-secondary:hover {
+    background-color: rgb(7, 7, 100);
+  }
+  
+  .text-kecil {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .violet-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid violet;
+    width: 100%;
+  }

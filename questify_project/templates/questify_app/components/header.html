@@ -1,0 +1,99 @@
+<!-- Header -->
+{% load static %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed">
+      <div class="container-fluid">
+        <!-- Logo and Questify Text -->
+        <a
+          class="navbar-brand d-flex align-items-center fs-0 fw-bold"
+          href="#"
+        >
+          Questify
+          <img
+            src="{% static 'images/arcticons--flixquest.png' %}"
+            alt="logo"
+            class="ms-2"
+            width="30"
+            height="30"
+          />
+        </a>
+
+        <!-- Toggler for mobile view -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar items -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
+            <li class="nav-item mx-3">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="semuakelas.html">Semua Kelas</a>
+            </li>
+            <li class="nav-item mx-3">
+              <a class="nav-link" href="#">Langganan</a>
+            </li>
+            <li class="nav-item mx-3">
+              <a class="nav-link" href="hasilnilai.html">Hasil Nilai</a>
+            </li>
+          </ul>
+
+          <!-- Bahasa and Masuk for desktop view -->
+          <div class="d-none d-lg-flex align-items-center">
+            <img
+              src="{% static 'images/world-map.png' %}"
+              alt="language"
+              class="language-icon"
+              style="width: 20px"
+            />
+            <span class="me-3">English</span>
+            <a href="userprofile.html">
+              <img
+                src="{% static 'images/profil.png' %}"
+                alt="profile"
+                class="profile-pic"
+              />
+            </a>
+          </div>
+
+          <!-- Dropdown for mobile view -->
+          <ul class="navbar-nav d-lg-none">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Lainnya
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Bahasa</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item btn btn-outline-primary"
+                    href="userprofile.html"
+                    >Profile</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
