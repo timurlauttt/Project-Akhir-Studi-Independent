@@ -39,9 +39,10 @@ def index(request):
     return render(request, 'questify_app/pages/index.html', {'form': form})
 
 def semuakelas(request):
-    data = "Hello, Questify!"  # Variabel data untuk ditampilkan
-    return render(request, 'questify_app/pages/semuakelas.html', context={'data': data})
+    return render(request, 'questify_app/pages/semuakelas.html')
 
 def hasilnilai(request):
-    data = "Hello, Questify!"  # Variabel data untuk ditampilkan
-    return render(request, 'questify_app/pages/hasilnilai.html', context={'data': data})
+    return render(request, 'questify_app/pages/hasilnilai.html')
+
+def halamanselesai(request):
+    return render(request, 'questify_app/pages/halamanselesai.html')

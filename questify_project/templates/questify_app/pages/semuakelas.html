@@ -1,7 +1,12 @@
-<!-- templates/questify_app/pages/semuakelas.html -->
 {% extends 'questify_app/layout/base.html' %}
 
-{% block title %}Semua Kelas Questify{% endblock %}
+{% load static %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/semuakelas.css' %}">
+{% endblock %}
+
+{% block title %}Semua Kelas{% endblock %}
 
 {% block content %}
 <div class="text-center">

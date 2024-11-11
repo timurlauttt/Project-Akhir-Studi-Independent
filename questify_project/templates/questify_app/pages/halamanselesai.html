@@ -1,0 +1,31 @@
+{% extends 'questify_app/layout/base.html' %}
+
+{% load static %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/halamanselesai.css' %}">
+{% endblock %}
+
+{% block title %}Halaman Selesai{% endblock %}
+
+{% block content %}
+<section class="card p-4" style="margin-top: 50px">
+  <!-- Icon -->
+  <img src="{% static 'images/tick.png' %}" alt="Deskripsi gambar">
+
+  <!-- Score Text -->
+  <div class="score-text">
+    <h1><b>SKOR KAMU 100!!</b></h1>
+  </div>
+
+  <!-- Message Text -->
+  <div class="message-text">
+    <h3><b>Pertahankan dan Tingkatkan!!!</b></h3>
+  </div>
+</section>
+
+<!-- Tombol Jawab & Lanjutkan -->
+<div class="d-flex justify-content-end mt-3">
+  <button class="btn btn-sm">Jawab & Lanjutkan</button>
+</div>
+{% endblock %}
