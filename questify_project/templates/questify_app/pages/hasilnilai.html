@@ -1,0 +1,108 @@
+{% extends 'questify_app/layout/base.html' %} 
+
+{% block title %}Hasil Nilai Questify{% endblock %} 
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-12 text-center mb-4">
+      <!-- Section Title -->
+      <h2 class="fw-bold" style="color: #6f4dbf;">Hasil Nilai Kelas Anda</h2>
+      <p class="text-muted">Di bawah ini adalah hasil nilai dari kelas yang telah Anda ikuti. Anda dapat melihat detail setiap kelas, tanggal pelaksanaan, dan meninjau ulang materi jika diperlukan.</p>
+      <!-- Divider Line -->
+      <hr class="my-4">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table custom-table mt-3">
+          <thead>
+            <tr>
+              <th>Judul Kelas</th>
+              <th>Kategori Kelas</th>
+              <th>Total</th>
+              <th><span class="icon">&#10004;</span></th>
+              <th><span class="icon">&#10008;</span></th>
+              <th><span class="icon">&#128197;</span></th>
+              <th><span class="icon">&#128278;</span></th>
+            </tr>
+          </thead>
+          <tbody id="dataRows">
+            <tr>
+              <td>Kelas Basic 1</td>
+              <td>Basic</td>
+              <td>10</td>
+              <td>10</td>
+              <td>0</td>
+              <td>20 September 2024</td>
+              <td><a href="#" class="review-link">Review</a></td>
+            </tr>
+            <tr>
+              <td>Kelas Basic 2</td>
+              <td>Basic</td>
+              <td>10</td>
+              <td>10</td>
+              <td>0</td>
+              <td>21 September 2024</td>
+              <td><a href="#" class="review-link">Review</a></td>
+            </tr>
+            <tr>
+              <td>Kelas Basic 3</td>
+              <td>Basic</td>
+              <td>10</td>
+              <td>9</td>
+              <td>1</td>
+              <td>22 September 2024</td>
+              <td><a href="#" class="review-link">Review</a></td>
+            </tr>
+            <tr>
+              <td>Kelas Intermediate 1</td>
+              <td>Intermediate</td>
+              <td>10</td>
+              <td>9</td>
+              <td>1</td>
+              <td>23 September 2024</td>
+              <td><a href="#" class="review-link">Review</a></td>
+            </tr>
+            <tr>
+              <td>Kelas Intermediate 2</td>
+              <td>Intermediate</td>
+              <td>10</td>
+              <td>8</td>
+              <td>2</td>
+              <td>24 September 2024</td>
+              <td><a href="#" class="review-link">Review</a></td>
+            </tr>
+            <tr>
+              <td>Kelas Intermediate 3</td>
+              <td>Intermediate</td>
+              <td>10</td>
+              <td>8</td>
+              <td>2</td>
+              <td>25 September 2024</td>
+              <td><a href="#" class="review-link">Review</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <nav aria-label="...">
+        <ul
+          class="pagination pagination-sm mt-2 justify-content-end"
+          id="pagination"
+        >
+          <li class="page-item disabled" id="prev-page">
+            <a class="page-link" href="#" tabindex="-1">Sebelumnya</a>
+          </li>
+          <!-- Halaman akan di-generate secara dinamis oleh JavaScript -->
+          <li class="page-item" id="next-page">
+            <a class="page-link" href="#">Selanjutnya</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+{% endblock %}

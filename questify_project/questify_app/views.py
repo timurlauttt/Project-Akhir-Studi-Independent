@@ -41,3 +41,7 @@ def index(request):
 def semuakelas(request):
     data = "Hello, Questify!"  # Variabel data untuk ditampilkan
     return render(request, 'questify_app/pages/semuakelas.html', context={'data': data})
+
+def hasilnilai(request):
+    data = "Hello, Questify!"  # Variabel data untuk ditampilkan
+    return render(request, 'questify_app/pages/hasilnilai.html', context={'data': data})

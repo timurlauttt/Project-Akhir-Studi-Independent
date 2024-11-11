@@ -1,6 +1,12 @@
 <!-- Header -->
 {% load static %}
 
+<style>
+  .nav-link.active {
+      color: #ed80fd !important;
+  }
+</style>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed">
       <div class="container-fluid">
@@ -36,16 +42,16 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
             <li class="nav-item mx-3">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="semuakelas.html">Semua Kelas</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'semuakelas' %}active{% endif %}" href="{% url 'semuakelas' %}">Semua Kelas</a>
             </li>
             <li class="nav-item mx-3">
               <a class="nav-link" href="#">Langganan</a>
             </li>
             <li class="nav-item mx-3">
-              <a class="nav-link" href="hasilnilai.html">Hasil Nilai</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'hasilnilai' %}active{% endif %}" href="{% url 'hasilnilai' %}">Hasil Nilai</a>
             </li>
           </ul>
 
