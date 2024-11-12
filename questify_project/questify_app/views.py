@@ -46,3 +46,6 @@ def hasilnilai(request):
 
 def halamanselesai(request):
     return render(request, 'questify_app/pages/halamanselesai.html')
+
+def langganan(request):
+    return render(request, 'questify_app/pages/langganan.html')
