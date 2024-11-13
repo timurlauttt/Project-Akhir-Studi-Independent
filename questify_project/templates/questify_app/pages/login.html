@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Login Page</title>
+</head>
+<body>
+
+    <!-- Header dan Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navbar-custom">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center fs-0 fw-bold" href="#">
+                    Questify
+                    <img src="{% static 'images/arcticons--flixquest.png' %}" alt="logo" class="ms-2" style="width: 25px; height: 25px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="{% url 'index' %}">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-none d-lg-flex align-items-center">
+                    <img src="{% static 'images/world-map.png' %}" alt="language" class="language-icon" style="width: 20px;">
+                    <span class="me-3">English</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content area -->
+    <main class="container vh-100 d-flex justify-content-center align-items-center mt-4 pt-5">
+        <section class="row w-100 shadow-lg mx-auto rounded-3 overflow-hidden" style="max-width: 850px;">
+            <div class="col-md-6 d-none d-md-block p-0">
+                <img src="{% static 'images/logo.jpg' %}" alt="Questify Logo" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="col-md-6 bg-white p-5 d-flex flex-column justify-content-center">
+                <h2 class="text-center mb-3 login-gradient-title">Login</h2>
+                
+                <form id="login-form" method="POST" action="">
+                    {% csrf_token %}
+
+                    <!-- Input Username -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" name="username" placeholder="Username" class="form-control input-style" required>
+                    </div>
+
+                    <!-- Input Password -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <input type="password" name="password" placeholder="Password" id="password" class="form-control input-style" required>
+                        <button type="button" id="toggle-password" class="btn btn-outline-secondary">Show</button>
+                    </div>
+
+                    <!-- Checkbox Keep Me Logged In -->
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="keepLoggedIn">
+                        <label class="form-check-label" for="keepLoggedIn">Keep Me Logged In</label>
+                    </div>
+
+                    <!-- Button Login -->
+                    <div class="d-grid mb-3">
+                        <button type="submit" class="btn btn-primary w-100" id="login-button" disabled>Login</button>
+                    </div>
+
+                    <!-- Link Forgot Password -->
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">Forgot password?</a>
+                    </div>
+                </form>
+
+                <!-- Link Register -->
+                <div class="text-center mt-4">
+                    <p>Belum punya akun? <a href="{% url 'register' %}" class="text-decoration-none">Register</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal untuk Pesan Error -->
+    <div class="modal fade" id="loginErrorModal" tabindex="-1" aria-labelledby="loginErrorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginErrorModalLabel">Login Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="error-message">
+                    <!-- Pesan error akan muncul di sini -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show/hide password functionality
+            const togglePasswordButton = document.getElementById('toggle-password');
+            const passwordField = document.getElementById('password');
+
+            togglePasswordButton.addEventListener('click', function() {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    togglePasswordButton.textContent = 'Hide';
+                } else {
+                    passwordField.type = 'password';
+                    togglePasswordButton.textContent = 'Show';
+                }
+            });
+
+            // Aktifkan tombol login jika checkbox Keep Me Logged In dicentang
+            const keepLoggedInCheckbox = document.getElementById('keepLoggedIn');
+            const loginButton = document.getElementById('login-button');
+
+            keepLoggedInCheckbox.addEventListener('change', function() {
+                loginButton.disabled = !keepLoggedInCheckbox.checked;
+            });
+
+            // Menampilkan pesan error dari Django jika ada
+            {% if messages %}
+                {% for message in messages %}
+                    if ("{{ message.tags }}".includes('error')) {
+                        document.getElementById('error-message').innerText = "{{ message }}";
+                        var errorModal = new bootstrap.Modal(document.getElementById('loginErrorModal'), {});
+                        errorModal.show();
+                    }
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
+</body>
+</html>

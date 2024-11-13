@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Navbar and footer styling -->
+    <link rel="stylesheet" href="{%static 'css/review.css' %}"> <!-- Custom styles for the review section -->
+</head>
+<body>
+
+    <!-- Header with Navbar -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+          <!-- Logo and Questify Text -->
+          <a class="navbar-brand d-flex align-items-center fs-0 fw-bold" href="#">
+            Questify
+            <img
+              src="{% static 'images/arcticons--flixquest.png' %}"
+              alt="logo"
+              class="ms-2"
+              width="30"
+              height="30"
+            />
+          </a>
+
+          <!-- Toggler for mobile view -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar items -->
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="semuakelas.html">Semua Kelas</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="#">Langganan</a>
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="hasilnilai.html">Hasil Nilai</a>
+              </li>
+            </ul>
+
+            <!-- Language and Profile icons for desktop view -->
+            <div class="d-none d-lg-flex align-items-center">
+              <img
+                src="{% static 'images/world-map.png' %}"
+                alt="language"
+                class="language-icon"
+                style="width: 20px"
+              />
+              <span class="me-3">English</span>
+              <a href="userprofile.html">
+                <img
+                  src="{%static 'images/profil.png' %}"
+                  alt="profile"
+                  class="profile-pic"
+                />
+              </a>
+            </div>
+
+            <!-- Dropdown for mobile view -->
+            <ul class="navbar-nav d-lg-none">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Lainnya
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Bahasa</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item btn btn-outline-primary"
+                      href="userprofile.html"
+                    >Profile</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content area for review with margin to avoid overlap with navbar -->
+    <main class="review-section mt-5 pt-5">
+        {% block content %}
+        <div class="result-container">
+            <h2 class="final-score">Nilai Akhir : 90</h2>
+            <div class="congrats-badge">
+                <img src="{% static 'images/piala.png' %}" alt="Congrats" class="congrats-icon" width="200">
+                <p class="pass-message">Selamat, Kamu Lulus</p>
+            </div>
+            <p class="minimum-score">Nilai Minimal: 70</p>
+        </div>
+        
+        <div class="score-info">
+            <p class="total-score">Total Terselesaikan: 10</p>
+            <p class="time-duration">Durasi Pengerjaan: 00:05:00</p>
+        </div>
+        
+        <table class="review-table">
+            <thead>
+                <tr>
+                    <th>Pertanyaan</th>
+                    <th>Jawaban Kamu</th>
+                    <th>Jawaban Benar</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lorem ipsum dolor sit amet...</td>
+                    <td>A</td>
+                    <td>A</td>
+                    <td><span class="status-correct">Benar</span></td>
+                </tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit amet...</td>
+                    <td>B</td>
+                    <td>B</td>
+                    <td><span class="status-correct">Benar</span></td>
+                </tr>
+                <tr>
+                    <td>Lorem ipsum dolor sit amet...</td>
+                    <td>D</td>
+                    <td>C</td>
+                    <td><span class="status-incorrect">Salah</span></td>
+                </tr>
+                <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+            </tbody>
+        </table>        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer text-center mt-4 py-3">
+        <p>&copy; Questify - All rights reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS for responsive navbar functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
