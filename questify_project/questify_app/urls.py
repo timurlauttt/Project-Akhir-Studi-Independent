@@ -6,5 +6,8 @@ urlpatterns = [
     path('semuakelas/', views.semuakelas, name='semuakelas'),  # Route untuk halaman semuakelas  
     path('hasilnilai/', views.hasilnilai, name='hasilnilai'),  # Route untuk halaman hasilnilai  
     path('halamanselesai/', views.halamanselesai, name='halamanselesai'),  # Route untuk halaman selesai
-    path('langganan/', views.langganan, name='langganan'),  # Route untuk halaman langganan  
+    path('langganan/', views.langganan, name='langganan'),  # Route untuk halaman langganan
+    path('login/', views.loginPage, name='login'), 
+    path('register/', views.register, name='register'),
+    path('review/', views.review, name='review'),
 ]
