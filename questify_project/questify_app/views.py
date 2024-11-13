@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import ContactForm
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
 
 # Create your views here.
 def index(request):
@@ -38,6 +41,39 @@ def index(request):
 
     return render(request, 'questify_app/pages/index.html', {'form': form})
 
+def register(request):
+    form = CreateUserForm()
+
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for {username}.  Please login')
+
+            return redirect('login')
+
+    context = {'form':form}
+    return render(request, 'questify_app/pages/register.html', context)
+
+def loginPage(request):
+
+    if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('semuakelas')  
+            else:
+                messages.error(request, 'Username atau password salah')
+
+    context = {}
+    return render(request, 'questify_app/pages/login.html', context)
+
 def semuakelas(request):
     return render(request, 'questify_app/pages/semuakelas.html')
 
@@ -49,3 +85,6 @@ def halamanselesai(request):
 
 def langganan(request):
     return render(request, 'questify_app/pages/langganan.html')
+
+def review(request):
+    return render(request, 'questify_app/pages/review.html')
