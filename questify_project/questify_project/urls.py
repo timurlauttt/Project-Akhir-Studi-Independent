@@ -25,5 +25,5 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/landing-page/', permanent=True)),  # Redirect ke landing-page
     path('landing-page/', views.index, name='landing-page'),
     path('', include('questify_app.urls')),
-
+    path('accounts/', include('allauth.urls')),
 ]
