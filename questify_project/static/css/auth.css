@@ -1,0 +1,172 @@
+/* auth.css */
+/* Kontainer utama */
+.container {
+    max-width: 900px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Gaya untuk gambar logo */
+img {
+    width: 100%; /* Pastikan gambar responsif */
+    height: auto; /* Tinggi otomatis agar proporsional */
+}
+
+/* Gaya header */
+h2 {
+    font-family: Arial, sans-serif; /* Font untuk header */
+    font-size: 2rem; /* Ukuran font */
+    font-weight: bold; /* Ketebalan font */
+    letter-spacing: 1px; /* Jarak antar huruf */
+    color: #8e24aa; /* Warna header */
+}
+
+/* Gaya untuk tombol utama */
+.btn-primary {
+    background-color: #8e24aa; /* Warna latar tombol */
+    border: none; /* Tanpa border */
+    border-radius: 5px; /* Sudut melengkung */
+    transition: background-color 0.3s, transform 0.2s; /* Transisi efek hover */
+}
+
+/* Efek hover untuk tombol utama */
+.btn-primary:hover {
+    background-color: #7b1fa2; /* Warna saat hover */
+    transform: scale(1.05); /* Membesar saat hover */
+}
+
+/* Gaya untuk link di dalam form */
+form a {
+    color: #8e24aa; /* Warna link */
+}
+
+/* Efek hover untuk link */
+form a:hover {
+    text-decoration: underline; /* Garis bawah saat hover */
+}
+
+/* Gaya bayangan untuk kontainer */
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* Bayangan */
+}
+
+/* Gaya untuk kolom input */
+.form-control {
+    border: 1px solid #ccc; /* Border abu-abu */
+    border-radius: 5px; /* Sudut melengkung */
+    transition: border-color 0.3s; /* Transisi warna border */
+}
+
+/* Warna border saat input fokus */
+.form-control:focus {
+    border-color: #8e24aa; /* Warna border saat fokus */
+    box-shadow: 0 0 5px rgba(142, 36, 170, 0.5); /* Bayangan saat fokus */
+}
+
+/* Menambahkan margin antara kolom */
+.mb-3 {
+    margin-bottom: 20px; /* Margin bawah untuk elemen */
+}
+
+
+/* File: css/style.css */
+
+/* Mengatur ukuran dan style logo */
+.logo {
+    width: 30px; /* Ukuran logo lebih kecil */
+    height: auto; /* Menjaga proporsi logo */
+    margin-left: 10px; /* Menambahkan sedikit margin agar tidak bertumpuk dengan teks */
+}
+
+/* Style untuk ikon bahasa */
+.language-icon {
+    width: 20px; /* Mengatur ukuran ikon bahasa */
+    height: auto; /* Menjaga proporsi */
+    margin-right: 5px; /* Memberikan sedikit jarak antara ikon dan teks */
+}
+
+/* Style untuk navbar agar tampak lebih rapi */
+.navbar-custom {
+    width: 100vw;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff; /* Warna latar belakang navbar tetap putih (default) */
+    padding: 2px 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    font-weight: bold;
+    padding-left: 2rem; /* Padding kiri */
+    padding-right: 2rem; /* Padding kanan */
+}
+
+/* Style untuk logo text dan link di navbar */
+.navbar-brand {
+    font-size: 1.5rem; /* Mengatur ukuran font logo text */
+    display: flex;
+    align-items: center; /* Memastikan logo dan teks berada dalam satu garis */
+    color: #0b132b !important; /* Warna teks biru dongker dengan !important */
+    font-weight: bold !important; /* Membuat teks lebih tebal */
+}
+
+.navbar-brand img {
+    margin-left: 10px; /* Memberikan jarak antara teks dan logo */
+}
+
+/* Style untuk link di navbar */
+.navbar-nav .nav-link {
+    font-size: 1rem; /* Mengatur ukuran font */
+    margin-right: 15px; /* Memberikan jarak antar link */
+    color: #0b132b !important; /* Warna teks biru dongker dengan !important */
+    font-weight: bold !important; /* Membuat teks lebih tebal */
+    position: relative; /* Posisi relatif untuk efek underline */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Transisi warna pada hover dan aktif */
+    text-transform: none; /* Mengubah teks menjadi bentuk normal (bukan uppercase) */
+    padding: 14px 20px; /* Sesuai dengan padding di navbar sebelumnya */
+    text-decoration: none; /* Menghapus garis bawah pada link */
+}
+
+/* Hover effect pada link navbar */
+.navbar-nav .nav-link:hover {
+    color: #ed80fd !important; /* Warna ungu saat hover */
+    background-color: #dddddd65; /* Memberikan latar belakang ringan saat hover */
+}
+
+/* Mengatur style untuk link yang aktif */
+.navbar-nav .nav-link.active {
+    color: #ed80fd !important; /* Warna ungu pada link yang aktif */
+}
+
+/* Style untuk bahasa (e.g., "English") */
+.language-text {
+    color: #0b132b !important; /* Warna teks biru dongker */
+    font-weight: bold !important;
+    margin-left: 5px;
+}
+
+/* Style untuk background halaman */
+body {
+    background-color: #f5efff; /* Warna latar belakang sesuai dengan gambar yang Anda berikan */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Jost", sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem !important;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem !important;
+        margin-right: 10px;
+    }
+}
