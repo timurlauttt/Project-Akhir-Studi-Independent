@@ -12,4 +12,7 @@ urlpatterns = [
     path('review/', views.review, name='review'),
     path('userprofile/', views.userprofile, name='userprofile'),
     path('metodepembayaran/', views.metodepembayaran, name='metodepembayaran'),
+    path('cekbeli/', views.cekbeli, name='cekbeli'),
+    path('payment/', views.payment, name='payment'),
+
 ]
