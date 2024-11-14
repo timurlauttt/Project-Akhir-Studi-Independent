@@ -1,0 +1,105 @@
+/* body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f3e9ff;
+    margin: 0;
+    padding: 0;
+    padding-top: 70px;
+}
+ */
+
+
+.container2 {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    padding-top: 70px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container2 h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.bank-logo {
+    width: 100px;   /* Ganti dengan lebar yang diinginkan */
+    height: 150px;  /* Ganti dengan tinggi yang diinginkan */
+}
+
+
+.amount {
+    font-weight: normal; /* Pastikan teks utama tidak tebal */
+}
+
+.amount .nominal {
+    font-weight: bold; /* Hanya angka nominal yang tebal */
+    display: inline-block; /* Memastikan tidak ada efek tambahan */
+}
+
+
+.divider {
+    border-top: 1px solid #d0e0ff;
+    margin: 10px 0;
+}
+
+.payment-box {
+    background-color: #e6f0ff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #d0e0ff;
+    text-align: center;
+}
+
+.container h2 {
+    font-weight: bold;
+}
+
+.payment-box h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.payment-box p {
+    margin: 5px 0;
+}
+
+.payment-box .bank-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.payment-box .bank-info img {
+    height: 100px;
+    margin-right: 20px;
+    width: 122px;
+}
+
+.payment-box .amount {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* CSS di dalam file style internal untuk .footer-container */
+.footer-container {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-container a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+

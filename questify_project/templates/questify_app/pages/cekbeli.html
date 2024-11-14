@@ -1,0 +1,63 @@
+{% extends 'questify_app/layout/base.html' %}
+
+{% load static %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/cekbeli.css' %}">
+
+{% endblock %}
+
+{% block title %}Cek Pembelian{% endblock %}
+
+{% block content %}
+
+<div class="container2">
+    <div class="title">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cek Pembelian Kamu</span>
+    </div>
+    <div class="content">
+        <div class="section">
+            <div class="label">Keterangan </div>
+        </div>
+        <div class="section">
+            <div class="label">
+                <div>Kelas Basic</div>
+                <div class="periode">Periode: 1 tahun</div> <!-- Teks periode ditambahkan di sini -->
+            </div>
+            <div class="value">Rp 250.000</div>
+        </div>
+        <div class="section">
+            <div class="label">Subtotal</div>
+            <div class="value">Rp 250.000</div>
+        </div>
+        <div class="section">
+            <div class="label">PPN</div>
+            <div class="value">-</div>
+        </div>
+        <div class="section">
+            <div class="label">Fee</div>
+            <div class="value">Rp 6.000</div>
+        </div>
+        <div class="section total">
+            <div class="label">Total</div>
+            <div class="value total">Rp 250.000</div>
+        </div>
+    </div>
+</div>
+
+<div class="checkout-footer">
+    <div class="steps">
+        <div class="step">
+            <div class="circle">1</div>
+            <div class="label">Metode Pembayaran</div>
+        </div>
+        <div class="step">
+            <div class="circle">2</div>
+            <div class="label">Pembelian</div>
+        </div>
+    </div>
+    <button class="checkout">Checkout</button>
+</div>
+
+{% endblock %}

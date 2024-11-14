@@ -94,3 +94,11 @@ def userprofile(request):
 
 def metodepembayaran(request):
     return render(request, 'questify_app/pages/metodepembayaran.html')
+
+def cekbeli(request):
+    return render(request, 'questify_app/pages/cekbeli.html')
+
+def payment(request):
+    return render(request, 'questify_app/pages/payment.html')
+
+
