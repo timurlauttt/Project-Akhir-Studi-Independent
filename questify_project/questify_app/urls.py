@@ -16,5 +16,5 @@ urlpatterns = [
     path('metodepembayaran/', views.metodepembayaran, name='metodepembayaran'),
     path('cekbeli/', views.cekbeli, name='cekbeli'),
     path('payment/', views.payment, name='payment'),
-    path('detail_transaksi/', views.detailtransaksi, name='detailtransaksi'),
+    path('daftar_transaksi/', views.daftartransaksi, name='daftartransaksi'),
 ]
