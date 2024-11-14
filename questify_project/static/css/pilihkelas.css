@@ -1,0 +1,59 @@
+
+h1,
+h2 {
+  color: #333;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 50px;
+}
+
+.kelas-card {
+  background: linear-gradient(180deg, #e9e6f1, #9675d3);
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.kelas-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.kelas-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.kelas-subtitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.label-kelas {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+.gratis {
+  background-color: yellow;
+  color: black;
+}
+
+.berbayar {
+  background-color: green;
+}

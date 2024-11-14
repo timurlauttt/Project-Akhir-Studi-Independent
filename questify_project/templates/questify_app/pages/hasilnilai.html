@@ -1,4 +1,5 @@
 {% extends 'questify_app/layout/base.html' %} 
+{% load static %}
 
 {% block title %}Hasil Nilai{% endblock %} 
 
@@ -17,7 +18,7 @@
   <div class="row justify-content-center">
     <div class="col-md-12">
       <div class="table-responsive">
-        <table class="table custom-table mt-3">
+        <table class="table custom-table mt-2">
           <thead>
             <tr>
               <th>Judul Kelas</th>
@@ -107,4 +108,8 @@
   </div>
 </main>
 
+{% endblock %}
+
+{% block page_js %}
+  <script src="{% static 'js/hasilnilai.js' %}"></script>
 {% endblock %}

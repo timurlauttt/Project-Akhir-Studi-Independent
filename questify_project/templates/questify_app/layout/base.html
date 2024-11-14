@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     {% block page_css %}
-    <!-- css lainnya dibuat perhalaman-->
+      <!-- css lainnya dibuat perhalaman-->
     {% endblock %}
+    
   </head>
   <body>
     <!-- Menyertakan header -->
     {% include 'questify_app/components/header.html' %}
 
     <!-- Konten utama -->
-
     {% block content %}{% endblock %}
 
     <!-- Menyertakan footer -->
@@ -30,6 +30,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/hasilnilai.js' %}"></script>
-  </body>
+
+    {% block page_js %}
+    <!-- css lainnya dibuat perhalaman-->
+    {% endblock %}  </body>
+
 </html>

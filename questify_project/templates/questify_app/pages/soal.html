@@ -1,0 +1,64 @@
+{% extends 'questify_app/layout/base.html' %}
+
+{% load static %}
+
+{% block title %}Semua Kelas{% endblock %}
+
+{% block content %}
+
+<main class="container my-5 px-5">
+    <section class="card p-4" style="margin-top: 100px">
+      <!-- Timer -->
+      <div class="d-flex justify-content-end">
+        <span class="badge bg-warning text-dark p-2">⏲ 10:00</span>
+      </div>
+
+      <!-- Soal dan Pilihan -->
+      <h4>Soal nomor: 1</h4>
+      <p>
+        Andi memiliki 5 apel. Kemudian, ibunya memberi 7 apel lagi. Berapa
+        jumlah apel Andi sekarang?
+      </p>
+
+      <!-- Pilihan Jawaban -->
+      <div class="row my-4">
+        <div class="col-6 d-flex justify-content-center">
+          <button class="btn btn-outline-secondary w-100" id="option1" onclick="selectAnswer ('option1')">
+            10 apel
+          </button>
+        </div>
+        <div class="col-6 d-flex justify-content-center">
+          <button class="btn btn-outline-secondary w-100" id="option2" onclick="selectAnswer ('option2')">
+            12 apel
+          </button>
+        </div>
+        <div class="col-6 d-flex justify-content-center mt-3">
+          <button class="btn btn-outline-secondary w-100" id="option3" onclick="selectAnswer ('option3')">
+            13 apel
+          </button>
+        </div>
+        <div class="col-6 d-flex justify-content-center mt-3">
+          <button class="btn btn-outline-secondary w-100" id="option4" onclick="selectAnswer ('option4')">
+            14 apel
+          </button>
+        </div>
+      </div>
+
+      <div id="warning-message" style="color: red; display: none">
+        Silahkan pilih opsi jawaban sebelum melanjutkan !
+      </div>
+
+      <!-- Tombol Jawab & Lanjutkan -->
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" onclick="nextQuestion()">
+          Jawab & Lanjutkan
+        </button>
+      </div> 
+    </section>
+  </main>
+
+{% endblock %}
+
+{% block page_js %}
+  <script src="{% static 'js/soal.js' %}"></script>
+{% endblock %}

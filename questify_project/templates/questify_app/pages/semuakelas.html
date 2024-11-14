@@ -12,7 +12,12 @@
 
 <main class="container content-main mt-5 pt-5 px-5">
   <div class="text-center">
-    <h2 class="mt-5"><strong>Selamat Datang, Pengguna!</strong></h2>
+    <h2><strong>Selamat Datang, Pengguna 🙌</strong></h2>
+    <p class="text-muted">Tantangan menantimu! Pilih kelas dan mulailah mengasah kemampuanmu sekarang!</p>
+
+    <!-- Divider Line -->
+    <hr class="my-4">
+
     
         <!-- Container untuk membungkus semua kartu (menggunakan Bootstrap) -->
         <section class="container my-4">
@@ -31,7 +36,7 @@
                     <!-- Harga ditampilkan dalam format teks -->
                     <p class="harga"><strong>50.000</strong><sub>/bulan</sub></p>
                     <img
-                    src="assets\images\lock.png"
+                    src="{% static 'images/lock.png' %}"
                     alt="Gambar Kunci"
                     class="img-fluid"
                     width="100px"
@@ -59,7 +64,7 @@
                     <div class="text-center">
                       <a href="#" class="btn btn-primary">Beli Sekarang</a>
                       <p class="text-kecil">untuk berlangganan penuh</p>
-                      <a href="pilihkelas.html" class="btn btn-secondary"
+                      <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
                         >Coba Gratis</a
                       >
                       <p class="text-kecil">trial dengan akses terbatas</p>
@@ -76,7 +81,7 @@
                   <div class="violet-box">
                     <p class="harga"><strong>150.000</strong><sub>/bulan</sub></p>
                     <img
-                    src="assets\images\lock.png"
+                    src="{% static 'images/lock.png' %}"
                     alt="Gambar Kunci"
                     class="img-fluid"
                     width="100px"
@@ -93,7 +98,7 @@
                     <div class="text-center">
                       <a href="#" class="btn btn-primary">Beli Sekarang</a>
                       <p class="text-kecil">untuk berlangganan penuh</p>
-                      <a href="pilihkelas.html" class="btn btn-secondary"
+                      <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
                         >Coba Gratis</a
                       >
                       <p class="text-kecil">trial dengan akses terbatas</p>
@@ -110,7 +115,7 @@
                   <div class="violet-box">
                     <p class="harga"><strong>250.000</strong><sub>/bulan</sub></p>
                     <img
-                      src="assets\images\lock.png"
+                      src="{% static 'images/lock.png' %}"
                       alt="Gambar Kunci"
                       class="img-fluid"
                       width="100px"
@@ -127,7 +132,7 @@
                     <div class="text-center">
                       <a href="#" class="btn btn-primary">Beli Sekarang</a>
                       <p class="text-kecil">untuk berlangganan penuh</p>
-                      <a href="pilihkelas.html" class="btn btn-secondary"
+                      <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
                         >Coba Gratis</a
                       >
                       <p class="text-kecil">trial dengan akses terbatas</p>

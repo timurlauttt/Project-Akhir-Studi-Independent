@@ -101,4 +101,13 @@ def cekbeli(request):
 def payment(request):
     return render(request, 'questify_app/pages/payment.html')
 
+def detailkelas(request):
+    return render(request, 'questify_app/pages/detailkelas.html')
+
+def soal(request):
+    return render(request, 'questify_app/pages/soal.html')
+
+def pilihkelas(request):
+    return render(request, 'questify_app/pages/pilihkelas.html')
+
 
