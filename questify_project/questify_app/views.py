@@ -67,7 +67,7 @@ def loginPage(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('semuakelas')  
+                return redirect('questify_app:semuakelas')  
             else:
                 messages.error(request, 'Username atau password salah')
 

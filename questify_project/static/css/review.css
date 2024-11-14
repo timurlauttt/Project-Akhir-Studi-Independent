@@ -1,0 +1,126 @@
+/* Styling utama untuk section review */
+.review-section {
+    background-color: #f3e9ff;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+}
+
+.result-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 0 auto 20px;
+    width: 100%; /* Ubah ini agar memenuhi layar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul Nilai Akhir */
+.final-score {
+    color: #6e49a3;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Congrats Badge dengan tata letak vertikal */
+.congrats-badge {
+    display: flex;
+    flex-direction: column; /* Membuat elemen anak vertikal */
+    align-items: center;
+    margin: 20px 0;
+}
+
+.congrats-icon {
+    width: 250px; /* Memperbesar ukuran gambar */
+    height: auto;
+    margin-bottom: 10px; /* Memberikan jarak antara gambar dan teks */
+}
+
+/* Pesan Lulus */
+.pass-message {
+    background-color: #a8f1c6;
+    color: #266235;
+    font-size: 20px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Nilai Minimal */
+.minimum-score {
+    color: #ff8b00;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Informasi Skor dan Durasi - di luar container hasil akhir */
+.score-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px auto 25px;
+    max-width: 600px;
+    font-size: 14px;
+    color: #333;
+}
+
+.total-score, .time-duration {
+    font-weight: bold;
+}
+
+/* Styling Tabel Review */
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.review-table thead {
+    background-color: #d3a3ff; /* Light purple color for header */
+    color: #000000; /* Black text color in the header */
+}
+
+
+.review-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Status Benar */
+.status-correct {
+    color: #28a745; /* Warna hijau */
+    font-weight: bold;
+}
+
+/* Status Salah */
+.status-incorrect {
+    color: #dc3545; /* Warna merah */
+    font-weight: bold;
+}
+
+/* Sel tabel */
+.review-table td {
+    padding: 12px;
+    text-align: left;
+    color: #333333; /* Warna teks utama */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Baris alternatif */
+.review-table tbody tr:nth-child(even) {
+    background-color: #f7faff; /* Biru sangat muda sebagai warna baris alternatif */
+}
+
+/* Responsif untuk tampilan kecil */
+@media (max-width: 768px) {
+    .review-table th, .review-table td {
+        font-size: 12px;
+    }
+}

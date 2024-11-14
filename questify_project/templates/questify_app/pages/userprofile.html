@@ -9,80 +9,84 @@
 
 {% block content %}
 <!-- Profile Section -->
-<div class="row justify-content-center">
-  <div class="col-md-12 mb-5">
-    <section class="card" style="margin-top: 50px">
-      <div class="card-body">
-        <section>
-          <ul
-            class="nav nav-tabs justify-content-between align-items-center"
-            style="background-color: #9575cd; padding: 10px; border-radius: 10px;">
-            <li class="nav-item">
-              <a class="nav-link active text-white" href="#" style="font-weight: bold">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#" style="font-weight: bold">Daftar Transaksi</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#" style="font-weight: bold">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-            </li>
-          </ul>
-        </section>
 
-        <section>
-          <div class="row mt-4 justify-content-center">
-            <div class="col-md-8 mx-auto">
-              <form>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="first-name" class="form-label">Nama Depan</label>
-                    <input type="text" class="form-control" id="first-name" value="" />
+<main class="container content-main mt-5 pt-5 px-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12 mb-5">
+      <section class="card" style="margin-top: 50px">
+        <div class="card-body">
+          <section>
+            <ul
+              class="nav nav-tabs justify-content-between align-items-center"
+              style="background-color: #9575cd; padding: 10px; border-radius: 10px;">
+              <li class="nav-item">
+                <a class="nav-link active text-white" href="#" style="font-weight: bold">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#" style="font-weight: bold">Daftar Transaksi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#" style="font-weight: bold">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+              </li>
+            </ul>
+          </section>
+  
+          <section>
+            <div class="row mt-4 justify-content-center">
+              <div class="col-md-8 mx-auto">
+                <form>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="first-name" class="form-label">Nama Depan</label>
+                      <input type="text" class="form-control" id="first-name" value="" />
+                    </div>
+                    <div class="col">
+                      <label for="last-name" class="form-label">Nama Belakang</label>
+                      <input type="text" class="form-control" id="last-name" value="" />
+                    </div>
                   </div>
-                  <div class="col">
-                    <label for="last-name" class="form-label">Nama Belakang</label>
-                    <input type="text" class="form-control" id="last-name" value="" />
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" value="" />
                   </div>
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" value="" />
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="" />
-                </div>
-                <div class="mb-3">
-                  <label for="confirm-password" class="form-label">Konfirmasi Password</label>
-                  <input type="password" class="form-control" id="confirm-password" placeholder="" />
-                  <small class="text-muted">Isi password jika ingin mengubahnya</small>
-                </div>
-                <div class="mb-3">
-                  <label for="profileUpload" class="form-label">Foto Profil</label>
-                  <input class="form-control" type="file" id="profileUpload" accept="image/*" onchange="loadFile(event)" />
-                </div>
-              </form>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="confirm-password" class="form-label">Konfirmasi Password</label>
+                    <input type="password" class="form-control" id="confirm-password" placeholder="" />
+                    <small class="text-muted">Isi password jika ingin mengubahnya</small>
+                  </div>
+                  <div class="mb-3">
+                    <label for="profileUpload" class="form-label">Foto Profil</label>
+                    <input class="form-control" type="file" id="profileUpload" accept="image/*" onchange="loadFile(event)" />
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-4 d-flex flex-column align-items-center">
+                <img
+                  id="output"
+                  src="{% static 'default-profile.jpg' %}"
+                  alt="Profile Picture"
+                  class="rounded-circle img-fluid"
+                  style="width: 150px; height: 150px"
+                />
+              </div>
             </div>
-            <div class="col-md-4 d-flex flex-column align-items-center">
-              <img
-                id="output"
-                src="{% static 'default-profile.jpg' %}"
-                alt="Profile Picture"
-                class="rounded-circle img-fluid"
-                style="width: 150px; height: 150px"
-              />
-            </div>
+          </section>
+  
+          <div class="text-center mt-4">
+            <button class="btn btn-primary">SAVE</button>
           </div>
-        </section>
-
-        <div class="text-center mt-4">
-          <button class="btn btn-primary">SAVE</button>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
+</main>
+
 
 <!-- JavaScript -->
 <script>

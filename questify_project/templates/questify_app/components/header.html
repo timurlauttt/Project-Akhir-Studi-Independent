@@ -45,13 +45,13 @@
               <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link {% if request.resolver_match.url_name == 'semuakelas' %}active{% endif %}" href="{% url 'semuakelas' %}">Semua Kelas</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'semuakelas' %}active{% endif %}" href="{% url 'questify_app:semuakelas' %}">Semua Kelas</a>
             </li>
             <li class="nav-item mx-3">
-              <a class="nav-link" href="#">Langganan</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'langganan' %}active{% endif %}" href="{% url 'questify_app:langganan' %}">Langganan</a>
             </li>
             <li class="nav-item mx-3">
-              <a class="nav-link {% if request.resolver_match.url_name == 'hasilnilai' %}active{% endif %}" href="{% url 'hasilnilai' %}">Hasil Nilai</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'hasilnilai' %}active{% endif %}" href="{% url 'questify_app:hasilnilai' %}">Hasil Nilai</a>
             </li>
           </ul>
 
@@ -64,7 +64,7 @@
               style="width: 20px"
             />
             <span class="me-3">English</span>
-            <a href="userprofile.html">
+            <a href="{% url 'questify_app:userprofile' %}">
               <img
                 src="{% static 'images/profil.png' %}"
                 alt="profile"
