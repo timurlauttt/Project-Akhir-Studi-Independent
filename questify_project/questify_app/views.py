@@ -101,4 +101,7 @@ def cekbeli(request):
 def payment(request):
     return render(request, 'questify_app/pages/payment.html')
 
+def daftartransaksi(request):
+    return render(request, 'questify_app/pages/daftar_transaksi.html')
+
 
