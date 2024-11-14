@@ -10,32 +10,35 @@
 
 {% block content %}
 
-<div class="container2">
-    <h1>Payment</h1>
-    <div class="divider"></div>
-    <div class="payment-box">
-        <h2>Menunggu Pembayaran</h2>
-        <p>Mohon Selesaikan pembayaran anda sebelum tanggal 24 September 18:00:00 dengan rincian sebagai berikut:
-        </p>
+<main class="container content-main mt-5 pt-5 px-5">
+    <div class="container2">
+        <h1>Payment</h1>
         <div class="divider"></div>
-        <div class="bank-info">
-            <img src="{% static 'images/bri.png' %}" alt="BANK BRI Logo" class="bank-logo" />
-            <div>
-                <p>No Rekening Tujuan:</p>
-                <p>152738494947</p>
-                <p>A.n Budi Budiman</p>
-                <p>Pembayaran Kelas Basic Program Questify</p>
+        <div class="payment-box">
+            <h2>Menunggu Pembayaran</h2>
+            <p>Mohon Selesaikan pembayaran anda sebelum tanggal 24 September 18:00:00 dengan rincian sebagai berikut:
+            </p>
+            <div class="divider"></div>
+            <div class="bank-info">
+                <img src="{% static 'images/bri.png' %}" alt="BANK BRI Logo" class="bank-logo" />
+                <div>
+                    <p>No Rekening Tujuan:</p>
+                    <p>152738494947</p>
+                    <p>A.n Budi Budiman</p>
+                    <p>Pembayaran Kelas Basic Program Questify</p>
+                </div>
             </div>
+            <div class="divider"></div>
+            <p class="amount">Jumlah yang harus dibayar:<br /><span class="nominal">Rp 256.000</span></p>
+            <div class="divider"></div>
         </div>
-        <div class="divider"></div>
-        <p class="amount">Jumlah yang harus dibayar:<br /><span class="nominal">Rp 256.000</span></p>
-        <div class="divider"></div>
+        <div class="footer-container">
+            Setelah melakukan pembayaran lihat status pembayaran dengan klik profil →
+            <a href="#">Daftar Transaksi</a>
+        </div>
     </div>
-    <div class="footer-container">
-        Setelah melakukan pembayaran lihat status pembayaran dengan klik profil →
-        <a href="#">Daftar Transaksi</a>
-    </div>
-</div>
+</main>
+
 
 
 {% endblock %}
