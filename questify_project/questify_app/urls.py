@@ -10,4 +10,6 @@ urlpatterns = [
     path('login/', views.loginPage, name='login'), 
     path('register/', views.register, name='register'),
     path('review/', views.review, name='review'),
+    path('userprofile/', views.userprofile, name='userprofile'),
+    path('metodepembayaran/', views.metodepembayaran, name='metodepembayaran'),
 ]

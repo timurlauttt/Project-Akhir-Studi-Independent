@@ -88,3 +88,9 @@ def langganan(request):
 
 def review(request):
     return render(request, 'questify_app/pages/review.html')
+
+def userprofile(request):
+    return render(request, 'questify_app/pages/userprofile.html')
+
+def metodepembayaran(request):
+    return render(request, 'questify_app/pages/metodepembayaran.html')
