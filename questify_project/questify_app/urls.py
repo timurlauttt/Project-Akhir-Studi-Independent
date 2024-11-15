@@ -17,5 +17,6 @@ urlpatterns = [
     path('cekbeli/', views.cekbeli, name='cekbeli'),
     path('payment/', views.payment, name='payment'),
     path('daftar_transaksi/', views.daftartransaksi, name='daftartransaksi'),
+    path('detailtransaksi/', views.detailtransaksi, name='detailtransaksi'),
 
 ]

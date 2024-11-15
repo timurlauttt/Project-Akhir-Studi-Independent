@@ -104,4 +104,7 @@ def payment(request):
 def daftartransaksi(request):
     return render(request, 'questify_app/pages/daftar_transaksi.html')
 
+def detailtransaksi(request):
+    return render(request, 'questify_app/pages/detailtransaksi.html')
+
 
