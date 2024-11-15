@@ -105,6 +105,13 @@
         </div>
     </div>
 
+    <!-- Elemen Tersembunyi untuk Menyimpan Pesan Django -->
+    <div id="django-messages" style="display: none;">
+        {% for message in messages %}
+            <div class="message" data-tags="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -132,16 +139,17 @@
                 loginButton.disabled = !keepLoggedInCheckbox.checked;
             });
 
-            // Menampilkan pesan error dari Django jika ada
-            {% if messages %}
-                {% for message in messages %}
-                    if ("{{ message.tags }}".includes('error')) {
-                        document.getElementById('error-message').innerText = "{{ message }}";
-                        var errorModal = new bootstrap.Modal(document.getElementById('loginErrorModal'), {});
-                        errorModal.show();
-                    }
-                {% endfor %}
-            {% endif %}
+            // Menampilkan pesan error di modal jika ada
+            const djangoMessages = document.querySelectorAll('#django-messages .message');
+            djangoMessages.forEach(function(messageElement) {
+                const messageText = messageElement.textContent;
+                const messageTags = messageElement.getAttribute('data-tags');
+                if (messageTags.includes('error')) {
+                    document.getElementById('error-message').innerText = messageText;
+                    const errorModal = new bootstrap.Modal(document.getElementById('loginErrorModal'));
+                    errorModal.show();
+                }
+            });
         });
     </script>
 </body>

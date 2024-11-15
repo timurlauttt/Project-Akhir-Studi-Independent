@@ -92,6 +92,15 @@ def review(request):
 def userprofile(request):
     return render(request, 'questify_app/pages/userprofile.html')
 
+def detailkelas(request):
+    return render(request, 'questify_app/pages/detailkelas.html')
+
+def soal(request):
+    return render(request, 'questify_app/pages/soal.html')
+
+def pilihkelas(request):
+    return render(request, 'questify_app/pages/pilihkelas.html')
+
 def metodepembayaran(request):
     return render(request, 'questify_app/pages/metodepembayaran.html')
 
