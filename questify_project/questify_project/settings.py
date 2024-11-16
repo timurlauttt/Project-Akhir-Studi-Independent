@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'questify_app',
 
     # Django Allauth apps
+    #'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -121,7 +122,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('semuakelas')
+LOGIN_REDIRECT_URL = reverse_lazy('questify_app:semuakelas')
+LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -3,6 +3,24 @@
 
 {% block page_css %}
 <link rel="stylesheet" href="{% static 'css/userprofile.css' %}" />
+<style>
+  .btn-small {
+  padding: 5px 12px;
+  font-size: 14px;
+  border: none;
+  background-color: #a27bf8; /* Biru */
+  color: white;
+  text-decoration: none; /* Hilangkan garis bawah pada link */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-small:hover {
+  background-color: #986df7; /* Biru Tua */
+}
+
+</style>
 {% endblock %}
 
 {% block title %}User Profile{% endblock %}
@@ -24,7 +42,7 @@
                     <a class="nav-link text-white {% if request.resolver_match.url_name == 'daftartransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}" style="font-weight: bold">Daftar Transaksi</a>
                   </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#" style="font-weight: bold">
+                    <a class="nav-link text-white" href="{% url 'account_logout' %}" style="font-weight: bold">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
@@ -50,14 +68,10 @@
                     <input type="email" class="form-control" id="email" value="" />
                   </div>
                   <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="" />
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" value="" />
                   </div>
-                  <div class="mb-3">
-                    <label for="confirm-password" class="form-label">Konfirmasi Password</label>
-                    <input type="password" class="form-control" id="confirm-password" placeholder="" />
-                    <small class="text-muted">Isi password jika ingin mengubahnya</small>
-                  </div>
+                  
                   <div class="mb-3">
                     <label for="profileUpload" class="form-label">Foto Profil</label>
                     <input class="form-control" type="file" id="profileUpload" accept="image/*" onchange="loadFile(event)" />
@@ -76,6 +90,15 @@
             </div>
           </section>
   
+          <div class="mt-2">
+            <a href="{% url 'account_change_password' %}" class="btn-small" style="margin-right: 5px;">
+                <b>Ganti Password</b>
+            </a>
+            <a href="{% url 'account_email' %}" class="btn-small">
+                <b>Ganti Email</b>
+            </a>
+          </div>
+
           <div class="text-center mt-4">
             <button class="btn btn-primary">SAVE</button>
           </div>

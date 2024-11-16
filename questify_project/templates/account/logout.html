@@ -1,0 +1,60 @@
+{% extends "questify_app/layout/base.html" %}
+{% load allauth i18n %}
+
+{% block title %}Sign Out{% endblock %}
+
+{% block head_title %}
+    {% trans "Sign Out" %}
+{% endblock head_title %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100 pt-5 px-5">
+    <div class="card text-center" style="max-width: 500px; width: 100%; margin-top: 50px; margin-bottom: 50px;">
+        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+            <h1 class="card-title text-center mt-2">
+                <b>{% trans "Sign Out" %}</b>
+            </h1>
+            
+            <p class="text-center mt-3">{% trans "Are you sure you want to sign out?" %}</p>
+            
+            {% url 'account_logout' as action_url %}
+            <form method="post" action="{{ action_url }}" class="d-flex flex-column align-items-center">
+                {% csrf_token %}
+                {{ redirect_field }}
+                
+                <button type="submit" class="btn btn-danger mt-3" style="width: 200px;">
+                    {% trans "Sign Out" %}
+                </button>
+            </form>
+
+            <strong class="mt-4">{% trans "Menu:" %}</strong>
+            <div class="d-flex justify-content-between flex-wrap mt-3 gap-2">
+                {% if user.is_authenticated %}
+                    {% url 'account_email' as email_url_ %}
+                    {% if email_url_ %}
+                        <a href="{{ email_url_ }}" class="btn btn-sm" style="color: #5b3e9f; background-color: #e6def8; padding: 5px 15px;">
+                            {% trans "Change Email" %}
+                        </a>
+                    {% endif %}
+                    
+                    {% url 'account_change_password' as change_password_url_ %}
+                    {% if change_password_url_ %}
+                        <a href="{{ change_password_url_ }}" class="btn btn-sm" style="color: #5b3e9f; background-color: #e6def8; padding: 5px 15px;">
+                            {% trans "Change Password" %}
+                        </a>     
+                    {% endif %}
+                
+                    {% url 'account_logout' as logout_url_ %}
+                    {% if logout_url_ %}
+                        <a href="{{ logout_url_ }}" class="btn btn-sm" style="color: #5b3e9f; background-color: #e6def8; padding: 5px 15px;">
+                            {% trans "Sign Out" %}
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <!-- Add guest options if necessary -->
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

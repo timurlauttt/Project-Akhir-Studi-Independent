@@ -7,6 +7,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -74,45 +75,59 @@ def loginPage(request):
     context = {}
     return render(request, 'questify_app/pages/login.html', context)
 
+@login_required(login_url='/accounts/login/')
 def semuakelas(request):
     return render(request, 'questify_app/pages/semuakelas.html')
 
+@login_required(login_url='/accounts/login/')
 def hasilnilai(request):
     return render(request, 'questify_app/pages/hasilnilai.html')
 
+@login_required(login_url='/accounts/login/')
 def halamanselesai(request):
     return render(request, 'questify_app/pages/halamanselesai.html')
 
+@login_required(login_url='/accounts/login/')
 def langganan(request):
     return render(request, 'questify_app/pages/langganan.html')
 
+@login_required(login_url='/accounts/login/')
 def review(request):
     return render(request, 'questify_app/pages/review.html')
 
+@login_required(login_url='/accounts/login/')
 def userprofile(request):
     return render(request, 'questify_app/pages/userprofile.html')
 
+@login_required(login_url='/accounts/login/')
 def detailkelas(request):
     return render(request, 'questify_app/pages/detailkelas.html')
 
+@login_required(login_url='/accounts/login/')
 def soal(request):
     return render(request, 'questify_app/pages/soal.html')
 
+@login_required(login_url='/accounts/login/')
 def pilihkelas(request):
     return render(request, 'questify_app/pages/pilihkelas.html')
 
+@login_required(login_url='/accounts/login/')
 def metodepembayaran(request):
     return render(request, 'questify_app/pages/metodepembayaran.html')
 
+@login_required(login_url='/accounts/login/')
 def cekbeli(request):
     return render(request, 'questify_app/pages/cekbeli.html')
 
+@login_required(login_url='/accounts/login/')
 def payment(request):
     return render(request, 'questify_app/pages/payment.html')
 
+@login_required(login_url='/accounts/login/')
 def daftartransaksi(request):
     return render(request, 'questify_app/pages/daftar_transaksi.html')
 
+@login_required(login_url='/accounts/login/')
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
