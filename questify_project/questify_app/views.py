@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
+from .forms import ProfileUpdateForm
 
 # Create your views here.
 def index(request):
@@ -53,7 +54,7 @@ def register(request):
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account was created for {username}.  Please login')
 
-            return redirect('login')
+            return redirect('questify_app:login')
 
     context = {'form':form}
     return render(request, 'questify_app/pages/register.html', context)
@@ -95,9 +96,26 @@ def langganan(request):
 def review(request):
     return render(request, 'questify_app/pages/review.html')
 
+
 @login_required(login_url='/accounts/login/')
 def userprofile(request):
-    return render(request, 'questify_app/pages/userprofile.html')
+    # Ambil data pengguna yang sedang login
+    user = request.user
+
+    # Jika metode POST, proses perubahan profil
+    if request.method == 'POST':
+        # Tangani data yang dikirimkan oleh formulir
+        form = ProfileUpdateForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profil Anda telah diperbarui!')
+            return redirect('questify_app:userprofile')  # Redirect ke halaman profil setelah perubahan
+    else:
+        # Jika GET, tampilkan profil pengguna yang sedang login
+        form = ProfileUpdateForm(instance=user)
+
+    return render(request, 'questify_app/pages/userprofile.html', {'form': form, 'user': user})
+
 
 @login_required(login_url='/accounts/login/')
 def detailkelas(request):

@@ -43,3 +43,16 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username']
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        # Pastikan email tidak duplikat (jika diperlukan)
+        if User.objects.filter(email=email).exclude(id=self.instance.id).exists():
+            raise forms.ValidationError("Email sudah digunakan oleh pengguna lain.")
+        return email

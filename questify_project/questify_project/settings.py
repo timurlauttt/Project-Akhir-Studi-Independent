@@ -18,6 +18,7 @@ from django.urls import reverse_lazy
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = BASE_DIR.joinpath("templates")
 STATIC_DIR = BASE_DIR.joinpath("static")
+MEDIA_DIR = BASE_DIR.joinpath("media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -180,7 +181,17 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Durasi sesi sebelum kedaluwarsa (dalam detik)
+SESSION_COOKIE_AGE = 3600  # 1 jam
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Sesi akan berakhir saat browser ditutup
