@@ -1,25 +1,10 @@
 from django.contrib import admin
 from .models import (
-    User, DetailUser, TypeUser, Kelas, MetodePembayaran,
+    Kelas, MetodePembayaran,
     Transaksi, ModulPembelajaran, Soal, Nilai, JawabanUser, ContactMessage
 )
 
 # Registering each model in the Django admin
-
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('email',)
-    search_fields = ('email',)
-
-@admin.register(DetailUser)
-class DetailUserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'nama_depan', 'nama_belakang')
-    search_fields = ('nama_depan', 'nama_belakang')
-
-@admin.register(TypeUser)
-class TypeUserAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
 
 @admin.register(Kelas)
 class KelasAdmin(admin.ModelAdmin):

@@ -1,27 +1,7 @@
 from datetime import datetime
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.email
-
-class DetailUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='detail_user')
-    nama_depan = models.CharField(max_length=255)
-    nama_belakang = models.CharField(max_length=255)
-    foto = models.TextField()
-
-    def __str__(self):
-        return f"{self.nama_depan} {self.nama_belakang}"
-
-class TypeUser(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
 
 class Kelas(models.Model):
     nama_kelas = models.CharField(max_length=100)
