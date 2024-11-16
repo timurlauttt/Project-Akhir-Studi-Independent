@@ -15,44 +15,41 @@
 <body>
 
     <!-- Main content area -->
-    <main class="container-fluid vh-100 d-flex align-items-center">
-        <section class="row w-100 shadow-lg mx-auto rounded-3 overflow-hidden vh-80">
-
-            <!-- Kolom Gambar -->
-            <div class="col-md-6 p-0 vh-100 d-flex flex-column justify-content-center align-items-center text-white d-none d-md-flex rounded-5" style="background: linear-gradient(180deg, #EE9AE5, #5961F9); position: relative;">
+    <main class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <section class="row w-90 shadow-xl mx-auto rounded-3 overflow-hidden my-3" style="max-height: 100%;">
+    
+            <!-- Image Column -->
+            <div class="col-md-6 p-0 d-flex flex-column justify-content-center align-items-center text-white d-none d-md-flex rounded-5"
+                 style="background: linear-gradient(180deg, #EE9AE5, #5961F9); position: relative;">
+                <a href="{% url 'questify_app:index' %}" class="btn btn-outline-light position-absolute d-none d-md-block" style="top: 20px; left: 20px;">Kembali</a>
                 <div class="text-center mb-5 p-4 d-flex align-items-center gap-2" style="position: relative;">
-                    
-                    <!-- Judul Questify dan Logo Perusahaan tetap berjejer -->
-                    <h3 class="display-4 fw-bold mb-0" style="color: #010851; position: relative; margin-top: -300px; ">Questify</h3>
+                    <h3 class="display-4 fw-bold mb-0" style="color: #010851; position: relative; margin-top: -300px;">Questify</h3>
                     <img src="{% static 'images/arcticons--flixquest.png' %}" alt="Company Logo" style="width: 80px; height: 80px; opacity: 50%; position: relative; margin-top: -300px; margin-left: -20px;">
-            
                 </div>
-                
-                <!-- Teks tambahan di bawah tulisan dan logo Questify -->
                 <p class="text-center" style="color: white; font-size: 1.5rem; font-weight: 500; margin-top: 80px; position: relative; margin-top: -140px;">Asah Kecepatan Berpikir</p>
                 <p class="text-center" style="color: white; font-size: 1.5rem; font-weight: 500; position: relative;">Taklukan Setiap Misi</p>
-                <!-- Tambahkan Gambar Hiasan -->
-                <img src="{% static 'images/pngwing.com.png' %}" alt="hiasan" style="width: 300px; height: 300px; position: absolute; left: -120px; bottom: 40px; opacity: 50%; ">
-                <img src="{% static 'images/pngwing.com.png' %}" alt="hiasan" style="width: 300px; height: 300px; position: absolute; left: -100px; bottom: 0px; opacity: 50%; ">
+                <img src="{% static 'images/pngwing.com.png' %}" alt="hiasan" style="width: 300px; height: 300px; position: absolute; left: -120px; bottom: 40px; opacity: 50%;">
+                <img src="{% static 'images/pngwing.com.png' %}" alt="hiasan" style="width: 300px; height: 300px; position: absolute; left: -100px; bottom: 0px; opacity: 50%;">
             </div>
-                      
-            
-            <!-- Kolom Form Login -->
-            <div class="col-md-6 bg-white p-5 d-flex flex-column justify-content-center vh-100">
-                <h2 class="text-center mb-3 login-gradient-title fw-bold" style="color:#010851;">Login</h2>
-                
+    
+            <!-- Form Column -->
+            <div class="col-md-6 bg-white p-5 d-flex flex-column justify-content-center" style="height: auto;">
+                <a href="{% url 'questify_app:index' %}" class="btn btn-outline-secondary mb-3 d-md-none" style="align-self: flex-start;">Kembali</a>
+                <h2 class="text-start mb-3" style="color: black;">
+                    Halo, Selamat Datang di <strong style="color: #010851;">Questify</strong>
+                    <img class="rounded" src="{% static 'images/arcticons--flixquest.png' %}" alt="Company Logo" style="width: 50px; height: 50px; position: relative; left: -10px;">
+                </h2>
+    
                 <form id="login-form" method="POST" action="">
                     {% csrf_token %}
                     
                     <!-- Input Username -->
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <div class="mb-3">
                         <input type="text" name="username" placeholder="Username" class="form-control input-style" required>
                     </div>
                     
-                    <!-- Input Password -->
+                    <!-- Input Password with Toggle -->
                     <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
                         <input type="password" name="password" placeholder="Password" id="password" class="form-control input-style" required>
                         <button type="button" id="toggle-password" class="btn btn-outline-secondary">Show</button>
                     </div>
@@ -63,31 +60,31 @@
                         <label class="form-check-label" for="keepLoggedIn">Keep Me Logged In</label>
                     </div>
                     
-                    <!-- Button Login -->
+                    <!-- Login Button -->
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary w-100" id="login-button" disabled>Login</button>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
                     </div>
-        
+    
+                    <!-- Google Login Button -->
                     <div class="text-center mb-3">
                         <a href="{% provider_login_url 'google' %}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center w-100">
                             <img src="{% static 'images/google.png' %}" alt="Google logo" style="width: 18px; margin-right: 10px;">
                             <span>Masuk dengan Google</span>
                         </a>                        
                     </div> 
-        
-                    <!-- Link Forgot Password -->
+    
+                    <!-- Forgot Password Link -->
                     <div class="text-center mt-3">
                         <a href="#" class="text-decoration-none">Forgot password?</a>
                     </div>
                 </form>
-        
-                <!-- Link Register -->
+    
+                <!-- Register Link -->
                 <div class="text-center mt-4">
                     <p>Belum punya akun? <a href="{% url 'questify_app:register' %}" class="text-decoration-none">Register</a></p>
                 </div>
             </div>
         </section>
-        
     </main>
     
 
