@@ -1,8 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
-
+from django.core.exceptions import ValidationError
 
 class Kelas(models.Model):
     nama_kelas = models.CharField(max_length=100)
@@ -88,3 +87,14 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def save(self, *args, **kwargs):
+        # Jika ada gambar profil sebelumnya dan gambar baru diupload
+        if self.pk and self.profile_picture:
+            old_profile = UserProfile.objects.get(pk=self.pk)
+            # Jika gambar berubah, hapus gambar yang lama
+            if old_profile.profile_picture != self.profile_picture:
+                if old_profile.profile_picture:
+                    old_profile.profile_picture.delete(save=False)
+
+        super().save(*args, **kwargs)

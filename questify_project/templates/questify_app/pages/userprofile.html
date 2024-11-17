@@ -19,6 +19,15 @@
   .btn-small:hover {
     background-color: #986df7;
   }
+
+  .alert-success {
+    background-color: #7bb0ff;
+    color: #ffffff;
+    border-color: #6296ff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
 </style>
 {% endblock %}
 
@@ -31,6 +40,13 @@
       <section class="card" style="margin-top: 50px">
         <div class="card-body">
           <section>
+            {% if messages %}
+              <div class="alert alert-success">
+                {% for message in messages %}
+                  <p>{{ message }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
             <ul class="nav nav-tabs justify-content-between align-items-center" style="background-color: #9575cd; padding: 10px; border-radius: 10px;">
               <li class="nav-item">
                 <a class="nav-link text-white {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}" style="font-weight: bold">Profile</a>
