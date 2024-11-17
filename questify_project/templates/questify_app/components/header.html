@@ -66,7 +66,7 @@
             <span class="me-3">English</span>
             <a href="{% url 'questify_app:userprofile' %}">
               <img
-                src="{% static 'images/profil.png' %}"
+                src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}"
                 alt="profile"
                 class="profile-pic"
               />

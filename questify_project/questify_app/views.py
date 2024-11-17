@@ -9,6 +9,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
+from django.contrib.auth.models import User
+from .models import UserProfile
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your views here.
 def index(request):
@@ -99,13 +103,15 @@ def review(request):
 
 @login_required(login_url='/accounts/login/')
 def userprofile(request):
-    # Ambil data pengguna yang sedang login
     user = request.user
+
+    # Periksa apakah pengguna sudah memiliki profil
+    if not hasattr(user, 'profile'):
+        UserProfile.objects.create(user=user)  # Jika tidak ada, buatkan profil baru
 
     # Jika metode POST, proses perubahan profil
     if request.method == 'POST':
-        # Tangani data yang dikirimkan oleh formulir
-        form = ProfileUpdateForm(request.POST, instance=user)
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request, 'Profil Anda telah diperbarui!')
@@ -115,6 +121,20 @@ def userprofile(request):
         form = ProfileUpdateForm(instance=user)
 
     return render(request, 'questify_app/pages/userprofile.html', {'form': form, 'user': user})
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('questify_app:userprofile')  # Ganti 'profile' dengan nama rute Anda
+    else:
+        form = ProfileUpdateForm(instance=request.user)
+    
+    return render(request, 'questify_app/pages/userprofile.html', {'form': form})
+
 
 
 @login_required(login_url='/accounts/login/')

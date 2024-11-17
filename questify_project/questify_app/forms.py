@@ -3,6 +3,7 @@ from django import forms
 from .models import ContactMessage
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import UserProfile
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -46,13 +47,23 @@ class CreateUserForm(UserCreationForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    profile_picture = forms.ImageField(required=False)  # Menangani gambar profil (opsional)
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username']
+        fields = ['first_name', 'last_name', 'email', 'username']  # Sesuaikan dengan field yang Anda inginkan
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        # Pastikan email tidak duplikat (jika diperlukan)
-        if User.objects.filter(email=email).exclude(id=self.instance.id).exists():
-            raise forms.ValidationError("Email sudah digunakan oleh pengguna lain.")
-        return email
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Inisialisasi profile_picture dari UserProfile jika sudah ada profil
+        if hasattr(self.instance, 'profile') and self.instance.profile:
+            self.fields['profile_picture'].initial = self.instance.profile.profile_picture
+
+    def save(self, commit=True):
+        # Simpan data user
+        user = super().save(commit)
+        # Simpan data profile_picture ke UserProfile jika ada
+        if 'profile_picture' in self.cleaned_data:
+            user.profile.profile_picture = self.cleaned_data['profile_picture']
+            user.profile.save()
+        return user

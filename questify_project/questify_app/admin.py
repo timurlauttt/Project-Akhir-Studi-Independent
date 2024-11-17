@@ -1,10 +1,21 @@
 from django.contrib import admin
 from .models import (
-    Kelas, MetodePembayaran,
+    UserProfile,Kelas, MetodePembayaran,
     Transaksi, ModulPembelajaran, Soal, Nilai, JawabanUser, ContactMessage
 )
 
 # Registering each model in the Django admin
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'profile_picture')  # Menampilkan user dan gambar profil di daftar admin
+    search_fields = ('user__username',)  # Membolehkan pencarian berdasarkan username
+    list_filter = ('user',)  # Filter berdasarkan pengguna
+    
+    # Menambahkan kemampuan untuk mengedit profil melalui admin
+    def save_model(self, request, obj, form, change):
+        obj.save()
+
+admin.site.register(UserProfile, UserProfileAdmin)
+
 
 @admin.register(Kelas)
 class KelasAdmin(admin.ModelAdmin):
