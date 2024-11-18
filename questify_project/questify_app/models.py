@@ -6,7 +6,8 @@ from django.core.exceptions import ValidationError
 class Kelas(models.Model):
     nama_kelas = models.CharField(max_length=100)
     harga = models.IntegerField()
-    deskripsi = models.TextField()
+    deskripsi_1 = models.TextField()
+    deskripsi_2 = models.TextField()
 
     def __str__(self):
         return self.nama_kelas

@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .models import Kelas
 
 # Create your views here.
 def index(request):
@@ -169,4 +170,6 @@ def daftartransaksi(request):
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
-
+def semua_kelas(request):
+    kelas_list = Kelas.objects.all()
+    return render(request, 'questify_app/semuakelas.html', {'kelas_list': kelas_list})

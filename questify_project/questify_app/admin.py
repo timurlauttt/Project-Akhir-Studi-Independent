@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-    UserProfile,Kelas, MetodePembayaran,
+    UserProfile, Kelas, MetodePembayaran,
     Transaksi, ModulPembelajaran, Soal, Nilai, JawabanUser, ContactMessage
 )
 
@@ -14,7 +14,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.save()
 
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserProfile, UserProfileAdmin, Kelas)
 
 
 @admin.register(Kelas)
