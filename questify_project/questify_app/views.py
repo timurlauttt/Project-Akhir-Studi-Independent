@@ -83,27 +83,6 @@ def loginPage(request):
     context = {}
     return render(request, 'questify_app/pages/login.html', context)
 
-@login_required(login_url='/accounts/login/')
-def semuakelas(request):
-    kelas_list = Kelas.objects.all()
-    return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
-
-@login_required(login_url='/accounts/login/')
-def hasilnilai(request):
-    return render(request, 'questify_app/pages/hasilnilai.html')
-
-@login_required(login_url='/accounts/login/')
-def halamanselesai(request):
-    return render(request, 'questify_app/pages/halamanselesai.html')
-
-@login_required(login_url='/accounts/login/')
-def langganan(request):
-    return render(request, 'questify_app/pages/langganan.html')
-
-@login_required(login_url='/accounts/login/')
-def review(request):
-    return render(request, 'questify_app/pages/review.html')
-
 
 @login_required(login_url='/accounts/login/')
 def userprofile(request):
@@ -140,18 +119,48 @@ def update_profile(request):
     return render(request, 'questify_app/pages/userprofile.html', {'form': form})
 
 
+@login_required(login_url='/accounts/login/')
+def semuakelas(request):
+    kelas_list = Kelas.objects.all()
+    return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
+
+
+def pilihkelas(request):
+    modul_list = ModulPembelajaran.objects.select_related('kelas').all()
+    print("Jumlah modul:", modul_list.count())  # Menampilkan jumlah modul di terminal
+    context = {
+        'modul_list': modul_list
+    }
+    return render(request, 'questify_app/pages/pilihkelas.html', context)
+
+
+def detailkelas(request, id):
+    modul = get_object_or_404(ModulPembelajaran, id=id)
+    context = {
+        'modul': modul
+    }
+    return render(request, 'questify_app/pages/detailkelas.html', context)
+
 
 @login_required(login_url='/accounts/login/')
-def detailkelas(request):
-    return render(request, 'questify_app/pages/detailkelas.html')
+def hasilnilai(request):
+    return render(request, 'questify_app/pages/hasilnilai.html')
+
+@login_required(login_url='/accounts/login/')
+def halamanselesai(request):
+    return render(request, 'questify_app/pages/halamanselesai.html')
+
+@login_required(login_url='/accounts/login/')
+def langganan(request):
+    return render(request, 'questify_app/pages/langganan.html')
+
+@login_required(login_url='/accounts/login/')
+def review(request):
+    return render(request, 'questify_app/pages/review.html')
 
 @login_required(login_url='/accounts/login/')
 def soal(request):
     return render(request, 'questify_app/pages/soal.html')
-
-@login_required(login_url='/questify_app/login/')
-def pilihkelas(request):
-    return render(request, 'questify_app/pages/pilihkelas.html')
 
 @login_required(login_url='/accounts/login/')
 def metodepembayaran(request):
@@ -173,22 +182,3 @@ def daftartransaksi(request):
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
-# def semua_kelas(request):
-#     kelas_list = Kelas.objects.all()
-#     return render(request, 'questify_app/semuakelas.html', {'kelas_list': kelas_list})
-
-def pilihkelas(request):
-    modul_list = ModulPembelajaran.objects.select_related('kelas').all()
-    print("Jumlah modul:", modul_list.count())  # Menampilkan jumlah modul di terminal
-    context = {
-        'modul_list': modul_list
-    }
-    return render(request, 'questify_app/pages/pilihkelas.html', context)
-
-
-def detailkelas(request, id):
-    modul = get_object_or_404(ModulPembelajaran, id=id)
-    context = {
-        'modul': modul
-    }
-    return render(request, 'questify_app/pages/detailkelas.html', context)

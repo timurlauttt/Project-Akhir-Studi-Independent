@@ -43,9 +43,9 @@
                 <p class="ikon-deskripsi">{{ modul.waktu_pengajaran }} Menit</p>
               </div>
             </div>
-            <div class="label-kelas {% if modul.kelas.gratis %}gratis{% else %}berbayar{% endif %}">
-              {% if modul.kelas.gratis %}Gratis{% else %}Berbayar{% endif %}
-            </div>
+            <div class="label-kelas {% if modul.gratis %}gratis{% else %}berbayar{% endif %}">
+              {% if modul.gratis %}Gratis{% else %}Berbayar{% endif %}
+            </div>            
           </div>
         </a>
       </article>
