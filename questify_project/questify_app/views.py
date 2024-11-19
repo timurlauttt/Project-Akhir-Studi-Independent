@@ -147,7 +147,7 @@ def detailkelas(request):
 def soal(request):
     return render(request, 'questify_app/pages/soal.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def pilihkelas(request):
     return render(request, 'questify_app/pages/pilihkelas.html')
 
