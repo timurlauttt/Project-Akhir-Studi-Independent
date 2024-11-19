@@ -2,237 +2,55 @@
 
 {% load static %}
 
-{% block page_css %}
-  <link rel="stylesheet" href="{% static 'css/pilihkelas.css' %}">
-{% endblock %}
+{% block title %}Detail Kelas{% endblock %}
 
-{% block title %}Semua Kelas{% endblock %}
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/detailkelas.css' %}">
+{% endblock %}
 
 {% block content %}
-
-<!-- Main content menggunakan container Bootstrap dan text-center untuk align -->
-<main class="container text-center my-5 px-5">
-    <h1 style="margin-top: 60px"><strong>Kelas Basic</strong></h1>
-    <h2>Ayo selesaikan tantangannya</h2>
-
-    <!-- Kontainer kelas, Section untuk card kelas, menggunakan grid system Bootstrap -->
-    <section class="row g-4">
-      <!-- Artikel menggunakan col-md-4 dari Bootstrap untuk membagi menjadi 3 kolom pada layar medium ke atas -->
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 1</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas gratis">Gratis</div>
-          </div>
-        </a>
-      </article>
-
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 2</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas gratis">Gratis</div>
-          </div>
-        </a>
-      </article>
-
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 3</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas gratis">Gratis</div>
-          </div>
-        </a>
-      </article>
-
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 4</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas berbayar">Berbayar</div>
-          </div>
-        </a>
-      </article>
-
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 5</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas berbayar">Berbayar</div>
-          </div>
-        </a>
-      </article>
-
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 6</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas berbayar">Berbayar</div>
-          </div>
-        </a>
-      </article>
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">Kelas Basic 6</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">10 Menit</p>
-              </div>
-            </div>
-            <div class="label-kelas berbayar">Berbayar</div>
-          </div>
-        </a>
-      </article>
+<main class="container my-5 px-5">
+    <section class="row">
+        <div class="col-12">
+            <h1><strong>{{ modul.judul }}</strong></h1>
+        </div>
     </section>
 
-    <!-- Pagination menggunakan komponen pagination dari Bootstrap -->
-    <nav aria-label="Page navigation" class="d-flex content-left mt-4">
-      <ul class="pagination">
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-      </ul>
-    </nav>
-  </main>
+    <!-- Card untuk informasi soal -->
+    <section class="row">
+        <div class="col-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-start">
+                    <p class="card-text"><strong>Jumlah soal:</strong> {{ modul.jumlah_soal }}</p>
+                    <p class="card-text"><strong>Kategori:</strong> {{ modul.kategori }}</p>
+                    <p class="card-text"><strong>Durasi:</strong> {{ modul.waktu_pengajaran }} menit</p>
+                    <p class="card-text"><strong>Tata cara menjawab:</strong> {{ modul.deskripsi }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-{% endblock %}
+    <!-- Card untuk informasi nilai minimum -->
+    <section class="row">
+        <div class="col-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Informasi</h5>
+                    <p class="highlight">Kamu harus mencapai skor minimum 70 untuk bisa dinyatakan lulus.</p>
+                    <p class="highlight">Selamat mengerjakan!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-{% block page_js %}
-  <script src="{% static 'js/pilihkelas.js' %}"></script>
+    <!-- Tombol Kembali dan Mulai -->
+    <section class="row">
+        <div class="col-12 text-center">
+            <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-outline-secondary mr-3">Kembali</a>
+            <a href="{% url 'questify_app:soal' %}">
+                <button class="btn btn-primary">Mulai</button>
+            </a>
+        </div>
+    </section>
+</main>
 {% endblock %}
