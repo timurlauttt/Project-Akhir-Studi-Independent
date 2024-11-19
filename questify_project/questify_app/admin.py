@@ -5,23 +5,19 @@ from .models import (
 )
 
 # Registering each model in the Django admin
+@admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'profile_picture')  # Menampilkan user dan gambar profil di daftar admin
-    search_fields = ('user__username',)  # Membolehkan pencarian berdasarkan username
-    list_filter = ('user',)  # Filter berdasarkan pengguna
-    
-    # Menambahkan kemampuan untuk mengedit profil melalui admin
-    def save_model(self, request, obj, form, change):
-        obj.save()
-
-admin.site.register(UserProfile, UserProfileAdmin, Kelas)
+    list_display = ('user', 'profile_picture')  # Menampilkan kolom user dan profile_picture di admin
+    search_fields = ('user__username',)  # Menambahkan fitur pencarian berdasarkan username user
+    list_filter = ('user',)  # Menambahkan filter berdasarkan user
 
 
 @admin.register(Kelas)
 class KelasAdmin(admin.ModelAdmin):
-    list_display = ('nama_kelas', 'harga', 'deskripsi')
+    list_display = ('nama_kelas', 'harga', 'deskripsi_1', 'deskripsi_2')
     search_fields = ('nama_kelas',)
     list_filter = ('harga',)
+
 
 
 @admin.register(ModulPembelajaran)

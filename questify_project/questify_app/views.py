@@ -83,7 +83,8 @@ def loginPage(request):
 
 @login_required(login_url='/accounts/login/')
 def semuakelas(request):
-    return render(request, 'questify_app/pages/semuakelas.html')
+    kelas_list = Kelas.objects.all()
+    return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
 
 @login_required(login_url='/accounts/login/')
 def hasilnilai(request):
@@ -170,6 +171,6 @@ def daftartransaksi(request):
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
-def semua_kelas(request):
-    kelas_list = Kelas.objects.all()
-    return render(request, 'questify_app/semuakelas.html', {'kelas_list': kelas_list})
+# def semua_kelas(request):
+#     kelas_list = Kelas.objects.all()
+#     return render(request, 'questify_app/semuakelas.html', {'kelas_list': kelas_list})

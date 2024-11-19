@@ -7,10 +7,15 @@ class Kelas(models.Model):
     nama_kelas = models.CharField(max_length=100)
     harga = models.IntegerField()
     deskripsi_1 = models.TextField()
-    deskripsi_2 = models.TextField()
+    deskripsi_2 = models.TextField(default="")  # Menambahkan nilai default
 
     def __str__(self):
         return self.nama_kelas
+
+    def format_rupiah(self):
+        """Format harga menjadi format Rupiah."""
+        return f"Rp. {self.harga:,.0f}".replace(",", ".")
+
 
 class ModulPembelajaran(models.Model):
     kelas = models.ForeignKey(Kelas, on_delete=models.CASCADE, related_name='modul_pembelajaran')
