@@ -1,0 +1,57 @@
+/* Styling untuk judul halaman */
+h1 {
+    color: #333;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* Styling untuk Card informasi soal dan nilai */
+.card {
+    background: linear-gradient(180deg, #e6e1f5, #c3b6ea);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none; /* Menghilangkan border agar terlihat lebih halus */
+}
+
+/* Styling untuk body dari Card */
+.card-body {
+    padding: 40px;
+    text-align: center; /* Membuat teks dalam card menjadi rata tengah */
+}
+
+/* Styling teks dalam Card */
+.card-text {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk Highlight Informasi */
+.highlight {
+    font-weight: bold;
+    color: #6f4dbf;
+    text-align: center; /* Membuat teks highlight rata tengah */
+}
+
+/* Styling untuk Tombol Kembali dan Mulai */
+.btn-outline-secondary, .btn-primary {
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #6f4dbf;
+    border-color: #6f4dbf;
+}
+
+.btn-outline-secondary {
+    color: #6f4dbf;
+    border-color: #6f4dbf;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6f4dbf;
+    color: #fff;
+}
