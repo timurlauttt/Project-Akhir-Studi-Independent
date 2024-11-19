@@ -1,57 +1,65 @@
-/* Styling untuk judul halaman */
-h1 {
+.section-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .program-container {
+    background-color: #f0f4f8;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  .program-provider {
+    font-weight: bold;
     color: #333;
-    font-size: 36px;
+    font-size: 14px;
+  }
+
+  .program {
+    background-color: #dee5fa;
+    padding: 15px;
+    border-radius: 8px;
     text-align: center;
-    margin-top: 60px;
-}
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+  }
 
-/* Styling untuk Card informasi soal dan nilai */
-.card {
-    background: linear-gradient(180deg, #e6e1f5, #c3b6ea);
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none; /* Menghilangkan border agar terlihat lebih halus */
-}
-
-/* Styling untuk body dari Card */
-.card-body {
-    padding: 40px;
-    text-align: center; /* Membuat teks dalam card menjadi rata tengah */
-}
-
-/* Styling teks dalam Card */
-.card-text {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Styling untuk Highlight Informasi */
-.highlight {
+  .program-title {
+    font-size: 20px;
     font-weight: bold;
     color: #6f4dbf;
-    text-align: center; /* Membuat teks highlight rata tengah */
-}
+    margin: 0;
+  }
 
-/* Styling untuk Tombol Kembali dan Mulai */
-.btn-outline-secondary, .btn-primary {
-    border-radius: 25px;
-    padding: 10px 30px;
+  .program-price {
     font-size: 16px;
-}
+    color: #9370e3;
+    margin: 0;
+  }
 
-.btn-primary {
-    background-color: #6f4dbf;
-    border-color: #6f4dbf;
-}
+  .details {
+    background-color: #f5f6f8;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+  }
 
-.btn-outline-secondary {
-    color: #6f4dbf;
-    border-color: #6f4dbf;
-}
+  .table td {
+    padding: 8px;
+    vertical-align: top;
+  }
 
-.btn-outline-secondary:hover {
-    background-color: #6f4dbf;
-    color: #fff;
-}
+  .status-success {
+    color: green;
+    font-weight: bold;
+  }
+
+  .bank-logo {
+    width: 50px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
