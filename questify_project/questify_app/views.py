@@ -14,6 +14,8 @@ from .models import UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Kelas
+from .models import ModulPembelajaran
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 def index(request):
@@ -174,3 +176,19 @@ def detailtransaksi(request):
 # def semua_kelas(request):
 #     kelas_list = Kelas.objects.all()
 #     return render(request, 'questify_app/semuakelas.html', {'kelas_list': kelas_list})
+
+def pilihkelas(request):
+    modul_list = ModulPembelajaran.objects.select_related('kelas').all()
+    print("Jumlah modul:", modul_list.count())  # Menampilkan jumlah modul di terminal
+    context = {
+        'modul_list': modul_list
+    }
+    return render(request, 'questify_app/pages/pilihkelas.html', context)
+
+
+def detailkelas(request, id):
+    modul = get_object_or_404(ModulPembelajaran, id=id)
+    context = {
+        'modul': modul
+    }
+    return render(request, 'questify_app/pages/detailkelas.html', context)

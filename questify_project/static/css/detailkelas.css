@@ -1,0 +1,65 @@
+.section-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .program-container {
+    background-color: #f0f4f8;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  .program-provider {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+  }
+
+  .program {
+    background-color: #dee5fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+  }
+
+  .program-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #6f4dbf;
+    margin: 0;
+  }
+
+  .program-price {
+    font-size: 16px;
+    color: #9370e3;
+    margin: 0;
+  }
+
+  .details {
+    background-color: #f5f6f8;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .table td {
+    padding: 8px;
+    vertical-align: top;
+  }
+
+  .status-success {
+    color: green;
+    font-weight: bold;
+  }
+
+  .bank-logo {
+    width: 50px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
