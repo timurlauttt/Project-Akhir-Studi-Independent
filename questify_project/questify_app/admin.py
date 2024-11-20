@@ -22,7 +22,7 @@ class KelasAdmin(admin.ModelAdmin):
 
 @admin.register(ModulPembelajaran)
 class ModulPembelajaranAdmin(admin.ModelAdmin):
-    list_display = ('kelas', 'judul', 'jumlah_soal', 'waktu_pengajaran')
+    list_display = ('kelas', 'judul', 'jumlah_soal', 'waktu_pengajaran','gratis')
     search_fields = ('judul',)
     list_filter = ('kelas',)
 

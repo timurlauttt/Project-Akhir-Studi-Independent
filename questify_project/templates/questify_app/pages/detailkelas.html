@@ -1,54 +1,56 @@
-{% extends 'questify_app/layout/base.html' %} 
+{% extends 'questify_app/layout/base.html' %}
 
-{% block title %}Hasil Nilai{% endblock %} 
+{% load static %}
+
+{% block title %}Detail Kelas{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/detailkelas.css' %}">
+{% endblock %}
 
 {% block content %}
-
 <main class="container my-5 px-5">
     <section class="row">
-      <div class="col-12" style="margin-top: 60px">
-        <h1 class="text-center mb-4">Judul Misi</h1>
-      </div>
+        <div class="col-12" style="margin-top: 60px; color: #6f4dbf; text-align: center;">
+            <h1><strong>{{ modul.judul }}</strong></h1>
+        </div>
     </section>
 
     <!-- Card untuk informasi soal -->
-    <section class="row">
-      <div class="col-12">
-        <div class="card shadow-sm mb-4">
-          <div class="card-body text-center">
-            <p class="card-text">Jumlah soal: 10</p>
-            <p class="card-text">Kategori: Debit dan Kredit</p>
-            <p class="card-text">Durasi: 10 menit</p>
-            <p class="card-text">Tata cara menjawab: Cara menjawab...</p>
-          </div>
+    <section class="row section-row">
+        <div class="col-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <p class="card-text"><strong>Jumlah soal:</strong> {{ modul.jumlah_soal }}</p>
+                    <p class="card-text"><strong>Kategori:</strong> {{ modul.kategori }}</p>
+                    <p class="card-text"><strong>Durasi:</strong> {{ modul.waktu_pengajaran }} menit</p>
+                    <p class="card-text"><strong>Tata cara menjawab:</strong> {{ modul.deskripsi }}</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Card untuk informasi nilai minimum -->
-    <section class="row">
-      <div class="col-12">
-        <div class="card shadow-sm mb-4">
-          <div class="card-body text-center">
-            <h5 class="card-title">Informasi</h5>
-            <p class="highlight">
-              Kamu harus mencapai skor min 70 untuk bisa dinyatakan lulus.
-            </p>
-            <p class="highlight">Selamat mengerjakan!</p>
-          </div>
+    <section class="row section-row">
+        <div class="col-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Informasi</h5>
+                    <p class="highlight">Kamu harus mencapai skor minimum 70 untuk bisa dinyatakan lulus.</p>
+                    <p class="highlight">Selamat mengerjakan!</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Tombol Kembali dan Mulai -->
-    <section class="row">
-      <div class="col-12 text-center">
-        <button class="btn btn-outline-secondary mr-3">Kembali</button>
-        <a href="{% url 'questify_app:soal' %}">
-          <button class="btn btn-primary" style="background-color: #6f4dbf;">Mulai</button>
-        </a>
-      </div>
+    <section class="row section-row">
+        <div class="col-12 text-center">
+            <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-outline-secondary mr-3">Kembali</a>
+            <a href="{% url 'questify_app:soal' %}">
+                <button class="btn btn-primary">Mulai</button>
+            </a>
+        </div>
     </section>
-  </main>
-
+</main>
 {% endblock %}
