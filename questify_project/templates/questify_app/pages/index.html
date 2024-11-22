@@ -18,104 +18,65 @@
     />
   </head>
 
-  <body>
+  <body data-bs-spy="scroll" data-bs-target="#navbarNavDropdown" data-bs-offset="100" tabindex="0" style="position: relative;">
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed">
-        <div class="container-fluid">
-          <!-- Logo and Questify Text -->
-          <a
-            class="navbar-brand ms-4 d-flex align-items-center fs-0 fw-bold"
-            href="#"
-          >
-            Questify
-            <img
-              src="{% static 'images/arcticons--flixquest.png' %}"
-              alt="logo"
-              class="ms"
-              width="30"
-              height="30"
-            />
-          </a>
-
-          <!-- Toggler for mobile view -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Navbar items -->
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="#home">Home</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="#features">Features</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="#about">About</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="#courses">Courses</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="#faq">FAQ</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="#contact">Contact</a>
-              </li>
-            </ul>
-
-            <!-- Bahasa and Masuk for desktop view -->
-            <div class="d-none d-lg-flex align-items-center">
-              <img
-                src="{% static 'images/world-map.png' %}"
-                alt="language"
-                class="language-icon"
-                style="width: 20px"
-              />
-              <span class="me-5">Bahasa</span>
-              <a href="{% url 'questify_app:login' %}" class="me-5 btn btn-outline-primary"
-                >Masuk</a
-              >
-            </div>
-
-            <!-- Dropdown for mobile view -->
-            <ul class="navbar-nav d-lg-none">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Lainnya
+        <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100">
+            <div class="container-fluid">
+                <!-- Logo and Questify Text -->
+                <a class="navbar-brand ms-4 d-flex align-items-center fs-0 fw-bold" href="#">
+                    Questify
+                    <img src="{% static 'images/arcticons--flixquest.png' %}" alt="logo" class="ms" width="30" height="30" />
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#bahasa">Bahasa</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a
-                      class="dropdown-item btn btn-outline-primary"
-                      href="{% url 'questify_app:login' %}"
-                      >Masuk</a
-                    >
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+
+                <!-- Toggler for mobile view -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar items -->
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav nav nav-pills mx-auto me-auto mb-2 mb-lg-0">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="#courses">Courses</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="#faq">FAQ</a>
+                        </li>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+
+                    <!-- Bahasa and Masuk for desktop view -->
+                    <div class="d-none d-lg-flex align-items-center">
+                        <img src="{% static 'images/world-map.png' %}" alt="language" class="language-icon" style="width: 20px" />
+                        <span class="me-5">Bahasa</span>
+                        <a href="{% url 'questify_app:login' %}" class="me-5 btn btn-outline-primary">Masuk</a>
+                    </div>
+
+                    <!-- Dropdown for mobile view -->
+                    <ul class="navbar-nav d-lg-none">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lainnya</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#bahasa">Bahasa</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item btn btn-outline-primary" href="{% url 'questify_app:login' %}">Masuk</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main class="main">
@@ -155,7 +116,7 @@
             class="btn btn-outline-primary btn-lg mt-3"
             style="color: white; background-color: #dda0dd"
             onmouseover="this.style.color='black'; this.style.backgroundColor='white';"
-            onmouseout="this.style.color='black'; this.style.backgroundColor='white';"
+            onmouseout="this.style.color='white'; this.style.backgroundColor='#dda0dd';"
           >
             Get Started
           </a>
