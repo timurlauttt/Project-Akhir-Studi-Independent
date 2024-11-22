@@ -265,122 +265,52 @@
       <!-- fitur kelas section -->
       <section id="courses" class="mt-8">
         <div class="container container-harga my-5">
-          <h1 class="judul-sesi">Kursus Kami</h1>
-          <h2 class="subjudul-sesi">
-            Ini adalah semua kursus yang kami tawarkan di Questify
-          </h2>
-
-          <div class="row justify-content-center card-container">
-            <div class="col-md-4 col-12 mb-4">
-              <!-- Tambahan col-12 untuk mobile -->
-              <div class="card-harga card h-100">
-                <h2 class="judul-paket">Basic</h2>
-                <div class="violet-box">
-                  <p class="harga"><strong>50.000</strong><sub>/bulan</sub></p>
-                  <img
-                    src="{% static 'images\lock.png' %}"
-                    alt="Gambar Kunci"
-                    class="img-fluid"
-                    width="100px"
-                    height="100px"
-                  />
-                  <ul class="fitur">
-                    <li>
-                      <strong
-                        >Tantangan sederhana untuk pengenalan konsep</strong
-                      >
-                    </li>
-                    <li>
-                      <strong
-                        >Kuis dengan soal dasar untuk menguji pemahaman
-                        awal</strong
-                      >
-                    </li>
-                  </ul>
+            <h1 class="judul-sesi">Kursus Kami</h1>
+            <h2 class="subjudul-sesi">
+                Ini adalah semua kursus yang kami tawarkan di Questify
+            </h2>
+    
+            <div class="row justify-content-center card-container">
+                {% for kelas in kelas_list %}
+                <div class="col-md-4 col-12 mb-4">
+                    <!-- Tambahan col-12 untuk mobile -->
+                    <div class="card-harga card h-100">
+                        <h2 class="judul-paket">{{ kelas.nama_kelas }}</h2>
+                        <div class="violet-box">
+                            <p class="harga"><strong>{{ kelas.format_rupiah }}</strong><sub>/bulan</sub></p>
+                            <img
+                                src="{% static 'images/lock.png' %}"
+                                alt="Gambar Kunci"
+                                class="img-fluid"
+                                width="100px"
+                                height="100px"
+                            />
+                            <ul class="fitur">
+                                <li><strong>{{ kelas.deskripsi_1 }}</strong></li>
+                                {% if kelas.deskripsi_2 %}
+                                <li><strong>{{ kelas.deskripsi_2 }}</strong></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div
+                            class="card-body d-flex flex-column justify-content-between"
+                        >
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary">Beli Sekarang</a>
+                                <p class="text-kecil">untuk berlangganan penuh</p>
+                                <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
+                                    >Coba Gratis</a
+                                >
+                                <p class="text-kecil">trial dengan akses terbatas</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div
-                  class="card-body d-flex flex-column justify-content-between"
-                >
-                  <div class="text-center">
-                    <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    <p class="text-kecil">untuk berlangganan penuh</p>
-                    <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
-                      >Coba Gratis</a
-                    >
-                    <p class="text-kecil">trial dengan akses terbatas</p>
-                  </div>
-                </div>
-              </div>
+                {% endfor %}
             </div>
-
-            <div class="col-md-4 col-12 mb-4">
-              <!-- Tambahan col-12 untuk mobile -->
-              <div class="card-harga card h-100">
-                <h2 class="judul-paket">Premium</h2>
-                <div class="violet-box">
-                  <p class="harga"><strong>150.000</strong><sub>/bulan</sub></p>
-                  <img
-                    src="{% static 'images\lock.png' %}"
-                    alt="Gambar Kunci"
-                    class="img-fluid"
-                    width="100px"
-                    height="100px"
-                  />
-                  <ul class="fitur">
-                    <li><strong>Tantangan lebih sulit dan beragam</strong></li>
-                    <li><strong>Akses ke materi premium</strong></li>
-                  </ul>
-                </div>
-                <div
-                  class="card-body d-flex flex-column justify-content-between"
-                >
-                  <div class="text-center">
-                    <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    <p class="text-kecil">untuk berlangganan penuh</p>
-                    <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
-                      >Coba Gratis</a
-                    >
-                    <p class="text-kecil">trial dengan akses terbatas</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-12 mb-4">
-              <!-- Tambahan col-12 untuk mobile -->
-              <div class="card-harga card h-100">
-                <h2 class="judul-paket">Eksklusif</h2>
-                <div class="violet-box">
-                  <p class="harga"><strong>250.000</strong><sub>/bulan</sub></p>
-                  <img
-                    src="{% static 'images\lock.png' %}"
-                    alt="Gambar Kunci"
-                    class="img-fluid"
-                    width="100px"
-                    height="100px"
-                  />
-                  <ul class="fitur">
-                    <li><strong>Akses ke semua tantangan dan kuis</strong></li>
-                    <li><strong>Konsultasi langsung dengan ahli</strong></li>
-                  </ul>
-                </div>
-                <div
-                  class="card-body d-flex flex-column justify-content-between"
-                >
-                  <div class="text-center">
-                    <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                    <p class="text-kecil">untuk berlangganan penuh</p>
-                    <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
-                      >Coba Gratis</a
-                    >
-                    <p class="text-kecil">trial dengan akses terbatas</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+    
 
       <!-- faq section -->
       <section id="faq" class="container my-5">

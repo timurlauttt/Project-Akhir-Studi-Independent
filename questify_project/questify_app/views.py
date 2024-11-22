@@ -23,6 +23,33 @@ def index(request):
     return render(request, 'questify_app/index.html', context={'data': data})
 
 
+# def index(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             # Simpan data dari form ke database
+#             form.save()
+
+#             # Mengirimkan email setelah formulir berhasil dikirim
+#             send_mail(
+#                 'Pesan Kontak Baru',  # Subjek email
+#                 f'Nama: {form.cleaned_data["name"]}\n'
+#                 f'Telepon: {form.cleaned_data["phone"]}\n'
+#                 f'Email: {form.cleaned_data["email"]}\n'
+#                 f'Komentar: {form.cleaned_data["comment"]}',  # Isi email
+#                 settings.EMAIL_HOST_USER,  # Pengirim
+#                 [settings.EMAIL_HOST_USER],  # Penerima
+#                 fail_silently=False,
+#             )
+
+#             # Menampilkan pesan sukses
+#             messages.success(request, "Pesan Anda telah berhasil dikirim!")
+#             return redirect('index')  # redirect untuk mengosongkan form
+#     else:
+#         form = ContactForm()
+
+#     return render(request, 'questify_app/pages/index.html', {'form': form})
+
 def index(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -48,7 +75,13 @@ def index(request):
     else:
         form = ContactForm()
 
-    return render(request, 'questify_app/pages/index.html', {'form': form})
+    # Ambil semua data kelas dari database
+    kelas_list = Kelas.objects.all()
+
+    return render(request, 'questify_app/pages/index.html', {
+        'form': form,
+        'kelas_list': kelas_list,  # Kirim data kelas ke template
+    })
 
 def register(request):
     form = CreateUserForm()
@@ -84,7 +117,7 @@ def loginPage(request):
     return render(request, 'questify_app/pages/login.html', context)
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def userprofile(request):
     user = request.user
 
@@ -106,7 +139,7 @@ def userprofile(request):
     return render(request, 'questify_app/pages/userprofile.html', {'form': form, 'user': user})
 
 
-@login_required
+@login_required(login_url='/questify_app/login/')
 def update_profile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
@@ -119,12 +152,13 @@ def update_profile(request):
     return render(request, 'questify_app/pages/userprofile.html', {'form': form})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def semuakelas(request):
     kelas_list = Kelas.objects.all()
     return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
 
 
+@login_required(login_url='/questify_app/login/')
 def pilihkelas(request):
     modul_list = ModulPembelajaran.objects.select_related('kelas').all()
     print("Jumlah modul:", modul_list.count())  # Menampilkan jumlah modul di terminal
@@ -134,6 +168,7 @@ def pilihkelas(request):
     return render(request, 'questify_app/pages/pilihkelas.html', context)
 
 
+@login_required(login_url='/questify_app/login/')
 def detailkelas(request, id):
     modul = get_object_or_404(ModulPembelajaran, id=id)
     context = {
@@ -142,43 +177,43 @@ def detailkelas(request, id):
     return render(request, 'questify_app/pages/detailkelas.html', context)
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def hasilnilai(request):
     return render(request, 'questify_app/pages/hasilnilai.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def halamanselesai(request):
     return render(request, 'questify_app/pages/halamanselesai.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def langganan(request):
     return render(request, 'questify_app/pages/langganan.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def review(request):
     return render(request, 'questify_app/pages/review.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def soal(request):
     return render(request, 'questify_app/pages/soal.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def metodepembayaran(request):
     return render(request, 'questify_app/pages/metodepembayaran.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def cekbeli(request):
     return render(request, 'questify_app/pages/cekbeli.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def payment(request):
     return render(request, 'questify_app/pages/payment.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def daftartransaksi(request):
     return render(request, 'questify_app/pages/daftar_transaksi.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
