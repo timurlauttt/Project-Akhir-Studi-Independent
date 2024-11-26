@@ -38,6 +38,11 @@ class Soal(models.Model):
     pilihan_d = models.CharField(max_length=255)
     jawaban = models.CharField(max_length=1)  # 'A', 'B', 'C', 'D'
     nilai_jawaban = models.IntegerField()
+    
+    def __str__(self):
+        return self.pertanyaan
+
+
 
 class Nilai(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='nilai')
@@ -52,6 +57,9 @@ class JawabanUser(models.Model):
     pilihan_user = models.CharField(max_length=1)  # 'A', 'B', 'C', 'D'
     status = models.BooleanField(default=False)  # benar atau salah
     waktu_jawab = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.soal.pertanyaan} - {self.pilihan_user}"
 
 class MetodePembayaran(models.Model):
     nama_metode = models.CharField(max_length=50)
