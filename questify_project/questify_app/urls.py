@@ -22,5 +22,7 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('daftar_transaksi/', views.daftartransaksi, name='daftartransaksi'),
     path('detailtransaksi/', views.detailtransaksi, name='detailtransaksi'),
+    path('soal/', views.soal, name='soal'),
+    path('soal/<int:soal_id>/', views.soal, name='soal_detail'),
 
 ]
