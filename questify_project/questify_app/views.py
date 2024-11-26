@@ -16,6 +16,8 @@ from django.dispatch import receiver
 from .models import Kelas
 from .models import ModulPembelajaran
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
+from .models import Soal, JawabanUser
 
 # Create your views here.
 def index(request):
@@ -216,4 +218,54 @@ def daftartransaksi(request):
 @login_required(login_url='/questify_app/login/')
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
+
+@login_required
+def soal(request, soal_id=None):
+    if soal_id is None:
+        # Ambil soal pertama jika soal_id tidak diberikan
+        soal = Soal.objects.first()
+        nomor_soal = 1  # Nomor soal pertama
+    else:
+        # Ambil soal berdasarkan soal_id
+        soal = get_object_or_404(Soal, id=soal_id)
+        # Hitung nomor soal berdasarkan ID
+        nomor_soal = soal.id  # Jika ID adalah urutan soal
+
+    next_soal = Soal.objects.filter(id__gt=soal.id).first()
+
+    if request.method == 'POST':
+        pilihan_user = request.POST.get(f'pilihan_user_{soal.id}')
+        if pilihan_user:
+            status = pilihan_user == soal.jawaban
+            JawabanUser .objects.create(
+                user=request.user,
+                soal=soal,
+                pilihan_user=pilihan_user,
+                status=status
+            )
+        
+        if next_soal:
+            return redirect('questify_app:soal_detail', soal_id=next_soal.id)
+        else:
+            context = {
+                'soal': soal,
+                'next_soal': None,
+                'pesan_selesai': "Anda telah menyelesaikan semua soal.",
+                'nomor_soal': nomor_soal,
+            }
+            return render(request, 'questify_app/pages/soal.html', context)
+    
+     # Start the timer if not already started
+
+    if 'start_time' not in request.session:
+
+        request.session['start_time'] = timezone.now()
+
+
+    context = {
+        'soal': soal,
+        'next_soal': next_soal,
+        'nomor_soal': nomor_soal,
+    }
+    return render(request, 'questify_app/pages/soal.html', context)
 
