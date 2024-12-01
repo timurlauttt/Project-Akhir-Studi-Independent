@@ -12,7 +12,7 @@
 
 <main class="container content-main mt-5 pt-5 px-5">
   <div class="text-center">
-    <h2><strong>🚀 Hallo Pengguna, Terimakasih Telah Bergabung! 🚀</strong></h2>
+    <h2><strong>🚀 Hallo {{ user.username }}, Terimakasih Telah Bergabung! 🚀</strong></h2>
     <p class="text-muted">Petualangan baru dimulai! Pilih kelas, raih tantangan, dan jadilah yang terbaik! Siap untuk mengasah kemampuanmu?</p>
 
     <!-- Divider Line -->
@@ -96,7 +96,7 @@
                   <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
                     >Mulai</a>
                   <br>
-                  <a href="semuakelas.html" class="text-kecil2"
+                  <a href="{% url 'questify_app:semuakelas' %}" class="text-kecil2"
                     >Perpanjang Sekarang</a>
                 </div>
               </div>
@@ -106,9 +106,8 @@
       </div>
     </section>
     ...
-</div>
+  </div>
 </main>
     
-
 {% endblock %}
   

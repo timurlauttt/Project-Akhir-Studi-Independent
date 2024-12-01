@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from decouple import config
 from django.urls import reverse_lazy
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -123,7 +124,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('questify_app:semuakelas')
+LOGIN_REDIRECT_URL = reverse_lazy('questify_app:home')
 LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
@@ -142,6 +143,11 @@ SOCIALACCOUNT_PROVIDERS = {
         'OAUTH_PKCE_ENABLED': True,
     }
 }
+
+MIDTRANS_SERVER_KEY = 'SB-Mid-server-IxGL8J0daVsu14JPWym77KPT'
+MIDTRANS_CLIENT_KEY = 'SB-Mid-client-lmnptvmZucycjugG'
+MIDTRANS_IS_PRODUCTION = False  # Ganti ke True jika menggunakan Production
+MIDTRANS_BASE_URL = 'https://app.midtrans.com/snap/v1/transactions' if MIDTRANS_IS_PRODUCTION else 'https://app.sandbox.midtrans.com/snap/v1/transactions'
 
 SITE_ID = 1
 

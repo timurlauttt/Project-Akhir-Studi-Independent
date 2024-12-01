@@ -34,7 +34,7 @@
 {% block title %}User Profile{% endblock %}
 
 {% block content %}
-<main class="container content-main mt-5 pt-5 px-5">
+<main class="container content-main mt-5 px-5">
   <div class="row justify-content-center">
     <div class="col-md-12 mb-5">
       <section class="card" style="margin-top: 50px">
@@ -55,7 +55,7 @@
                 <a class="nav-link text-white {% if request.resolver_match.url_name == 'daftartransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}" style="font-weight: bold">Daftar Transaksi</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'account_logout' %}" style="font-weight: bold">
+                <a class="nav-link text-white" href="{% url 'account_logout' %}" style="font-weight: bold; background-color:black;">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
               </li>

@@ -8,16 +8,27 @@ from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Kelas
-from .models import ModulPembelajaran
+from .models import ModulPembelajaran,Transaksi
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import midtransclient
 
-# Create your views here.
+from django.http import JsonResponse
+import midtransclient
+from .models import Kelas, Transaksi
+from django.contrib.auth.models import User
+import uuid
+
+#Create your views here.
+
 def index(request):
     data = "Hello, Questify!"  # Variabel data untuk ditampilkan
     return render(request, 'questify_app/index.html', context={'data': data})
@@ -48,7 +59,14 @@ def index(request):
     else:
         form = ContactForm()
 
-    return render(request, 'questify_app/pages/index.html', {'form': form})
+    # Ambil semua data kelas dari database
+    kelas_list = Kelas.objects.all()
+
+    return render(request, 'questify_app/pages/index.html', {
+        'form': form,
+        'kelas_list': kelas_list,  # Kirim data kelas ke template
+    })
+
 
 def register(request):
     form = CreateUserForm()
@@ -67,22 +85,26 @@ def register(request):
     return render(request, 'questify_app/pages/register.html', context)
 
 def loginPage(request):
-
     if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
 
-            user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect berdasarkan peran pengguna
+            if user.is_staff or user.is_superuser:  # Admin atau staff
+                return redirect(reverse('admin:index'))  # Halaman admin bawaan Django
+            else:  # User biasa
+                return redirect('questify_app:home')  # Halaman user biasa
+        else:
+            messages.error(request, 'Username atau password salah')
 
-            if user is not None:
-                login(request, user)
-                return redirect('questify_app:semuakelas')  
-            else:
-                messages.error(request, 'Username atau password salah')
+    return render(request, 'questify_app/pages/login.html')
 
-    context = {}
-    return render(request, 'questify_app/pages/login.html', context)
-
+@login_required
+def home(request):
+    return render(request, 'questify_app/pages/home.html')
 
 @login_required(login_url='/accounts/login/')
 def userprofile(request):
@@ -123,6 +145,61 @@ def update_profile(request):
 def semuakelas(request):
     kelas_list = Kelas.objects.all()
     return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
+from django.http import JsonResponse
+import midtransclient
+from .models import Kelas, Transaksi
+from django.contrib.auth.models import User
+
+def payment(request):
+    if request.method == 'POST':
+        # Parse JSON data dari permintaan POST
+        kelas_id = request.POST.get('kelas_id')
+        amount = request.POST.get('amount')
+        user_id = request.POST.get('user_id')
+        first_name = request.POST.get('first_name')
+        
+        print(user_id, amount)
+        
+        snap = midtransclient.Snap(
+            is_production=False,
+            server_key='SB-Mid-server-IxGL8J0daVsu14JPWym77KPT'
+        )
+        
+        # Build API parameter
+        param = {
+            "transaction_details": {
+                "order_id": str(uuid.uuid4()),  # Sesuaikan order_id jika diperlukan
+                "gross_amount": amount
+            },
+            "credit_card": {
+                "secure": True
+            },
+            "customer_details": {
+                "first_name": first_name,
+                # "last_name": "pratama",
+                # "email": "budi.pra@example.com",
+                # "phone": "08111222333"
+            }
+        }
+
+        # Buat transaksi di Midtrans dan dapatkan token
+        transaction = snap.create_transaction(param)
+        transaction_token = transaction['token']
+        
+        # Simpan data transaksi ke database
+        kelas = Kelas.objects.get(id=kelas_id)
+        user = User.objects.get(id=user_id)
+        Transaksi.objects.create(
+            user=user,
+            kelas=kelas,
+            amount=amount,
+            link_payment="https://app.sandbox.midtrans.com/snap/v2/vtweb/" + transaction_token
+        )
+        
+        # Mengembalikan token transaksi sebagai JSON
+        return JsonResponse({"token": transaction_token})
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 
 def pilihkelas(request):
@@ -170,9 +247,9 @@ def metodepembayaran(request):
 def cekbeli(request):
     return render(request, 'questify_app/pages/cekbeli.html')
 
-@login_required(login_url='/accounts/login/')
-def payment(request):
-    return render(request, 'questify_app/pages/payment.html')
+# @login_required(login_url='/accounts/login/')
+# def payment(request):
+#     return render(request, 'questify_app/pages/payment.html')
 
 @login_required(login_url='/accounts/login/')
 def daftartransaksi(request):
@@ -182,3 +259,17 @@ def daftartransaksi(request):
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
+#keperluang midtrans
+# @login_required
+# def initiate_payment(request):
+#     # Ambil metode pembayaran dari parameter URL
+#     bank = request.GET.get('bank')
+    
+#     if not bank:
+#         return HttpResponse("Metode pembayaran tidak ditemukan", status=400)
+    
+#     # Logika untuk memulai proses pembayaran menggunakan Midtrans
+#     # Misalnya, mengatur parameter dan mengirim permintaan ke Midtrans
+    
+#     # Redirect atau tampilkan halaman sesuai kebutuhan setelah proses pembayaran
+#     return HttpResponse(f"Proses pembayaran menggunakan bank {bank} dimulai.", status=200)

@@ -51,7 +51,7 @@ class MetodePembayaranAdmin(admin.ModelAdmin):
 
 @admin.register(Transaksi)
 class TransaksiAdmin(admin.ModelAdmin):
-    list_display = ('user', 'kelas', 'metode_pembayaran', 'status_pembayaran', 'tanggal_transaksi','batas_waktu_pembayaran','total_pembayaran')
+    list_display = ('user', 'kelas', 'metode_pembayaran', 'status_pembayaran', 'tanggal_transaksi','batas_waktu_pembayaran','amount')
     search_fields = ('user__email', 'kelas__nama_kelas', 'metode_pembayaran__nama_metode')
     list_filter = ('status_pembayaran', 'metode_pembayaran')
 

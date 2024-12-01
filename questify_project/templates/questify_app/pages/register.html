@@ -7,15 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
     <title>Register Page</title>
 </head>
 <body>
 
     <!-- Main content -->
-    <main class="container-fluid d-flex justify-content-center align-items-center mt-5" style="height: 90vh;">
+    <main class="container-fluid d-flex justify-content-center align-items-center mb-3 mt-3" style="height: 95vh;">
         <section class="row w-90 shadow-xl mx-auto rounded-3 overflow-hidden my-3" style="max-height: 100%;">     
             <div class="col-md-6 p-0 vh-100 d-flex flex-column justify-content-center align-items-center text-white d-none d-md-flex rounded-5" style="background: linear-gradient(180deg, #EE9AE5, #5961F9); position: relative;">
                 <a href="{% url 'questify_app:index' %}" class="btn btn-outline-light position-absolute d-none d-md-block" style="top: 20px; left: 20px;">Kembali</a>
@@ -35,13 +34,11 @@
             
             <!-- Kolom Formulir Pendaftaran -->
             <div class="col-md-6 bg-white p-5 d-flex flex-column justify-content-center vh-100">
-                <a href="#" class="btn btn-outline-secondary mb-3 d-md-none" style="align-self: flex-start;">Kembali</a>
+                <a href="{% url 'questify_app:index' %}" class="btn btn-outline-secondary mb-3 d-md-none" style="align-self: flex-start;">Kembali</a>
                 <h2 class="text-start mb-3" style="color: black;">
                     Halo, Selamat Datang di <strong style="color: #010851;">Questify</strong>
                     <img class="rounded" src="{% static 'images/arcticons--flixquest.png' %}" alt="Company Logo" style="width: 50px; height: 50px; position: relative; left: -10px;">
                 </h2>                
-                
-                
                 
                 <form method="POST" action="">
                     {% csrf_token %}
@@ -98,52 +95,17 @@
                             <img src="{% static 'images/google.png' %}" alt="Google logo" style="width: 18px; margin-right: 10px;">
                             <span>Register dengan Google</span>
                         </a>                        
+                        <p class="text-center mt-3" >Sudah punya akun? <a href="{% url 'questify_app:login' %}" class="link-underline-primary">Login</a></p>
                     </div> 
-    
-                    <!-- Link Login -->
-                    <div class="text-center mt-2">
-                        <p>Sudah punya akun? <a href="{% url 'questify_app:login' %}" class="text-decoration-none">Masuk disini</a></p>
-                    </div>
                 </form>
             </div>
         </section>
     </main>
     
-
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/register.js' %}"></script>
 </body>
 </html>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Toggle password visibility for password1 field
-        const togglePasswordButton1 = document.getElementById('toggle-password1');
-        const passwordField1 = document.getElementById('password1');
-
-        togglePasswordButton1.addEventListener('click', function() {
-            if (passwordField1.type === 'password') {
-                passwordField1.type = 'text';
-                togglePasswordButton1.textContent = 'Hid    e';
-            } else {
-                passwordField1.type = 'password';
-                togglePasswordButton1.textContent = 'Show';
-            }
-        });
-
-        // Toggle password visibility for password2 field
-        const togglePasswordButton2 = document.getElementById('toggle-password2');
-        const passwordField2 = document.getElementById('password2');
-
-        togglePasswordButton2.addEventListener('click', function() {
-            if (passwordField2.type === 'password') {
-                passwordField2.type = 'text';
-                togglePasswordButton2.textContent = 'Hide';
-            } else {
-                passwordField2.type = 'password';
-                togglePasswordButton2.textContent = 'Show';
-            }
-        });
-    });
-</script>

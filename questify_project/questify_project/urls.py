@@ -24,8 +24,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    # path('', RedirectView.as_view(url='/landing-page/', permanent=True)),  # Redirect ke landing-page
-    # path('landing-page/', views.index, name='landing-page'),
     path('questify_app/', include('questify_app.urls')),
     path('accounts/', include('allauth.urls')),
 ]

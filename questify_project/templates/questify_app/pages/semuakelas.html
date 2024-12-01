@@ -1,5 +1,4 @@
 {% extends 'questify_app/layout/base.html' %}
-
 {% load static %}
 
 {% block page_css %}
@@ -9,74 +8,79 @@
 {% block title %}Semua Kelas{% endblock %}
 
 {% block content %}
-
 <main class="container content-main mt-5 pt-5 px-5">
   <div class="text-center">
-    <h2><strong>Selamat Datang, Pengguna 🙌</strong></h2>
+    <h2><strong>Selamat Datang,{{ user.username }}🙌</strong></h2>
     <p class="text-muted">Tantangan menantimu! Pilih kelas dan mulailah mengasah kemampuanmu sekarang!</p>
-
-    <!-- Divider Line -->
     <hr class="my-4">
-
     
-        <!-- Container untuk membungkus semua kartu (menggunakan Bootstrap) -->
-        <section class="container my-4">
-          <!-- Baris pertama untuk mengatur kolom -->
-          <div class="row">
-            <!-- Baris kedua untuk menampilkan semua kartu di tengah -->
-            <div class="row justify-content-center card-container">
-  
-              <!-- Card 1: Basic -->
-               <!-- Penggunaan col-md-4 untuk layout 3 kolom di layar medium ke atas, col-12 untuk layar mobile -->
-              {% for kelas in kelas_list %}
-              <div class="col-md-4 col-12 mb-4">
-                <!-- Tambahan col-12 untuk mobile -->
-                <div class="card-harga card h-100">
-                  <h2 class="judul-paket"><strong>{{ kelas.nama_kelas }}</strong></h2>
-                  <div class="violet-box">
-                    <!-- Harga ditampilkan dalam format teks -->
-                    <p class="harga"><strong>{{ kelas.format_rupiah }}</strong><sub>/bulan</sub></p>
-                    <img
-                    src="{% static 'images/lock.png' %}"
-                    alt="Gambar Kunci"
-                    class="img-fluid"
-                    width="100px"
-                    height="100px"
-                    />
-                    <!-- Daftar fitur dalam format list -->
-                    <ul class="fitur">
-                      <li>
-                        <strong
-                          >{{ kelas.deskripsi_1 }}</strong
-                        >
-                      </li>
-                      <li>
-                        <strong
-                          >{{ kelas.deskripsi_2 }}</strong
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                  <div
-                    class="card-body d-flex flex-column justify-content-between"
-                  >
-                    <!-- Tombol Beli dan Coba Gratis -->
-                    <div class="text-center">
-                      <a href="#" class="btn btn-primary">Beli Sekarang</a>
-                      <p class="text-kecil">untuk berlangganan penuh</p>
-                      <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary"
-                        >Coba Gratis</a
-                      >
-                      <p class="text-kecil">trial dengan akses terbatas</p>
-                    </div>
-                  </div>
+    <section class="container my-4">
+      <div class="row">
+        <div class="row justify-content-center card-container">
+          {% for kelas in kelas_list %}
+          <div class="col-md-4 col-12 mb-4">
+            <div class="card-harga card h-100">
+              <h2 class="judul-paket"><strong>{{ kelas.nama_kelas }}</strong></h2>
+              <div class="violet-box">
+                <p class="harga"><strong>{{ kelas.format_rupiah }}</strong><sub>/bulan</sub></p>
+                <img src="{% static 'images/lock.png' %}" alt="Gambar Kunci" class="img-fluid" width="100px" height="100px"/>
+                <ul class="fitur">
+                  <li><strong>{{ kelas.deskripsi_1 }}</strong></li>
+                  <li><strong>{{ kelas.deskripsi_2 }}</strong></li>
+                </ul>
+              </div>
+              <div class="card-body d-flex flex-column justify-content-between">
+                <div class="text-center">
+                  {% if user.is_authenticated %}
+                  <button onclick="triggerPayment('{{ kelas.id }}', '{{ kelas.harga }}', '{{ user.id }}', '{{ user.first_name }}')" class="btn btn-primary">Beli Sekarang</button>
+                  {% else %}
+                  <p>Silahkan login untuk membeli kelas</p>
+                  <a href="{% url 'questify_app:login' %}">Login</a>
+                  {% endif %}
+                  <p class="text-kecil">untuk berlangganan penuh</p>
+                  <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-secondary">Coba Gratis</a>
+                  <p class="text-kecil">trial dengan akses terbatas</p>
                 </div>
               </div>
-              {% endfor %}
+            </div>
           </div>
-        </section>
-    ...
+          {% endfor %}
+        </div>
+      </div>
+    </section>
   </div>
 </main>
 
+<!-- Midtrans Snap.js -->
+<script type="text/javascript"
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-lmnptvmZucycjugG"></script>
+
+<script type="text/javascript">
+  function triggerPayment(kelasId, amount, userId, firstName) {
+    fetch("{% url 'questify_app:payment' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: new URLSearchParams({
+        "kelas_id": kelasId,
+        "amount": amount,
+        "user_id": userId,
+        "first_name": firstName
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.token) {
+        // Memunculkan pop-up pembayaran Snap dengan token yang diterima
+        window.snap.pay(data.token);
+      } else {
+        alert("Gagal mendapatkan token pembayaran.");
+      }
+    })
+    .catch(error => console.error("Error:", error));
+  }
+</script>
 {% endblock %}

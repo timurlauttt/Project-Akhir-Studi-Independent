@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-class Kelas(models.Model):
+class Kelas(models.Model):  
     nama_kelas = models.CharField(max_length=100)
     harga = models.IntegerField()
     deskripsi_1 = models.TextField()
@@ -73,7 +73,9 @@ class Transaksi(models.Model):
     status_pembayaran = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     tanggal_transaksi = models.DateTimeField(auto_now_add=True)
     batas_waktu_pembayaran = models.DateTimeField(default=datetime.now)
-    total_pembayaran = models.DecimalField(max_digits=10, decimal_places=2)
+    # total_pembayaran = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.IntegerField(default=0)
+    link_payment = models.CharField(max_length=255,blank=True, null=True)
 
     def __str__(self):
         return f"Transaksi oleh {self.user.username} untuk {self.kelas.nama_kelas}"

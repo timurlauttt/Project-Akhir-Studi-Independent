@@ -13,7 +13,7 @@
         <!-- Logo and Questify Text -->
         <a
           class="navbar-brand d-flex align-items-center fs-0 fw-bold"
-          href="#"
+          href="{% url 'questify_app:home' %}"
         >
           Questify
           <img
@@ -42,9 +42,9 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
             <li class="nav-item mx-3">
-              <a class="nav-link" href="{% url 'index' %}">Home</a>
+              <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'questify_app:home' %}">Home</a>
             </li>
-            <li class="nav-item mx-2">
+            <li class="nav-item mx-3">
               <a class="nav-link {% if request.resolver_match.url_name == 'semuakelas' %}active{% endif %}" href="{% url 'questify_app:semuakelas' %}">Semua Kelas</a>
             </li>
             <li class="nav-item mx-3">
@@ -57,13 +57,6 @@
 
           <!-- Bahasa and Masuk for desktop view -->
           <div class="d-none d-lg-flex align-items-center">
-            <img
-              src="{% static 'images/world-map.png' %}"
-              alt="language"
-              class="language-icon"
-              style="width: 20px"
-            />
-            <span class="me-3">English</span>
             <a href="{% url 'questify_app:userprofile' %}">
               <img
                 src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}"
@@ -87,12 +80,10 @@
                 Lainnya
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Bahasa</a></li>
-                <li><hr class="dropdown-divider" /></li>
                 <li>
                   <a
                     class="dropdown-item btn btn-outline-primary"
-                    href="userprofile.html"
+                    href="{% url 'questify_app:userprofile' %}"
                     >Profile</a
                   >
                 </li>
@@ -102,4 +93,4 @@
         </div>
       </div>
     </nav>
-  </header>
+</header>
