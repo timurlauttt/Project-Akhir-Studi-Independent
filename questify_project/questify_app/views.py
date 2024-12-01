@@ -1,13 +1,12 @@
+from datetime import timezone
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .forms import ContactForm
+from .forms import ContactForm, CreateUserForm,ProfileUpdateForm
 from django.conf import settings
 from django.core.mail import send_mail
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm
 from django.contrib.auth.models import User
@@ -32,6 +31,14 @@ import uuid
 def index(request):
     data = "Hello, Questify!"  # Variabel data untuk ditampilkan
     return render(request, 'questify_app/index.html', context={'data': data})
+=======
+from django.contrib.auth.models import User
+from .models import ModulPembelajaran, Soal, JawabanUser, Nilai, UserProfile, Kelas, PercobaanTerakhir
+from django.shortcuts import render, get_object_or_404
+from django.utils.timezone import now, timedelta
+from django.utils.dateparse import parse_datetime
+from django.db.models import Sum
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 
 
 def index(request):
@@ -67,6 +74,10 @@ def index(request):
         'kelas_list': kelas_list,  # Kirim data kelas ke template
     })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 
 def register(request):
     form = CreateUserForm()
@@ -83,6 +94,8 @@ def register(request):
 
     context = {'form':form}
     return render(request, 'questify_app/pages/register.html', context)
+
+
 
 def loginPage(request):
     if request.method == 'POST':
@@ -106,7 +119,9 @@ def loginPage(request):
 def home(request):
     return render(request, 'questify_app/pages/home.html')
 
-@login_required(login_url='/accounts/login/')
+
+
+@login_required(login_url='/questify_app/login/')
 def userprofile(request):
     user = request.user
 
@@ -128,7 +143,7 @@ def userprofile(request):
     return render(request, 'questify_app/pages/userprofile.html', {'form': form, 'user': user})
 
 
-@login_required
+@login_required(login_url='/questify_app/login/')
 def update_profile(request):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
@@ -141,7 +156,9 @@ def update_profile(request):
     return render(request, 'questify_app/pages/userprofile.html', {'form': form})
 
 
-@login_required(login_url='/accounts/login/')
+
+
+@login_required(login_url='/questify_app/login/')
 def semuakelas(request):
     kelas_list = Kelas.objects.all()
     return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
@@ -202,63 +219,193 @@ def payment(request):
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
-def pilihkelas(request):
-    modul_list = ModulPembelajaran.objects.select_related('kelas').all()
-    print("Jumlah modul:", modul_list.count())  # Menampilkan jumlah modul di terminal
+
+
+@login_required(login_url='/questify_app/login/')
+def pilihkelas(request, kelas_id):
+    # Mendapatkan objek Kelas berdasarkan ID
+    kelas = get_object_or_404(Kelas, id=kelas_id)
+    
+    # Memfilter modul berdasarkan kelas yang dipilih
+    modul_list = ModulPembelajaran.objects.filter(kelas=kelas)
+    
     context = {
-        'modul_list': modul_list
+        'kelas': kelas,
+        'modul_list': modul_list,
     }
+    
     return render(request, 'questify_app/pages/pilihkelas.html', context)
 
 
+
+
+@login_required(login_url='/questify_app/login/')
 def detailkelas(request, id):
     modul = get_object_or_404(ModulPembelajaran, id=id)
+    kelas = modul.kelas  # Ambil kelas yang terkait dengan modul
     context = {
-        'modul': modul
+        'modul': modul,
+        'kelas': kelas  # Kirimkan objek kelas ke template
     }
     return render(request, 'questify_app/pages/detailkelas.html', context)
 
 
-@login_required(login_url='/accounts/login/')
+
+
+@login_required(login_url='/questify_app/login/')
 def hasilnilai(request):
-    return render(request, 'questify_app/pages/hasilnilai.html')
+    user = request.user
+    hasil_data = (
+        Nilai.objects.filter(user=user)
+        .select_related('modul', 'modul__kelas')
+        .order_by('-tanggal_percobaan', '-percobaan_ke', '-id')  # Urutkan berdasarkan tanggal, percobaan_ke, dan id
+    )
 
-@login_required(login_url='/accounts/login/')
-def halamanselesai(request):
-    return render(request, 'questify_app/pages/halamanselesai.html')
+    # Menambahkan informasi benar, salah, total soal untuk setiap nilai
+    for result in hasil_data:
+        # Filter JawabanUser berdasarkan percobaan_ke dan modul untuk menghitung benar dan salah
+        total_benar = JawabanUser.objects.filter(user=user, percobaan_ke=result.percobaan_ke, soal__modul=result.modul, status=True).count()
+        total_salah = JawabanUser.objects.filter(user=user, percobaan_ke=result.percobaan_ke, soal__modul=result.modul, status=False).count()
 
-@login_required(login_url='/accounts/login/')
+        # Menyimpan hasil ke dalam result untuk ditampilkan di template
+        result.benar = total_benar
+        result.salah = total_salah
+        result.total_soal = result.modul.soal.count()  # Total soal dalam modul
+        result.tanggal = result.tanggal_percobaan  # Tanggal percobaan
+
+    return render(request, 'questify_app/pages/hasilnilai.html', {'hasil_data': hasil_data})
+
+
+@login_required(login_url='/questify_app/login/')
+def halamanselesai(request, modul_id, nilai_total):
+    modul = get_object_or_404(ModulPembelajaran, id=modul_id)
+    # Ambil percobaan terakhir yang dilakukan oleh pengguna untuk modul ini dari database
+    percobaan_terakhir = PercobaanTerakhir.objects.filter(user=request.user, modul=modul).first()
+    if percobaan_terakhir:
+        percobaan_ke = percobaan_terakhir.percobaan_ke
+    else:
+        percobaan_ke = 1  # Jika tidak ada data percobaan sebelumnya, mulai dari percobaan pertama
+
+    kelas = modul.kelas  # Ambil kelas yang terkait dengan modul
+
+
+    jawaban_user = JawabanUser.objects.filter(
+        user=request.user,
+        soal__modul=modul,
+        percobaan_ke=percobaan_ke
+    )
+
+    return render(request, 'questify_app/pages/halamanselesai.html', {
+        'modul': modul,
+        'nilai_total': nilai_total,
+        'percobaan_ke': percobaan_ke,
+        'jawaban_user': jawaban_user,
+        'kelas': kelas,
+    })
+
+
+
+@login_required(login_url='/questify_app/login/')
 def langganan(request):
-    return render(request, 'questify_app/pages/langganan.html')
+    kelas_list = Kelas.objects.all()
+    return render(request, 'questify_app/pages/langganan.html', {'kelas_list': kelas_list})
 
-@login_required(login_url='/accounts/login/')
-def review(request):
-    return render(request, 'questify_app/pages/review.html')
 
-@login_required(login_url='/accounts/login/')
-def soal(request):
-    return render(request, 'questify_app/pages/soal.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
+def review(request, percobaan_ke, modul_id):
+    user = request.user
+
+    # Ambil data soal dan jawaban user berdasarkan percobaan dan modul
+    jawaban_list = JawabanUser.objects.filter(
+        user=user,
+        soal__modul_id=modul_id,
+        percobaan_ke=percobaan_ke
+    )
+    
+    # Ambil objek modul berdasarkan ID modul
+    modul = get_object_or_404(ModulPembelajaran, id=modul_id)
+
+    # Hitung jumlah soal yang dijawab benar dan salah
+    benar = jawaban_list.filter(status=True).count()
+    salah = jawaban_list.filter(status=False).count()
+
+    # Hitung durasi pengerjaan
+    if jawaban_list.exists():
+        waktu_mulai = jawaban_list.first().waktu_jawab
+        waktu_selesai = jawaban_list.last().waktu_jawab
+        durasi = waktu_selesai - waktu_mulai
+    else:
+        durasi = timezone.timedelta()
+
+    # Format durasi menjadi HH:MM:SS tanpa desimal
+    durasi_str = str(durasi).split('.')[0]
+
+    # Hitung nilai akhir berdasarkan jumlah soal yang benar
+    total_soal = jawaban_list.count()
+    nilai = (benar / total_soal) * 100 if total_soal > 0 else 0  # Menghitung persentase benar
+
+    # Ubah nilai menjadi integer untuk menghilangkan koma
+    nilai = int(nilai)  # Mengkonversi nilai ke bilangan bulat tanpa koma
+
+    # Ambil data nilai untuk percobaan ini (jika ada)
+    nilai_data = Nilai.objects.filter(
+        user=user,
+        modul=modul,
+        percobaan_ke=percobaan_ke
+    ).first()
+
+    # Jika data nilai belum ada, buat baru
+    if not nilai_data:
+        Nilai.objects.create(
+            user=user,
+            modul=modul,
+            jumlah_nilai=nilai,
+            waktu_pengajaran=durasi,
+            percobaan_ke=percobaan_ke
+        )
+
+    context = {
+        'jawaban_list': jawaban_list,
+        'nilai': nilai,
+        'total_soal': total_soal,
+        'benar': benar,
+        'salah': salah,
+        'durasi': durasi_str,  # Menggunakan durasi yang sudah diformat
+        'modul': modul,
+        'percobaan_ke': percobaan_ke,
+    }
+
+    return render(request, 'questify_app/pages/review.html', context)
+
+
+@login_required(login_url='/questify_app/login/')
 def metodepembayaran(request):
     return render(request, 'questify_app/pages/metodepembayaran.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def cekbeli(request):
     return render(request, 'questify_app/pages/cekbeli.html')
 
+<<<<<<< HEAD
 # @login_required(login_url='/accounts/login/')
 # def payment(request):
 #     return render(request, 'questify_app/pages/payment.html')
+=======
+@login_required(login_url='/questify_app/login/')
+def payment(request):
+    return render(request, 'questify_app/pages/payment.html')
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def daftartransaksi(request):
     return render(request, 'questify_app/pages/daftar_transaksi.html')
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/questify_app/login/')
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
+<<<<<<< HEAD
 #keperluang midtrans
 # @login_required
 # def initiate_payment(request):
@@ -273,3 +420,117 @@ def detailtransaksi(request):
     
 #     # Redirect atau tampilkan halaman sesuai kebutuhan setelah proses pembayaran
 #     return HttpResponse(f"Proses pembayaran menggunakan bank {bank} dimulai.", status=200)
+=======
+@login_required(login_url='/questify_app/login/')
+def soal(request, modul_id, soal_id=None):
+    modul = get_object_or_404(ModulPembelajaran, id=modul_id)
+    soal_list = Soal.objects.filter(modul=modul).order_by('id')
+
+    # Cek percobaan terakhir di database untuk pengguna dan modul
+    percobaan_terakhir = PercobaanTerakhir.objects.filter(user=request.user, modul=modul).first()
+    if percobaan_terakhir:
+        percobaan_ke = percobaan_terakhir.percobaan_ke
+    else:
+        percobaan_ke = 1  # Mulai dari percobaan pertama jika belum ada
+
+    if soal_id is None:
+        soal = soal_list.first()
+        nomor_soal = 1
+    else:
+        soal = get_object_or_404(soal_list, id=soal_id)
+        nomor_soal = list(soal_list).index(soal) + 1
+
+    next_soal = soal_list.filter(id__gt=soal.id).first()
+    is_last_question = next_soal is None
+
+    pilihan_user = None
+    if request.method == 'POST':
+        pilihan_user = request.POST.get(f'pilihan_user_{soal.id}')
+        if pilihan_user:
+            status = pilihan_user == soal.jawaban
+            JawabanUser.objects.create(
+                user=request.user,
+                soal=soal,
+                pilihan_user=pilihan_user,
+                status=status,
+                percobaan_ke=percobaan_ke
+            )
+
+        if 'selesai' in request.POST:
+            # Hitung nilai berdasarkan soal yang benar
+            nilai_total = JawabanUser.objects.filter(
+                user=request.user,
+                soal__modul=modul,
+                percobaan_ke=percobaan_ke,
+                status=True
+            ).aggregate(total_nilai=Sum('soal__nilai_jawaban'))['total_nilai'] or 0
+
+            waktu_pengajaran = timedelta(seconds=request.session.get(f'modul_{modul_id}_time_spent', 0))
+            # Cek apakah nilai sudah ada untuk percobaan ini
+            nilai_data = Nilai.objects.filter(user=request.user, modul=modul, percobaan_ke=percobaan_ke).first()
+            if not nilai_data:
+                Nilai.objects.create(
+                    user=request.user,
+                    modul=modul,
+                    jumlah_nilai=nilai_total,
+                    waktu_pengajaran=waktu_pengajaran,
+                    tanggal_percobaan=now(),
+                    percobaan_ke=percobaan_ke
+                )
+
+            # Update percobaan ke untuk percakapan berikutnya
+            percobaan_ke += 1
+            PercobaanTerakhir.objects.update_or_create(
+                user=request.user,
+                modul=modul,
+                defaults={'percobaan_ke': percobaan_ke}
+            )
+
+            return redirect('questify_app:halamanselesai', modul_id=modul.id, nilai_total=nilai_total)
+
+        if next_soal:
+            return redirect('questify_app:soal_detail', modul_id=modul.id, soal_id=next_soal.id)
+
+    # Atur waktu pengerjaan
+    session_key = f'modul_{modul_id}_time'
+    start_time_str = request.session.get(f'{session_key}_start')
+    end_time_str = request.session.get(f'{session_key}_end')
+
+    if not start_time_str or not end_time_str:
+        start_time = now()
+        end_time = start_time + timedelta(minutes=modul.waktu_pengajaran)
+        request.session[f'{session_key}_start'] = start_time.isoformat()
+        request.session[f'{session_key}_end'] = end_time.isoformat()
+    else:
+        start_time = parse_datetime(start_time_str)
+        end_time = parse_datetime(end_time_str)
+
+    remaining_time = max(0, (end_time - now()).total_seconds())
+    time_spent = max(0, (now() - start_time).total_seconds())
+    request.session[f'modul_{modul_id}_time_spent'] = time_spent
+
+    if remaining_time <= 0:
+        # Waktu habis, kirim jawaban dengan nilai 0
+        JawabanUser.objects.filter(user=request.user, percobaan_ke=percobaan_ke).delete()  # Hapus jawaban yang tidak terjawab
+        return redirect('questify_app:pilihkelas', kelas_id=modul.kelas.id)  # Arahkan ke halaman pilih kelas
+
+
+    pilihan = [
+        ('A', soal.pilihan_a),
+        ('B', soal.pilihan_b),
+        ('C', soal.pilihan_c),
+        ('D', soal.pilihan_d),
+    ]
+
+    return render(request, 'questify_app/pages/soal.html', {
+        'soal': soal,
+        'next_soal': next_soal,
+        'nomor_soal': nomor_soal,
+        'remaining_time': remaining_time,
+        'is_last_question': is_last_question,
+        'pilihan': pilihan,
+        'pilihan_user': pilihan_user,
+        'percobaan_ke': percobaan_ke,
+        'modul': modul,
+    })
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e

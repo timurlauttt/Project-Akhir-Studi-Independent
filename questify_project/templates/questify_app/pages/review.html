@@ -1,60 +1,86 @@
 {% extends 'questify_app/layout/base.html' %}
-{% load static %}  
+{% load static %}
 
-{% block title %}Hasil Nilai{% endblock %} 
+{% block title %}Review Jawaban{% endblock %}
 
 {% block page_css %}
 <link rel="stylesheet" href="{% static 'css/review.css' %}" />
+<style>
+  .gagal-message {
+    background-color: #f8b8ac;
+    color: #b43939;
+    font-size: 20px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-
 <main class="container content-main mt-5 pt-5 px-5">
+  <!-- Final Score Section -->
   <div class="result-container">
-    <h2 class="final-score">Nilai Akhir : 90</h2>
+    <h2 class="final-score">Nilai Akhir : {{ nilai }}</h2>
     <div class="congrats-badge">
-        <img src="{% static 'images/piala.png' %}" alt="Congrats" class="congrats-icon" width="200">
-        <p class="pass-message">Selamat, Kamu Lulus</p>
+        {% if nilai >= 70 %}
+            <!-- Tampilkan gambar jika nilai >= 70 -->
+            <img src="{% static 'images/piala.png' %}" alt="Congrats" class="congrats-icon" width="200">
+            <p class="pass-message">Selamat, Kamu Lulus</p>
+        {% else %}
+            <!-- Tampilkan gambar jika nilai < 70 -->
+            <img src="{% static 'images/sad.png' %}" alt="Gagal" class="congrats-icon" width="200">
+            <p class="gagal-message">Mohon Maaf, Kamu Gagal</p>
+        {% endif %}
     </div>
     <p class="minimum-score">Nilai Minimal: 70</p>
-</div>
+  </div>
 
-<div class="score-info">
-    <p class="total-score">Total Terselesaikan: 10</p>
-    <p class="time-duration">Durasi Pengerjaan: 00:05:00</p>
-</div>
+  <!-- Score Information -->
+  <div class="score-info" style="font-size: 16px; margin-top: 50px;">
+    <p class="total-score">Total Soal Terselesaikan: {{ total_soal }}</p>
+    <p class="time-duration">Durasi Pengerjaan: {{ durasi }}</p>
+  </div>
 
-<table class="review-table">
+  <!-- Review Table Section -->
+  <table class="review-table">
     <thead>
-        <tr>
-            <th>Pertanyaan</th>
-            <th>Jawaban Kamu</th>
-            <th>Jawaban Benar</th>
-            <th>Status</th>
-        </tr>
+      <tr style="color: #4e3980;">
+        <th>Pertanyaan</th>
+        <th>Gambar</th>
+        <th>Jawaban Kamu</th>
+        <th>Jawaban Benar</th>
+        <th>Status</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Lorem ipsum dolor sit amet...</td>
-            <td>A</td>
-            <td>A</td>
-            <td><span class="status-correct">Benar</span></td>
-        </tr>
-        <tr>
-            <td>Lorem ipsum dolor sit amet...</td>
-            <td>B</td>
-            <td>B</td>
-            <td><span class="status-correct">Benar</span></td>
-        </tr>
-        <tr>
-            <td>Lorem ipsum dolor sit amet...</td>
-            <td>D</td>
-            <td>C</td>
-            <td><span class="status-incorrect">Salah</span></td>
-        </tr>
-        <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+      {% for jawaban in jawaban_list %}
+      <tr>
+        <td>{{ jawaban.soal.pertanyaan }}</td>
+        <td>
+          {% if jawaban.soal.gambar %}
+            <img src="{{ jawaban.soal.gambar.url }}" alt="Gambar Soal" width="100" />
+          {% else %}
+            Tidak ada gambar
+          {% endif %}
+        </td>
+        <td>{{ jawaban.pilihan_user }}</td>
+        <td>{{ jawaban.soal.jawaban }}</td>
+        <td>
+          {% if jawaban.status %}
+            <span class="badge bg-success">Benar</span>
+          {% else %}
+            <span class="badge bg-danger">Salah</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" class="text-center">Tidak ada jawaban yang tersedia.</td>
+      </tr>
+      {% endfor %}
     </tbody>
-</table> 
+  </table>
 </main>
-
 {% endblock %}

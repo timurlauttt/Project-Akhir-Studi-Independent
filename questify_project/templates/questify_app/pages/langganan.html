@@ -20,6 +20,7 @@
 
     <!-- Container untuk membungkus semua kartu (menggunakan Bootstrap) -->
     <section class="container my-4">
+<<<<<<< HEAD
       <!-- Baris pertama untuk mengatur kolom -->
       <div class="row">
         <!-- Baris kedua untuk menampilkan semua kartu di tengah -->
@@ -99,15 +100,45 @@
                   <a href="{% url 'questify_app:semuakelas' %}" class="text-kecil2"
                     >Perpanjang Sekarang</a>
                 </div>
+=======
+      <div class="row justify-content-center card-container">
+        {% for kelas in kelas_list %}
+        <div class="col-md-4 col-12 mb-4">
+          <div class="card-harga card h-100">
+            <h2 class="judul-paket"><strong>{{ kelas.nama }}</strong></h2>
+            <p class="aktif"><strong>Langganan Aktif</strong></p>
+            <img
+              src="{% static 'images/unlock.png' %}"
+              alt="Gambar Kunci"
+              class="img-fluid"
+              width="120px"
+              height="120px"
+            />
+            <ul class="fitur">
+              <li><strong>{{ kelas.deskripsi }}</strong></li>
+              <li><strong>Akses sesuai paket</strong></li>
+            </ul>
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="text-center">
+                <p class="text-sedang">Langganan Berlaku Hingga</p>
+                <p class="text-sedang">25 Oktober 2025</p>
+                <a href="{% url 'questify_app:pilihkelas' kelas.id %}" class="btn btn-secondary">Mulai</a>
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
               </div>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
     </section>
+<<<<<<< HEAD
     ...
   </div>
 </main>
     
+=======
+  </div>
+</main>
+
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 {% endblock %}
-  

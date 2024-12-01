@@ -75,6 +75,7 @@
         </nav>
     </header>
 
+<<<<<<< HEAD
       <main class="main">
         <!-- Hero Section -->
         <section id="home" class="d-flex align-items-center bg-white py-5">
@@ -102,6 +103,51 @@
             </div>
           </div>
         </section>
+=======
+    <main class="main">
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="d-flex align-items-center"
+        style="background-color: white; padding-top: 90px"
+      >
+        <div
+          class="container-xxl text-left py-5 ms-5 me-5 w-100"
+          style="
+            height: calc(100vh - 100px);
+            background: linear-gradient(30deg, #5961f9, #ee9ae5);
+            border-radius: 25px 25px 125px 25px;
+          "
+        >
+          <img
+            src="{% static 'images/achievement.png' %}"
+            alt="logo_questify"
+            class="achievement-img img-fluid rounded float-end"
+            style="max-width: 40%; width: auto"
+          />
+          <h1 class="display-6 fw-bold mb-5 ms-5" style="color: white">QUESTIFY</h1>
+          <h2 class="fw-normal ms-5" style="color: white">
+            Asah Kecepatan Berpikir
+          </h2>
+          <h2 class="fw-normal ms-5" style="color: white">Taklukkan Setiap Misi</h2>
+          <p class="lead mt-4 ms-5" style="color: white">
+            Berpikir cepat adalah kunci sukses di dunia yang serba cepat. Di
+            Questify, kami menghadirkan misi dan kuis yang dirancang untuk
+            menguji kemampuan Anda, mendorong Anda untuk terus melampaui batas
+            kemampuan berpikir Anda.
+          </p>
+          <a
+            href="#"
+            class="btn btn-outline-primary btn-lg mt-3 ms-5"
+            style="color: white; background-color: #dda0dd"
+            onmouseover="this.style.color='black'; this.style.backgroundColor='white';"
+            onmouseout="this.style.color='white'; this.style.backgroundColor='#dda0dd';"
+          >
+            Get Started
+          </a>
+        </div>
+      </section>
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 
         <!-- Kenapa Pilih Kami Section -->
         <section data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300" id="features" class="benefits container mt-3 p-4 shadow-lg rounded">
@@ -214,6 +260,7 @@
                   {% endfor %}
               </div>
           </div>
+<<<<<<< HEAD
         </section>
       
         <!-- faq section -->
@@ -297,6 +344,67 @@
             </div>
           </div>
         </section>
+=======
+          <div class="col-md-6 about-image text-center">
+            <img
+              src="{% static 'images/stationery.png' %}"
+              alt="About Us"
+              class="img-fluid rounded-3"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- fitur kelas section -->
+      <section id="courses" class="mt-8">
+        <div class="container container-harga my-5">
+            <h1 class="judul-sesi">Kursus Kami</h1>
+            <h2 class="subjudul-sesi">
+                Ini adalah semua kursus yang kami tawarkan di Questify
+            </h2>
+    
+            <div class="row justify-content-center card-container">
+                {% for kelas in kelas_list %}
+                <div class="col-md-4 col-12 mb-4">
+                    <!-- Tambahan col-12 untuk mobile -->
+                    <div class="card-harga card h-100">
+                        <h2 class="judul-paket">{{ kelas.nama_kelas }}</h2>
+                        <div class="violet-box">
+                            <p class="harga"><strong>{{ kelas.format_rupiah }}</strong><sub>/bulan</sub></p>
+                            <img
+                                src="{% static 'images/lock.png' %}"
+                                alt="Gambar Kunci"
+                                class="img-fluid"
+                                width="100px"
+                                height="100px"
+                            />
+                            <ul class="fitur">
+                                <li><strong>{{ kelas.deskripsi_1 }}</strong></li>
+                                {% if kelas.deskripsi_2 %}
+                                <li><strong>{{ kelas.deskripsi_2 }}</strong></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div
+                            class="card-body d-flex flex-column justify-content-between"
+                        >
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary">Beli Sekarang</a>
+                                <p class="text-kecil">untuk berlangganan penuh</p>
+                                <a href="{% url 'questify_app:pilihkelas' kelas.id %}" class="btn btn-secondary"
+                                    >Coba Gratis</a
+                                >
+                                <p class="text-kecil">trial dengan akses terbatas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+      </section>
+    
+>>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 
         <!-- motivational section -->
         <section data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300" class="motivational-card d-flex align-items-center justify-content-center mt-5 my-5 p-5" style="border-radius: 50px">

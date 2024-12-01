@@ -3,7 +3,7 @@ from django import forms
 from .models import ContactMessage
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import Soal
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -67,3 +67,8 @@ class ProfileUpdateForm(forms.ModelForm):
             user.profile.profile_picture = self.cleaned_data['profile_picture']
             user.profile.save()
         return user
+
+class SoalForm(forms.ModelForm):
+    class Meta:
+        model = Soal
+        fields = ['pertanyaan', 'gambar', 'pilihan_a', 'pilihan_b', 'pilihan_c', 'pilihan_d', 'jawaban', 'nilai_jawaban']
