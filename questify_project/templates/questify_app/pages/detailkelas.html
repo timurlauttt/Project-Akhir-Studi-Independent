@@ -6,50 +6,84 @@
 
 {% block page_css %}
   <link rel="stylesheet" href="{% static 'css/detailkelas.css' %}">
+  <style>
+    .highlight {
+      font-size: 1.1em;
+      color: #6f4dbf;
+    }
+    .section-row {
+      margin-top: 30px;
+    }
+    .btn-custom {
+      background-color: #6f4dbf;
+      color: white;
+    }
+    .btn-custom:hover {
+      background-color: #5430a8;
+      color: white;
+    }
+    .card-icon {
+      font-size: 2em;
+      margin-right: 10px;
+      color: #6f4dbf;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
 <main class="container my-5 px-5">
+    <!-- Judul Halaman -->
     <section class="row">
-        <div class="col-12" style="margin-top: 60px; color: #6f4dbf; text-align: center;">
-            <h1><strong>{{ modul.judul }}</strong></h1>
+        <div class="col-12 text-center" style="margin-top: 60px; color: #6f4dbf;">
+            <h1 class="display-4"><strong><b>{{ modul.judul }}</b></strong></h1>
         </div>
     </section>
 
-    <!-- Card untuk informasi soal -->
+    <!-- Informasi Modul -->
     <section class="row section-row">
         <div class="col-12">
-            <div class="card shadow-sm mb-4">
+            <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <p class="card-text"><strong>Jumlah soal:</strong> {{ modul.jumlah_soal }}</p>
-                    <p class="card-text"><strong>Kategori:</strong> {{ modul.kategori }}</p>
-                    <p class="card-text"><strong>Durasi:</strong> {{ modul.waktu_pengajaran }} menit</p>
-                    <p class="card-text"><strong>Tata cara menjawab:</strong> {{ modul.deskripsi }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Jumlah Soal:</strong> {{ modul.jumlah_soal }}</li>
+                        <li class="list-group-item"><strong>Kategori:</strong> {{ modul.kategori }}</li>
+                        <li class="list-group-item"><strong>Durasi:</strong> {{ modul.waktu_pengajaran }} menit</li>
+                        <li class="list-group-item"><strong>Tata Cara Menjawab:</strong> {{ modul.deskripsi }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Card untuk informasi nilai minimum -->
+    <!-- Informasi Nilai Minimum -->
     <section class="row section-row">
         <div class="col-12">
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Informasi</h5>
-                    <p class="highlight">Kamu harus mencapai skor minimum 70 untuk bisa dinyatakan lulus.</p>
-                    <p class="highlight">Selamat mengerjakan!</p>
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="bi bi-exclamation-circle card-icon"></i><b>Informasi Penting</b></h5>
+                    <p class="highlight">Kamu harus mencapai skor minimum <strong>70</strong> untuk dinyatakan lulus.</p>
+                    <p class="highlight">Semoga sukses dan selamat mengerjakan!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tombol Kembali dan Mulai -->
+    <!-- Tombol Aksi -->
     <section class="row section-row">
         <div class="col-12 text-center">
-            <a href="{% url 'questify_app:pilihkelas' %}" class="btn btn-outline-secondary mr-3">Kembali</a>
-            <a href="{% url 'questify_app:soal' %}">
-                <button class="btn btn-primary">Mulai</button>
+            <a href="{% url 'questify_app:pilihkelas' kelas.id %}" class="btn btn-outline-secondary mx-2">
+                <i class="bi bi-arrow-left-circle"></i> Kembali
             </a>
+            
+            {% if modul.jumlah_soal > 0 %}
+                <a href="{% url 'questify_app:soal' modul.id %}">
+                    <button class="btn btn-custom mx-2">
+                        <i class="bi bi-play-circle"></i> Mulai
+                    </button>
+                </a>
+            {% else %}
+                <p class="text-danger mt-4"><strong>Soal untuk modul ini belum tersedia. Silakan tunggu pengaturan soal.</strong></p>
+            {% endif %}
         </div>
     </section>
 </main>

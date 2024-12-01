@@ -6,62 +6,47 @@
   <link rel="stylesheet" href="{% static 'css/pilihkelas.css' %}">
 {% endblock %}
 
-{% block title %}Semua Kelas{% endblock %}
+{% block title %}{{ kelas.nama_kelas }}{% endblock %}
 
 {% block content %}
-
-<!-- Main content menggunakan container Bootstrap dan text-center untuk align -->
 <main class="container text-center my-5 px-5">
-    <h1 style="margin-top: 60px"><strong>Kelas Basic</strong></h1>
-    <h2>Ayo selesaikan tantangannya</h2>
+  <h1 style="margin-top: 60px"><strong>{{ kelas.nama_kelas }}</strong></h1>
+  <h2>Ayo selesaikan tantangannya</h2>
 
-    <!-- Kontainer kelas, Section untuk card kelas, menggunakan grid system Bootstrap -->
-    <section class="row g-4">
-      <!-- Loop untuk menampilkan setiap modul dalam modul_list -->
-      {% for modul in modul_list %}
-      <article class="col-md-4">
-        <a href="{% url 'questify_app:detailkelas' modul.id %}" class="text-decoration-none">
-          <div class="kelas-card">
-            <h2 class="kelas-title">{{ modul.judul }}</h2>
-            <div class="d-flex justify-content-around">
-              <div>
-                <img
-                  src="{% static 'images/soal.png' %}"
-                  alt="Soal"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">{{ modul.jumlah_soal }} Soal</p>
-              </div>
-              <div>
-                <img
-                  src="{% static 'images/waktu.png' %}"
-                  alt="Waktu"
-                  class="icon"
-                  style="width: 60px"
-                />
-                <p class="ikon-deskripsi">{{ modul.waktu_pengajaran }} Menit</p>
-              </div>
+  <section class="row g-4">
+    {% for modul in modul_list %}
+    <article class="col-md-4">
+      <a href="{% url 'questify_app:detailkelas' modul.id %}" class="text-decoration-none">
+        <div class="kelas-card">
+          <h2 class="kelas-title">{{ modul.judul }}</h2>
+          <div class="d-flex justify-content-around">
+            <div>
+              <img src="{% static 'images/soal.png' %}" alt="Soal" class="icon" style="width: 60px" />
+              <p class="ikon-deskripsi">{{ modul.jumlah_soal }} Soal</p>
             </div>
-            <div class="label-kelas {% if modul.gratis %}gratis{% else %}berbayar{% endif %}">
-              {% if modul.gratis %}Gratis{% else %}Berbayar{% endif %}
-            </div>            
+            <div>
+              <img src="{% static 'images/waktu.png' %}" alt="Waktu" class="icon" style="width: 60px" />
+              <p class="ikon-deskripsi">{{ modul.waktu_pengajaran }} Menit</p>
+            </div>
           </div>
-        </a>
-      </article>
-      {% endfor %}
-    </section>
+          <div class="label-kelas {% if modul.gratis %}gratis{% else %}berbayar{% endif %}">
+            {% if modul.gratis %}Gratis{% else %}Berbayar{% endif %}
+          </div>
+        </div>
+      </a>
+    </article>
+    {% endfor %}
+  </section>
 
-    <!-- Pagination menggunakan komponen pagination dari Bootstrap -->
-    <nav aria-label="Page navigation" class="d-flex content-left mt-4">
-      <ul class="pagination">
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-      </ul>
-    </nav>
-  </main>
-
+  <!-- Pagination -->
+  <nav aria-label="Page navigation" class="d-flex content-left mt-4">
+    <ul class="pagination">
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+    </ul>
+  </nav>
+</main>
 {% endblock %}
 
 {% block page_js %}

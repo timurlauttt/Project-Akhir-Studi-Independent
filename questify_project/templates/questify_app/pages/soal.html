@@ -1,81 +1,102 @@
 {% extends 'questify_app/layout/base.html' %}
 
+{% load static %}
+
 {% block title %}Soal Quiz{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/soal.css' %}" />
+{% endblock %}
 
 {% block content %}
 <main class="container my-5 px-5">
-  <section class="card p-4" style="margin-top: 100px">
+  <!-- Card untuk Soal -->
+  <section class="card card-soal">
     <!-- Timer -->
-    <div class="d-flex justify-content-end">
-      <span id="timer" class="badge bg-warning text-dark p-2">⏲ 10:00</span>
+    <div class="d-flex justify-content-end mb-3">
+      <span id="timer" class="timer" data-remaining-time="{{ remaining_time }}">
+        ⏲ {{ remaining_time|date:"i:s" }}
+      </span>
     </div>
 
-    <!-- Soal dan Pilihan -->
-    {% if pesan_selesai %}
-      <h4>{{ pesan_selesai }}</h4>
-      <div class="d-flex justify-content-center mt-4">
-        <a class="btn btn-primary" href="{% url 'questify_app:soal' %}">Kembali ke daftar soal</a>
-      </div>
-    {% else %}
-      <form method="POST">
-        {% csrf_token %}
-        <h4>Soal {{ nomor_soal }}: {{ soal.pertanyaan }}</h4>  <!-- Menampilkan nomor soal -->
+    <!-- Konten Soal -->
+    <form method="POST">
+      {% csrf_token %}
+      <h4 class="mb-4"><b>Soal {{ nomor_soal }}</b>: {{ soal.pertanyaan }}</h4>
 
-        <!-- Pilihan Jawaban -->
-        <div class="row my-4">
-          <div class="col-6 d-flex justify-content-center">
-            <button class="btn btn-outline-secondary w-100" type="submit" name="pilihan_user_{{ soal.id }}" value="A">
-              {{ soal.pilihan_a }}
-            </button>
-          </div>
-          <div class="col-6 d-flex justify-content-center">
-            <button class="btn btn-outline-secondary w-100" type="submit" name="pilihan_user_{{ soal.id }}" value="B">
-              {{ soal.pilihan_b }}
-            </button>
-          </div>
-          <div class="col-6 d-flex justify-content-center mt-3">
-            <button class="btn btn-outline-secondary w-100" type="submit" name="pilihan_user_{{ soal.id }}" value="C">
-              {{ soal.pilihan_c }}
-            </button>
-          </div>
-          <div class="col-6 d-flex justify-content-center mt-3">
-            <button class="btn btn-outline-secondary w-100" type="submit" name="pilihan_user_{{ soal.id }}" value="D">
-              {{ soal.pilihan_d }}
-            </button>
-          </div>
+      <!-- Gambar Soal (jika ada) -->
+      {% if soal.gambar %}
+      <div class="text-center mb-4">
+        <img src="{{ soal.gambar.url }}" alt="Gambar Soal" class="img-fluid question-img">
+      </div>
+      {% endif %}
+
+      <!-- Pilihan Jawaban -->
+      <div class="row">
+        {% for option, label in pilihan %}
+        <div class="col-md-6 col-12 mb-3">
+          <button
+            class="btn btn-answer w-100 {% if pilihan_user == option %}btn-answer-selected{% else %}btn-outline-secondary{% endif %}"
+            type="submit" name="pilihan_user_{{ soal.id }}" value="{{ option }}">
+            {{ label }}
+          </button>
         </div>
-      </form>
-    {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Tombol Selesai hanya untuk soal terakhir -->
+      {% if is_last_question %}
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-finish" type="submit" name="selesai">Selesai</button>
+      </div>
+      {% endif %}
+    </form>
   </section>
 </main>
 
+<!-- Script Timer -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-  // Atur durasi timer total (dalam detik)
-  var totalDuration = 600; // 10 menit
-  var timerDisplay = document.getElementById('timer');
-  var countdown;
+  // Ambil elemen timer dan durasi waktu yang tersisa
+  var timerElement = document.getElementById('timer');
+  var totalDuration = parseInt(timerElement.getAttribute('data-remaining-time'));
+  var modulId = "{{ modul_id }}";  // Ambil modul_id dari context Django
 
-  // Fungsi untuk memulai timer
-  function startTimer() {
-    countdown = setInterval(function() {
-      var minutes = Math.floor(totalDuration / 60);
-      var seconds = totalDuration % 60;
-
-      // Format waktu untuk selalu menunjukkan dua digit
-      timerDisplay.textContent = '⏲ ' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
-
-      // Kurangi timer 1 detik
-      totalDuration--;
-
-      if (totalDuration < 0) {
-        clearInterval(countdown);
-        // Kirim form secara otomatis saat waktu habis
-        document.querySelector('form').submit();
-      }
-    }, 1000);
+  // Fungsi untuk format waktu dalam format mm:ss
+  function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var secs = seconds % 60;
+    return minutes + ':' + (secs < 10 ? '0' + secs : secs);
   }
 
-  // Panggil startTimer saat kuis dimulai
-  startTimer();
+  // Fungsi untuk memperbarui timer dan mengecek waktu habis
+  function updateTimer() {
+    totalDuration--;
+    timerElement.innerText = "⏲ " + formatTime(totalDuration);
+
+    // Jika waktu habis, hentikan timer dan arahkan ke halaman pilih kelas
+    if (totalDuration <= 0) {
+      clearInterval(timerInterval); // Hentikan timer
+
+      // Tampilkan SweetAlert ketika waktu habis
+      Swal.fire({
+        title: 'Waktu Habis!',
+        text: 'Waktu ujian sudah selesai. Kamu akan diarahkan ke halaman pilih kelas.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonText: 'Coba Lagi',
+        allowOutsideClick: false
+      }).then(function() {
+        // Arahkan ke halaman pilih kelas
+        window.location.href = "{% url 'questify_app:pilihkelas' modul.kelas.id %}";
+      });
+    }
+  }
+
+  // Mulai timer dengan interval 1 detik
+  var timerInterval = setInterval(updateTimer, 1000);
 </script>
+
+
 {% endblock %}

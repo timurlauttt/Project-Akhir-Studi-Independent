@@ -10,24 +10,37 @@
 
 {% block content %}
 <main class="container content-main mt-5 pt-5 px-5">
-<section class="card p-4" style="margin-top: 50px">
-  <!-- Icon -->
-  <img src="{% static 'images/tick.png' %}" alt="Deskripsi gambar">
+  <!-- Header Section -->
+  <section class="card p-4 text-center" style="margin-top: 50px">
+    <!-- Icon -->
+    {% if nilai_total >= 70 %}
+      <img src="{% static 'images/tick.png' %}" alt="Deskripsi gambar" class="mb-4" style="max-width: 200px; max-height: 200px;">
+      <div class="score-text mb-3">
+        <h1><b>SKOR KAMU : {{ nilai_total }} - Selamat!</b></h1>
+      </div>
+      <div class="message-text">
+        <h5 class="text-muted"><b>Kamu Lulus! Terus Pertahankan!</b></h5>
+      </div>
+    {% else %}
+      <img src="{% static 'images/sad.png' %}" alt="Deskripsi gambar" class="mb-4" style="max-width: 200px; max-height: 200px;">
+      <div class="score-text mb-3">
+        <h1><b>SKOR KAMU : {{ nilai_total }}</b></h1>
+      </div>
+      <div class="message-text">
+        <h5 class="text-muted"><b>Jangan Menyerah! Coba Lagi!</b></h5>
+      </div>
+    {% endif %}
+  </section>
 
-  <!-- Score Text -->
-  <div class="score-text">
-    <h1><b>SKOR KAMU 100!!</b></h1>
+
+  <!-- Navigation Buttons -->
+  <div class="d-flex justify-content-between mt-4">
+    <a class="btn" href="{% url 'questify_app:pilihkelas' kelas.id %}">
+      Kembali ke Daftar Kelas
+    </a>
+    <a class="btn" href="{% url 'questify_app:hasilnilai' %}">
+      Lihat Detail Jawaban
+    </a>
   </div>
-
-  <!-- Message Text -->
-  <div class="message-text">
-    <h3><b>Pertahankan dan Tingkatkan!!!</b></h3>
-  </div>
-</section>
-
-<!-- Tombol Jawab & Lanjutkan -->
-<div class="d-flex justify-content-end mt-3">
-  <button class="btn btn-sm">Jawab & Lanjutkan</button>
-</div>
 </main>
 {% endblock %}
