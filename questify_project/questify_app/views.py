@@ -6,39 +6,32 @@ from .forms import ContactForm, CreateUserForm,ProfileUpdateForm
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm
-from django.contrib.auth.models import User
 from .models import UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Kelas
-from .models import ModulPembelajaran,Transaksi
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 import midtransclient
 
 from django.http import JsonResponse
 import midtransclient
-from .models import Kelas, Transaksi
 from django.contrib.auth.models import User
 import uuid
 
-#Create your views here.
-
-def index(request):
-    data = "Hello, Questify!"  # Variabel data untuk ditampilkan
-    return render(request, 'questify_app/index.html', context={'data': data})
-=======
+from django.http import JsonResponse
+import midtransclient
 from django.contrib.auth.models import User
-from .models import ModulPembelajaran, Soal, JawabanUser, Nilai, UserProfile, Kelas, PercobaanTerakhir
+
+from django.contrib.auth.models import User
+from .models import ModulPembelajaran, Soal, JawabanUser, Nilai, UserProfile, Kelas, PercobaanTerakhir, Transaksi
 from django.shortcuts import render, get_object_or_404
 from django.utils.timezone import now, timedelta
 from django.utils.dateparse import parse_datetime
 from django.db.models import Sum
->>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
+
 
 
 def index(request):
@@ -73,11 +66,6 @@ def index(request):
         'form': form,
         'kelas_list': kelas_list,  # Kirim data kelas ke template
     })
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
 
 def register(request):
     form = CreateUserForm()
@@ -162,11 +150,10 @@ def update_profile(request):
 def semuakelas(request):
     kelas_list = Kelas.objects.all()
     return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
-from django.http import JsonResponse
-import midtransclient
-from .models import Kelas, Transaksi
-from django.contrib.auth.models import User
 
+
+
+@login_required(login_url='/questify_app/login/')
 def payment(request):
     if request.method == 'POST':
         # Parse JSON data dari permintaan POST
@@ -387,16 +374,6 @@ def metodepembayaran(request):
 def cekbeli(request):
     return render(request, 'questify_app/pages/cekbeli.html')
 
-<<<<<<< HEAD
-# @login_required(login_url='/accounts/login/')
-# def payment(request):
-#     return render(request, 'questify_app/pages/payment.html')
-=======
-@login_required(login_url='/questify_app/login/')
-def payment(request):
-    return render(request, 'questify_app/pages/payment.html')
->>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
-
 @login_required(login_url='/questify_app/login/')
 def daftartransaksi(request):
     return render(request, 'questify_app/pages/daftar_transaksi.html')
@@ -405,22 +382,7 @@ def daftartransaksi(request):
 def detailtransaksi(request):
     return render(request, 'questify_app/pages/detailtransaksi.html')
 
-<<<<<<< HEAD
-#keperluang midtrans
-# @login_required
-# def initiate_payment(request):
-#     # Ambil metode pembayaran dari parameter URL
-#     bank = request.GET.get('bank')
-    
-#     if not bank:
-#         return HttpResponse("Metode pembayaran tidak ditemukan", status=400)
-    
-#     # Logika untuk memulai proses pembayaran menggunakan Midtrans
-#     # Misalnya, mengatur parameter dan mengirim permintaan ke Midtrans
-    
-#     # Redirect atau tampilkan halaman sesuai kebutuhan setelah proses pembayaran
-#     return HttpResponse(f"Proses pembayaran menggunakan bank {bank} dimulai.", status=200)
-=======
+
 @login_required(login_url='/questify_app/login/')
 def soal(request, modul_id, soal_id=None):
     modul = get_object_or_404(ModulPembelajaran, id=modul_id)
@@ -533,4 +495,4 @@ def soal(request, modul_id, soal_id=None):
         'percobaan_ke': percobaan_ke,
         'modul': modul,
     })
->>>>>>> 30bc9755eb7ab9f5ee8e23df1d22584c7f570c1e
+

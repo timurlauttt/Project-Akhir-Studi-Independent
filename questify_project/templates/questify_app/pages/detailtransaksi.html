@@ -24,7 +24,7 @@
                         <a class="nav-link text-white {% if request.resolver_match.url_name == 'detailtransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}" style="font-weight: bold">Daftar Transaksi</a>
                       </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#" style="font-weight: bold">
+                        <a class="nav-link text-white" href="{% url 'account_logout' %}" style="font-weight: bold">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
