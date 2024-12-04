@@ -6,6 +6,41 @@ body {
   font-family: "Jost", sans-serif;
 }
 
+/* Style for the trophy image */
+.trophy-img {
+  width: 40%; /* Responsif untuk desktop */
+  max-width: 400px;
+  top: 23%;
+  left: 20%;
+}
+
+.avatar-img{
+  width: 40%;
+  max-width: 300px;
+  top: 21%;
+  right: 10%;
+  object-fit: cover;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .trophy-img {
+      width: 10%;
+      top: 10%; 
+      left: 3%;
+      position: fixed;
+  }
+  .avatar-img {
+      width: 50%;
+      top: 3%;
+      bottom: 3%;
+      right: 10%;
+  }
+}
+
+.d-flex i {
+  font-size: 1.5rem;
+}
 
 /* Navbar */
 
@@ -34,7 +69,6 @@ body {
 }
 
 .navbar a:hover {
-  background-color: #dddddd65;
   color: #ed80fd;
 }
 
