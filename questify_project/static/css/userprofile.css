@@ -2,3 +2,19 @@
     background-color: rgb(7, 7, 100); /* Set active navbar color to black */
     color: white !important; /* Optional: Change text color to white when active */
   }
+
+  .hover-effect {
+    background-color: #6f4dbf;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Animasi transisi */
+    cursor: pointer;
+}
+
+/* Efek hover */
+.hover-effect:hover {
+    color: white;
+    background-color: #5a3aa3; /* Warna lebih gelap saat dihover */
+}

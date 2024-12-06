@@ -8,6 +8,22 @@
       background-color: rgb(7, 7, 100) !important; /* Set active navbar color to black */
       color: white !important; /* Optional: Change text color to white when active */
     }
+
+    .hover-effect {
+    background-color: #6f4dbf;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Animasi transisi */
+    cursor: pointer;
+  }
+
+  /* Efek hover */
+  .hover-effect:hover {
+    color: white;
+    background-color: #5a3aa3; /* Warna lebih gelap saat dihover */
+  }
   </style>
 {% endblock %}
 
@@ -16,7 +32,7 @@
 {% block content %}
 <main class="container my-5">
   <div class="row justify-content-center mt-5">
-    <div class="col-md-12">
+    <div class="col-md-11">
       <section class="card shadow-sm">
         <div class="card-body">
         <!-- Profile Picture -->
@@ -27,8 +43,8 @@
 
         <!-- Additional Actions -->
         <div class="d-flex justify-content-center gap-2">
-          <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-primary">Ganti Password</a>
-          <a href="{% url 'account_email' %}" class="btn btn-sm btn-primary">Ganti Email</a>
+          <a href="{% url 'account_change_password' %}" class="btn btn-sm hover-effect">Ganti Password</a>
+          <a href="{% url 'account_email' %}" class="btn btn-sm hover-effect">Ganti Email</a>
         </div>
           <!-- Navigation Tabs -->
           <nav class="container mt-3" style="background: white;">

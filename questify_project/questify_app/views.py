@@ -105,7 +105,47 @@ def loginPage(request):
 
 @login_required
 def home(request):
-    return render(request, 'questify_app/pages/home.html')
+
+    # Ambil semua kelas
+    semua_kelas = Kelas.objects.prefetch_related('modul_pembelajaran').all()
+
+    # Ambil nilai user dengan jumlah_nilai > 70
+    nilai_lebih_70 = Nilai.objects.filter(user=request.user, jumlah_nilai__gt=70)
+
+    # Hitung total modul terselesaikan
+    total_modul_terselesaikan = nilai_lebih_70.values('modul').distinct().count()
+
+    # Hitung total modul yang tersedia
+    total_modul = ModulPembelajaran.objects.count()
+
+    # Hitung persentase penyelesaian modul
+    persentase_penyelesaian = int(total_modul_terselesaikan / total_modul * 100) if total_modul > 0 else 0
+
+    # Total skor user
+    total_skor = nilai_lebih_70.aggregate(total=Sum('jumlah_nilai'))['total'] or 0
+
+    # Data penyelesaian per kelas
+    data_kelas = []
+    for kelas in semua_kelas:
+        modul_ids = kelas.modul_pembelajaran.values_list('id', flat=True)
+        modul_terselesaikan = Nilai.objects.filter(
+            user=request.user,
+            modul_id__in=modul_ids,
+            jumlah_nilai__gt=70
+        ).values('modul').distinct().count()
+        total_modul = kelas.modul_pembelajaran.count()
+        persentase = int(modul_terselesaikan / total_modul * 100) if total_modul > 0 else 0
+        data_kelas.append({
+            'nama_kelas': kelas.nama_kelas,
+            'persentase': round(persentase, 2),
+        })
+
+    return render(request, 'questify_app/pages/home.html', {
+        'total_modul': total_modul_terselesaikan,
+        'persentase': round(persentase_penyelesaian, 2),
+        'skor': total_skor,
+        'data_kelas': data_kelas,
+    })
 
 
 

@@ -3,30 +3,4 @@
   color: white !important; /* Optional: Change text color to white when active */
 }
 
-.card-custom {
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card-custom .card-header {
-  background-color: #f7f7f7;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 0.75rem 1rem;
-}
-
-.card-custom .card-body {
-  padding: 1.5rem;
-  background-color: #f9f9f9;
-}
-
-.btn-primary-custom {
-  background-color: #6C63FF;
-  border-color: #6C63FF;
-  color: white;
-}
-
-.btn-primary-custom:hover {
-  background-color: #574bd6;
-  border-color: #574bd6;
-}
   
