@@ -1,5 +1,4 @@
 {% extends 'questify_app/layout/base.html' %}
-
 {% load static %}
 
 {% block page_css %}
@@ -10,37 +9,48 @@
 {% block title %}Detail Transaksi{% endblock %}
 
 {% block content %}
-<main class="container mt-5 px-5">
-    <div class="row justify-content-center">
+<main class="container my-5">
+    <div class="row justify-content-center mt-5">
       <div class="col-md-12 mb-5">
-        <section class="card" style="margin-top: 100px">
+        <section class="card shadow-sm">
           <div class="card-body">
+            <div class="text-center my-4">
+              <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}" 
+                   alt="Profile Picture" class="rounded-circle img-fluid" style="max-width: 200px;">
+            </div>
+  
+            <!-- Additional Actions -->
+            <div class="d-flex justify-content-center gap-2 mb-3">
+              <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-primary">Ganti Password</a>
+              <a href="{% url 'account_email' %}" class="btn btn-sm btn-primary">Ganti Email</a>
+            </div>
             <section>
-                <ul class="nav nav-tabs justify-content-between align-items-center" style="background-color: #9575cd; padding: 10px; border-radius: 10px;">
+                <ul class="nav nav-pills justify-content-center py-2 mb-3 rounded shadow-sm" style="background: white;">
                     <li class="nav-item">
-                        <a class="nav-link text-white {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}" style="font-weight: bold">Profile</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-white {% if request.resolver_match.url_name == 'detailtransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}" style="font-weight: bold">Daftar Transaksi</a>
-                      </li>
+                        <a class="nav-link text-primary {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}">Profile</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'account_logout' %}" style="font-weight: bold">
+                        <a class="nav-link text-primary {% if request.resolver_match.url_name == 'daftartransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}">Daftar Transaksi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" href="{% url 'account_logout' %}">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
                 </ul>
-              </section>
+            </section>
 
             <section>
               <div class="card-body">
-                <div class="section-header">Detail Transaksi</div>
+                <div class="section-header mb-4">
+                  <h3>Detail Transaksi</h3>
+                </div>
                 <div class="row mt-4">
                   <!-- Left Side: Program Details -->
                   <div class="col-md-5">
                     <div class="program-container">
                       <p class="program-provider">
-                        Penyedia Program:
-                        <span style="font-weight: bold">Questify</span>
+                        Penyedia Program: <span style="font-weight: bold">Questify</span>
                       </p>
                       <div class="program">
                         <div class="program-title"><b>KELAS BASIC</b></div>
@@ -56,15 +66,8 @@
                         <tr>
                           <td>No Rekening Tujuan:</td>
                           <td>
-                            <img
-                              src="{% static 'images/bri.png' %}"
-                              alt="Logo BRI"
-                              class="bank-logo"
-                              style="margin: 5px 0; width: 40px"
-                            />
-                            12837748949473<br />
-                            A.n.: Budi Budiman<br />
-                            BANK BRI
+                            <img src="{% static 'images/bri.png' %}" alt="Logo BRI" class="bank-logo" style="width: 40px" />
+                            12837748949473<br />A.n.: Budi Budiman<br />BANK BRI
                           </td>
                         </tr>
                         <tr>
@@ -79,29 +82,19 @@
                           <td>Status Pembayaran:</td>
                           <td class="status-success">Berhasil</td>
                         </tr>
-
                         <tr>
                           <td>Metode Pembayaran:</td>
                           <td>
                             <b>Transfer Bank</b><br />
-                            <img
-                              src="{% static 'images/bri.png' %}"
-                              alt="Logo BRI"
-                              class="bank-logo"
-                              style="margin: 5px 0; width: 40px"
-                            /><br />
+                            <img src="{% static 'images/bri.png' %}" alt="Logo BRI" class="bank-logo" style="width: 40px" /><br />
                             BANK BRI<br />
-                            Sumber Dana: 67282828399<br />
-                            A.n.: Putri
+                            Sumber Dana: 67282828399<br />A.n.: Putri
                           </td>
                         </tr>
-
                         <tr>
                           <td>Detail Pembayaran:</td>
                           <td>
-                            <table
-                              style="width: 100%; border-collapse: collapse"
-                            >
+                            <table style="width: 100%; border-collapse: collapse">
                               <tr>
                                 <td>Kelas Basic:</td>
                                 <td style="text-align: right">Rp. 50.000</td>
@@ -113,12 +106,9 @@
                             </table>
                           </td>
                         </tr>
-
                         <tr>
                           <td><strong>Total Pembayaran:</strong></td>
-                          <td style="text-align: right">
-                            <strong>Rp. 56.500</strong>
-                          </td>
+                          <td style="text-align: right"><strong>Rp. 56.500</strong></td>
                         </tr>
                       </table>
                     </div>

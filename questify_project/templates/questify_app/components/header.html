@@ -9,7 +9,7 @@
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed">
-      <div class="container-fluid">
+      <div class="container-fluid ms-1">
         <!-- Logo and Questify Text -->
         <a
           class="navbar-brand d-flex align-items-center fs-0 fw-bold"
@@ -19,7 +19,7 @@
           <img
             src="{% static 'images/arcticons--flixquest.png' %}"
             alt="logo"
-            class="ms-2"
+            class="ms-0"
             width="30"
             height="30"
           />
@@ -56,7 +56,7 @@
           </ul>
 
           <!-- Bahasa and Masuk for desktop view -->
-          <div class="d-none d-lg-flex align-items-center">
+          <div class="d-none d-lg-flex align-items-center me-2">
             <a href="{% url 'questify_app:userprofile' %}">
               <img
                 src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}"

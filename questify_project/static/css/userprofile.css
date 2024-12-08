@@ -1,42 +1,5 @@
-.form-control {
-    border: 2px solid #d37ebe;
-    border-radius: 5px;
-}
-
-.form-label {
-    font-weight: 600;
-    color: #563d7c;
-}
-
-.btn-primary {
-    background-color: #745bb9;
-    border: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #563d7c;
-}
-
-.nav-tabs {
-    border-bottom: none;
-}
-
-.nav-tabs .nav-link {
-    background-color: #9575cd;
-    color: white;
-    border: none;
-    font-weight: bold;
-}
-
-.nav-tabs .nav-link.active {
-    background-color: #745bb9;
-    color: white;
-}
-
-.nav-tabs .nav-link:hover {
-    background-color: #563d7c;
-}
+.nav-pills .nav-link.active {
+    background-color: rgb(7, 7, 100); /* Set active navbar color to black */
+    color: white !important; /* Optional: Change text color to white when active */
+  }
+  

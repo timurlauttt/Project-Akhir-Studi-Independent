@@ -1,113 +1,83 @@
-{% extends 'questify_app/layout/base.html' %} 
+{% extends 'questify_app/layout/base.html' %}
 {% load static %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{% static 'css/userprofile.css' %}" />
-<style>
-  .btn-small {
-    padding: 5px 12px;
-    font-size: 14px;
-    border: none;
-    background-color: #a27bf8;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn-small:hover {
-    background-color: #986df7;
-  }
-
-  .alert-success {
-    background-color: #7bb0ff;
-    color: #ffffff;
-    border-color: #6296ff;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-</style>
+  <link rel="stylesheet" href="{% static 'css/userprofile.css' %}" />
 {% endblock %}
 
 {% block title %}User Profile{% endblock %}
 
 {% block content %}
-<main class="container content-main mt-5 px-5">
-  <div class="row justify-content-center">
-    <div class="col-md-12 mb-5">
-      <section class="card" style="margin-top: 50px">
+<main class="container my-5">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-12">
+      <section class="card shadow-sm">
         <div class="card-body">
-          <section>
-            {% if messages %}
-              <div class="alert alert-success">
-                {% for message in messages %}
-                  <p>{{ message }}</p>
-                {% endfor %}
-              </div>
-            {% endif %}
-            <ul class="nav nav-tabs justify-content-between align-items-center" style="background-color: #9575cd; padding: 10px; border-radius: 10px;">
-              <li class="nav-item">
-                <a class="nav-link text-white {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}" style="font-weight: bold; background-color: white;">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white {% if request.resolver_match.url_name == 'daftartransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}" style="font-weight: bold">Daftar Transaksi</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'account_logout' %}" style="font-weight: bold;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <div class="row mt-4 justify-content-center">
-              <div class="col-md-8 mx-auto">
-                <form method="POST" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="first-name" class="form-label">Nama Depan</label>
-                      <input type="text" class="form-control" id="first-name" value="{{ form.first_name.value|default:user.first_name }}" name="first_name" />
-                    </div>
-                    <div class="col">
-                      <label for="last-name" class="form-label">Nama Belakang</label>
-                      <input type="text" class="form-control" id="last-name" value="{{ form.last_name.value|default:user.last_name }}" name="last_name" />
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" value="{{ form.email.value|default:user.email }}" name="email" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" value="{{ form.username.value|default:user.username }}" name="username" />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="profile_picture" class="form-label">Foto Profil</label>
-                    <input class="form-control" type="file" id="profile_picture" name="profile_picture">
-                  </div>
-                
-                  <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-              </div>
-              <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}" 
-                   alt="Profile Picture" class="rounded-circle" 
-                   style="width: 300px; height: 300px;">
-
+          <!-- Messages Section -->
+          {% if messages %}
+            <div class="alert alert-success">
+              {% for message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
             </div>
-          </section>
+          {% endif %}
+          
+          <!-- Profile Picture -->
+          <div class="text-center my-4">
+            <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}" 
+            alt="Profile Picture" class="rounded-circle img-fluid" style="max-width: 200px;">
+          </div>
+  
+          <!-- Additional Actions -->
+          <div class="d-flex justify-content-center gap-2">
+            <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-primary">Ganti Password</a>
+            <a href="{% url 'account_email' %}" class="btn btn-sm btn-primary">Ganti Email</a>
+          </div>
+            <!-- Navigation Tabs -->
+            <nav class="container mt-3" style="background: white;">
+              <ul class="nav nav-pills justify-content-center py-2 mb-3 rounded shadow-sm">
+                <li class="nav-item">
+                  <a class="nav-link {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link {% if request.resolver_match.url_name == 'daftartransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}">Daftar Transaksi</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                  </a>
+                </li>
+              </ul>
+            </nav>
 
-          <div class="mt-2">
-            <a href="{% url 'account_change_password' %}" class="btn-small" style="margin-right: 5px;">
-                <b>Ganti Password</b>
-            </a>
-            <a href="{% url 'account_email' %}" class="btn-small">
-                <b>Ganti Email</b>
-            </a>
+          <!-- Profile Form -->
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="first-name" class="form-label">Nama Depan</label>
+                  <input type="text" class="form-control" id="first-name" value="{{ form.first_name.value|default:user.first_name }}" name="first_name" />
+                </div>
+                <div class="mb-3">
+                  <label for="last-name" class="form-label">Nama Belakang</label>
+                  <input type="text" class="form-control" id="last-name" value="{{ form.last_name.value|default:user.last_name }}" name="last_name" />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" value="{{ form.email.value|default:user.email }}" name="email" />
+                </div>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" value="{{ form.username.value|default:user.username }}" name="username" />
+                </div>
+                <div class="mb-3">
+                  <label for="profile_picture" class="form-label">Foto Profil</label>
+                  <input class="form-control" type="file" id="profile_picture" name="profile_picture">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Save</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

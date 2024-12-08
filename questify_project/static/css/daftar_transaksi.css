@@ -1,166 +1,32 @@
+.nav-pills .nav-link.active {
+  background-color: rgb(7, 7, 100) !important; /* Set active navbar color to black */
+  color: white !important; /* Optional: Change text color to white when active */
+}
+
 .card-custom {
-    border-radius: 15px;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    background: linear-gradient(135deg, #ffffff, #f0f0f0);
-    transition: transform 0.2s ease-in-out;
-    margin-left: 20px;
-    margin-right: 20px;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.card-custom:hover {
-    transform: translateY(-5px);
+.card-custom .card-header {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.75rem 1rem;
 }
 
-.card-header {
-    font-weight: bold;
-    background-color: #E5DBFF;
-    border-bottom: 2px solid #D1C4E9;
-    padding: 10px 20px;
-    color: #333;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.card-title {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #4A00E0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: linear-gradient(45deg, #4A00E0, #8E2DE2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.status-bayar {
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-}
-
-.text-success {
-    color: #1DB954 !important;
-    font-style: italic;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.text-warning {
-    color: #FFA500 !important;
-    font-style: italic;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.badge {
-    font-size: 0.9rem;
-    padding: 5px 10px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.badge.bg-success {
-    background-color: #00C851 !important;
-    color: #fff;
-}
-
-.badge.bg-warning {
-    background-color: #FFBB33 !important;
-    color: #fff;
+.card-custom .card-body {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
 }
 
 .btn-primary-custom {
-    background-color: #6C63FF;
-    border-color: #6C63FF;
-    font-weight: bold;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+  color: white;
 }
 
 .btn-primary-custom:hover {
-    background-color: #5848C2;
-    border-color: #5848C2;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  background-color: #574bd6;
+  border-color: #574bd6;
 }
-
-.logout-button {
-    font-size: 0.9rem;
-    background-color: #FF4B5C;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.logout-button:hover {
-    background-color: #D84350;
-}
-
-.tab-menu a {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tab-menu a:hover {
-    background-color: #574B90;
-}
-
-.tab-menu a.active {
-    background-color: #6C63FF;
-    border-radius: 10px;
-}
-
-/* Additional styles for improving text appeal */
-.card-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
-
-.card-title-sub {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #333;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
-}
-
-.text-highlight {
-    background: #FFF3CD;
-    padding: 5px 8px;
-    border-radius: 5px;
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-a.btn-primary-custom {
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+  
