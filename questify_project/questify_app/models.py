@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import timedelta
+import pytz
+from django.utils.timezone import now
 
 class Kelas(models.Model):  
     nama_kelas = models.CharField(max_length=100)
@@ -91,24 +93,38 @@ class MetodePembayaran(models.Model):
 
 class Transaksi(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('gagal', 'Gagal'),
-        ('berhasil', 'Berhasil'),
+        ('pending', 'Pending'),       # Saat pembayaran belum selesai
+        ('settlement', 'Settlement'), # Pembayaran berhasil
+        ('cancelled', 'Cancelled'),   # Pembayaran dibatalkan
+        ('expired', 'Expired'),       # Waktu pembayaran habis
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaksi')
     kelas = models.ForeignKey(Kelas, on_delete=models.CASCADE, related_name='transaksi')
     metode_pembayaran = models.ForeignKey(MetodePembayaran, on_delete=models.CASCADE, related_name='transaksi', null=True)
-    status_pembayaran = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    status_pembayaran = models.CharField(max_length=10, choices=STATUS_CHOICES, default='settlement')
     tanggal_transaksi = models.DateTimeField(auto_now_add=True)
     batas_waktu_pembayaran = models.DateTimeField(default=datetime.now)
     # total_pembayaran = models.DecimalField(max_digits=10, decimal_places=2)
     amount = models.IntegerField(default=0)
     link_payment = models.CharField(max_length=255,blank=True, null=True)
+    order_id = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"Transaksi oleh {self.user.username} untuk {self.kelas.nama_kelas}"
+    
+    @property
+    def tanggal_berakhir(self):
+        """
+        Menghitung batas akhir langganan (1 tahun setelah settlement).
+        """
+        if self.status_pembayaran == 'settlement':
+            return self.tanggal_transaksi + timedelta(days=365)
+        return None
 
+def get_default_batas_waktu():
+    jakarta_tz = pytz.timezone('Asia/Jakarta')
+    return now().astimezone(jakarta_tz) + timedelta(days=1)
 
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)

@@ -4,6 +4,13 @@
 
 {% block page_css %}
   <link rel="stylesheet" href="{% static 'css/pilihkelas.css' %}">
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+  <style>
+    .langganan {
+      background-color: rgb(76, 179, 138);
+      color: white;
+    }
+  </style>
 {% endblock %}
 
 {% block title %}{{ kelas.nama_kelas }}{% endblock %}
@@ -16,39 +23,146 @@
   <section class="row g-4">
     {% for modul in modul_list %}
     <article class="col-md-4">
-      <a href="{% url 'questify_app:detailkelas' modul.id %}" class="text-decoration-none">
-        <div class="kelas-card">
-          <h2 class="kelas-title">{{ modul.judul }}</h2>
-          <div class="d-flex justify-content-around">
-            <div>
-              <img src="{% static 'images/soal.png' %}" alt="Soal" class="icon" style="width: 60px" />
-              <p class="ikon-deskripsi">{{ modul.jumlah_soal }} Soal</p>
-            </div>
-            <div>
-              <img src="{% static 'images/waktu.png' %}" alt="Waktu" class="icon" style="width: 60px" />
-              <p class="ikon-deskripsi">{{ modul.waktu_pengajaran }} Menit</p>
-            </div>
+      <div class="kelas-card {% if not is_subscribed and not modul.gratis %}locked{% endif %}" 
+           {% if not is_subscribed and not modul.gratis %}data-bs-toggle="modal" data-bs-target="#subscriptionModal"{% else %}onclick="window.location.href='{% url 'questify_app:detailkelas' modul.id %}'"{% endif %}>
+        <h2 class="kelas-title">{{ modul.judul }}</h2>
+        <div class="d-flex justify-content-around">
+          <div>
+            <img src="{% static 'images/soal.png' %}" alt="Soal" class="icon" style="width: 60px" />
+            <p class="ikon-deskripsi">{{ modul.jumlah_soal }} Soal</p>
           </div>
-          <div class="label-kelas {% if modul.gratis %}gratis{% else %}berbayar{% endif %}">
-            {% if modul.gratis %}Gratis{% else %}Berbayar{% endif %}
+          <div>
+            <img src="{% static 'images/waktu.png' %}" alt="Waktu" class="icon" style="width: 60px" />
+            <p class="ikon-deskripsi">{{ modul.waktu_pengajaran }} Menit</p>
           </div>
         </div>
-      </a>
+        <div class="label-kelas 
+            {% if modul.gratis %}gratis{% elif is_subscribed %}langganan{% else %}berbayar{% endif %}">
+          {% if modul.gratis %}
+            Gratis
+          {% elif is_subscribed %}
+            Langganan
+          {% else %}
+            Berbayar
+          {% endif %}
+        </div>
+      </div>
     </article>
     {% endfor %}
   </section>
 
   <!-- Pagination -->
-  <nav aria-label="Page navigation" class="d-flex content-left mt-4">
-    <ul class="pagination">
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-    </ul>
+  <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+    <ul class="pagination" id="pagination-container"></ul>
   </nav>
 </main>
+
+<!-- Modal -->
+<div class="modal fade" id="subscriptionModal" tabindex="-1" aria-labelledby="subscriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="subscriptionModalLabel">Akses Berlangganan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Modul ini hanya dapat diakses jika Anda berlangganan kelas ini. Silakan lakukan pembayaran untuk menikmati semua modul berbayar.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block page_js %}
   <script src="{% static 'js/pilihkelas.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      const $cards = $(".kelas-card").closest("article"); // Ambil semua modul
+      const itemsPerPage = 6; // Tentukan jumlah modul per halaman
+      const totalPages = Math.ceil($cards.length / itemsPerPage); // Hitung total halaman berdasarkan jumlah item
+      const $paginationContainer = $("#pagination-container");
+
+      // Fungsi untuk menampilkan halaman tertentu
+      function showPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        // Sembunyikan semua card dan tampilkan yang sesuai dengan halaman ini
+        $cards.hide().slice(start, end).fadeIn();
+
+        // Update kelas aktif pada pagination
+        $paginationContainer.find("li").removeClass("active");
+        $paginationContainer.find(`li[data-page="${page}"]`).addClass("active");
+
+        // Menonaktifkan halaman sebelumnya atau selanjutnya jika sudah mencapai batas
+        if (page === 1) {
+          $paginationContainer.find(".prev").addClass("disabled");
+        } else {
+          $paginationContainer.find(".prev").removeClass("disabled");
+        }
+
+        if (page === totalPages) {
+          $paginationContainer.find(".next").addClass("disabled");
+        } else {
+          $paginationContainer.find(".next").removeClass("disabled");
+        }
+      }
+
+      // Fungsi untuk membuat elemen pagination
+      function setupPagination() {
+        $paginationContainer.empty();
+
+        // Tombol "Previous"
+        const prevItem = $('<li class="page-item prev"><a class="page-link" href="#">Previous</a></li>');
+        prevItem.on("click", function (e) {
+          e.preventDefault();
+          const activePage = $paginationContainer.find(".page-item.active").data("page");
+          if (activePage > 1) {
+            showPage(activePage - 1);
+          }
+        });
+        $paginationContainer.append(prevItem);
+
+        // Tombol-tombol halaman
+        for (let i = 1; i <= totalPages; i++) {
+          const $li = $(`
+            <li class="page-item ${i === 1 ? "active" : ""}" data-page="${i}">
+              <a class="page-link" href="#">${i}</a>
+            </li>
+          `);
+          $li.on("click", function (e) {
+            e.preventDefault();
+            const page = $(this).data("page");
+            showPage(page);
+          });
+          $paginationContainer.append($li);
+        }
+
+        // Tombol "Next"
+        const nextItem = $('<li class="page-item next"><a class="page-link" href="#">Next</a></li>');
+        nextItem.on("click", function (e) {
+          e.preventDefault();
+          const activePage = $paginationContainer.find(".page-item.active").data("page");
+          if (activePage < totalPages) {
+            showPage(activePage + 1);
+          }
+        });
+        $paginationContainer.append(nextItem);
+      }
+
+      // Inisialisasi pagination
+      if (totalPages > 1) {
+        setupPagination();
+        showPage(1); // Tampilkan halaman pertama secara default
+      } else {
+        $paginationContainer.hide(); // Sembunyikan pagination jika hanya satu halaman
+      }
+    });
+  </script>
 {% endblock %}

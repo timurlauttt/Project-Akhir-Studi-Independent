@@ -21,8 +21,13 @@
   
             <!-- Additional Actions -->
             <div class="d-flex justify-content-center gap-2 mb-3">
+<<<<<<< HEAD
               <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-primary">Ganti Password</a>
               <a href="{% url 'account_email' %}" class="btn btn-sm btn-primary">Ganti Email</a>
+=======
+              <a href="{% url 'account_change_password' %}" class="btn btn-sm hover-effect">Ganti Password</a>
+              <a href="{% url 'account_email' %}" class="btn btn-sm hover-effect">Ganti Email</a>
+>>>>>>> 9a8f7183ec563006e96b51613403fee4dceaa1fb
             </div>
             <section>
                 <ul class="nav nav-pills justify-content-center py-2 mb-3 rounded shadow-sm" style="background: white;">
@@ -30,7 +35,11 @@
                         <a class="nav-link text-primary {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}">Profile</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< HEAD
                         <a class="nav-link text-primary {% if request.resolver_match.url_name == 'daftartransaksi' %}active{% endif %}" href="{% url 'questify_app:daftartransaksi' %}">Daftar Transaksi</a>
+=======
+                        <a class="nav-link text-primary {% if request.resolver_match.url_name == 'detailtransaksi' %}active{% endif %}" href="{% url 'questify_app:detailtransaksi' %}">Daftar Transaksi</a>
+>>>>>>> 9a8f7183ec563006e96b51613403fee4dceaa1fb
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-primary" href="{% url 'account_logout' %}">

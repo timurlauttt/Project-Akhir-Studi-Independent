@@ -1,6 +1,7 @@
 .nav-pills .nav-link.active {
   background-color: rgb(7, 7, 100) !important; /* Set active navbar color to black */
   color: white !important; /* Optional: Change text color to white when active */
+<<<<<<< HEAD
 }
 
 .card-custom {
@@ -30,3 +31,8 @@
   border-color: #574bd6;
 }
   
+=======
+}
+
+  
+>>>>>>> 9a8f7183ec563006e96b51613403fee4dceaa1fb
