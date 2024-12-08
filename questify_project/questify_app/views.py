@@ -32,6 +32,12 @@ from django.utils.timezone import now, timedelta
 from django.utils.dateparse import parse_datetime
 from django.db.models import Sum
 
+from django.views.decorators.csrf import csrf_exempt
+import json
+from datetime import datetime
+import pytz
+import logging
+
 
 
 def index(request):
@@ -188,9 +194,9 @@ def update_profile(request):
 
 @login_required(login_url='/questify_app/login/')
 def semuakelas(request):
-    kelas_list = Kelas.objects.all()
+    # Ambil semua kelas yang belum memiliki transaksi settlement
+    kelas_list = Kelas.objects.exclude(transaksi__user=request.user, transaksi__status_pembayaran='settlement')
     return render(request, 'questify_app/pages/semuakelas.html', {'kelas_list': kelas_list})
-
 
 
 @login_required(login_url='/questify_app/login/')
@@ -204,6 +210,8 @@ def payment(request):
         
         print(user_id, amount)
         
+        order_id = str(uuid.uuid4())
+
         snap = midtransclient.Snap(
             is_production=False,
             server_key='SB-Mid-server-IxGL8J0daVsu14JPWym77KPT'
@@ -212,7 +220,7 @@ def payment(request):
         # Build API parameter
         param = {
             "transaction_details": {
-                "order_id": str(uuid.uuid4()),  # Sesuaikan order_id jika diperlukan
+                "order_id": order_id,  # Sesuaikan order_id jika diperlukan
                 "gross_amount": amount
             },
             "credit_card": {
@@ -237,7 +245,8 @@ def payment(request):
             user=user,
             kelas=kelas,
             amount=amount,
-            link_payment="https://app.sandbox.midtrans.com/snap/v2/vtweb/" + transaction_token
+            link_payment="https://app.sandbox.midtrans.com/snap/v2/vtweb/" + transaction_token,
+            order_id=order_id
         )
         
         # Mengembalikan token transaksi sebagai JSON
@@ -253,12 +262,16 @@ def pilihkelas(request, kelas_id):
     # Mendapatkan objek Kelas berdasarkan ID
     kelas = get_object_or_404(Kelas, id=kelas_id)
     
-    # Memfilter modul berdasarkan kelas yang dipilih
+    # Memeriksa apakah pengguna telah menyelesaikan pembayaran untuk kelas ini
+    is_subscribed = Transaksi.objects.filter(user=request.user, kelas=kelas, status_pembayaran='settlement').exists()
+    
+    # Mendapatkan semua modul tanpa filter
     modul_list = ModulPembelajaran.objects.filter(kelas=kelas)
     
     context = {
         'kelas': kelas,
         'modul_list': modul_list,
+        'is_subscribed': is_subscribed,
     }
     
     return render(request, 'questify_app/pages/pilihkelas.html', context)
@@ -334,9 +347,22 @@ def halamanselesai(request, modul_id, nilai_total):
 
 @login_required(login_url='/questify_app/login/')
 def langganan(request):
-    kelas_list = Kelas.objects.all()
+    # Ambil semua transaksi settlement dengan tanggal berakhir lebih besar dari hari ini
+    transaksi_aktif = Transaksi.objects.filter(
+        user=request.user,
+        status_pembayaran='settlement',
+        tanggal_transaksi__lte=now(),
+        tanggal_transaksi__gt=now() - timedelta(days=365)
+    )
+    
+    # Ambil kelas terkait transaksi aktif
+    kelas_list = Kelas.objects.filter(transaksi__in=transaksi_aktif).distinct()
+    
+    # Tambahkan properti transaksi_terbaru untuk ditampilkan di template
+    for kelas in kelas_list:
+        kelas.transaksi_terbaru = transaksi_aktif.filter(kelas=kelas).latest('tanggal_transaksi')
+    
     return render(request, 'questify_app/pages/langganan.html', {'kelas_list': kelas_list})
-
 
 
 @login_required(login_url='/questify_app/login/')
@@ -416,7 +442,9 @@ def cekbeli(request):
 
 @login_required(login_url='/questify_app/login/')
 def daftartransaksi(request):
-    return render(request, 'questify_app/pages/daftar_transaksi.html')
+    transaksi_list = Transaksi.objects.filter(user=request.user).order_by('-tanggal_transaksi')
+    return render(request, 'questify_app/pages/daftar_transaksi.html', {'transaksi_list': transaksi_list})
+
 
 @login_required(login_url='/questify_app/login/')
 def detailtransaksi(request):
@@ -536,3 +564,53 @@ def soal(request, modul_id, soal_id=None):
         'modul': modul,
     })
 
+
+# Konfigurasi logger untuk debugging
+logger = logging.getLogger(__name__)
+
+@csrf_exempt
+def midtrans_webhook(request):
+    if request.method == 'POST':
+        try:
+            # Log data notifikasi untuk debugging
+            logger.info(f"Midtrans webhook received: {request.body}")
+
+            # Parse data JSON dari notifikasi Midtrans
+            data = json.loads(request.body)
+            order_id = data.get('order_id')  # Ambil order_id
+            transaction_status = data.get('transaction_status')  # Status transaksi dari Midtrans
+            transaction_time = data.get('transaction_time')  # Waktu transaksi dari Midtrans
+
+            # Cari transaksi berdasarkan order_id
+            transaksi = Transaksi.objects.get(link_payment__icontains=order_id)
+
+            # Konversi waktu transaksi ke timezone lokal (Asia/Jakarta)
+            jakarta_tz = pytz.timezone('Asia/Jakarta')
+            waktu_transaksi = datetime.strptime(transaction_time, "%Y-%m-%d %H:%M:%S")
+            waktu_transaksi = waktu_transaksi.replace(tzinfo=pytz.utc).astimezone(jakarta_tz)
+            transaksi.tanggal_transaksi = waktu_transaksi  # Update waktu transaksi
+
+            # Update status pembayaran berdasarkan transaction_status Midtrans
+            if transaction_status == 'settlement':
+                transaksi.status_pembayaran = 'berhasil'
+            elif transaction_status == 'pending':
+                transaksi.status_pembayaran = 'pending'
+            elif transaction_status in ['cancel', 'deny']:
+                transaksi.status_pembayaran = 'gagal'
+            elif transaction_status == 'expire':
+                transaksi.status_pembayaran = 'expired'
+            else:
+                logger.warning(f"Unhandled transaction status: {transaction_status}")
+
+            # Simpan perubahan status di database
+            transaksi.save()
+            return JsonResponse({"message": "Transaction status updated successfully"}, status=200)
+
+        except Transaksi.DoesNotExist:
+            logger.error(f"Transaction not found for order_id {order_id}")
+            return JsonResponse({"error": "Transaction not found"}, status=404)
+        except Exception as e:
+            logger.error(f"Error processing webhook: {str(e)}")
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request method"}, status=400)

@@ -1,29 +1,27 @@
 {% extends 'questify_app/layout/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block page_css %}
   <link rel="stylesheet" href="{% static 'css/daftar_transaksi.css' %}">
   <style>
     .nav-pills .nav-link.active {
-      background-color: rgb(7, 7, 100) !important; /* Set active navbar color to black */
-      color: white !important; /* Optional: Change text color to white when active */
+      background-color: rgb(7, 7, 100) !important;
+      color: white !important;
     }
-
     .hover-effect {
-    background-color: #6f4dbf;
-    color: white;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease; /* Animasi transisi */
-    cursor: pointer;
-  }
-
-  /* Efek hover */
-  .hover-effect:hover {
-    color: white;
-    background-color: #5a3aa3; /* Warna lebih gelap saat dihover */
-  }
+      background-color: #6f4dbf;
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .hover-effect:hover {
+      color: white;
+      background-color: #5a3aa3;
+    }
   </style>
 {% endblock %}
 
@@ -35,19 +33,20 @@
     <div class="col-md-11">
       <section class="card shadow-sm">
         <div class="card-body">
-        <!-- Profile Picture -->
-        <div class="text-center my-4">
-          <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}" 
-          alt="Profile Picture" class="rounded-circle img-fluid" style="max-width: 200px;">
-        </div>
+          <!-- Profile Picture -->
+          <div class="text-center my-4">
+            <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'images/profil.png' %}{% endif %}" 
+            alt="Profile Picture" class="rounded-circle img-fluid" style="max-width: 200px;">
+          </div>
 
-        <!-- Additional Actions -->
-        <div class="d-flex justify-content-center gap-2">
-          <a href="{% url 'account_change_password' %}" class="btn btn-sm hover-effect">Ganti Password</a>
-          <a href="{% url 'account_email' %}" class="btn btn-sm hover-effect">Ganti Email</a>
-        </div>
+          <!-- Additional Actions -->
+          <div class="d-flex justify-content-center gap-2">
+            <a href="{% url 'account_change_password' %}" class="btn btn-sm hover-effect">Ganti Password</a>
+            <a href="{% url 'account_email' %}" class="btn btn-sm hover-effect">Ganti Email</a>
+          </div>
+
           <!-- Navigation Tabs -->
-          <nav class="container mt-3" style="background: white;">
+          <nav class="container mt-3">
             <ul class="nav nav-pills justify-content-center py-2 mb-3 rounded shadow-sm">
               <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}" href="{% url 'questify_app:userprofile' %}">Profile</a>
@@ -65,48 +64,61 @@
 
           <!-- Transaksi Section -->
           <div class="row justify-content-center">
-            <!-- Card for Kelas Basic -->
-            <div class="card card-custom mt-4">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span>Penyedia Program: <strong>Questify</strong></span>
-                <span class="badge bg-success">Langganan Aktif</span>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title text-primary">KELAS BASIC</h5>
-                <p class="card-text">Rp. 50.000</p>
-                <p class="card-text">
-                  <span>Status Pembayaran: </span>
-                  <span class="status-bayar text-success">Berhasil</span>
-                </p>
-                <p class="card-text">
-                  <span>Tanggal Pembayaran: </span>
-                  <span>24 September 2024, 09:45 WIB</span>
-                </p>
-                <a href="{% url 'questify_app:detailtransaksi' %}" class="btn btn-primary btn-primary-custom">Lihat Detail Pembayaran</a>
-              </div>
-            </div>
-
-            <!-- Card for Kelas Intermediate -->
-            <div class="card card-custom mt-4">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span>Penyedia Program: <strong>Questify</strong></span>
-                <span class="badge bg-warning text-dark">Belum Aktif</span>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title text-primary">KELAS INTERMEDIATE</h5>
-                <p class="card-text">Rp. 100.000</p>
-                <p class="card-text">
-                  <span>Status Pembayaran: </span>
-                  <span class="status-bayar text-warning">Menunggu Pembayaran</span>
-                </p>
-                <p class="card-text">
-                  <span>Tanggal Pembayaran: </span>
-                  <span>Batas sebelum 25 September 2024, 24:00 WIB</span>
-                </p>
-                <a href="{% url 'questify_app:detailtransaksi' %}" class="btn btn-primary btn-primary-custom">Lihat Detail Pembayaran</a>
-              </div>
-            </div>
+              {% if transaksi_list %}
+                {% for transaksi in transaksi_list %}
+                <div class="card card-custom mt-4">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Penyedia Program: <strong>Questify</strong></span>
+                    {% if transaksi.status_pembayaran == 'settlement' %}
+                    <span class="badge bg-success">Langganan Aktif</span>
+                    {% elif transaksi.status_pembayaran == 'pending' %}
+                    <span class="badge bg-warning text-dark">Menunggu Pembayaran</span>
+                    {% elif transaksi.status_pembayaran == 'cancelled' %}
+                    <span class="badge bg-danger">Transaksi Dibatalkan</span>
+                    {% elif transaksi.status_pembayaran == 'expired' %}
+                    <span class="badge bg-secondary">Pembayaran Kedaluwarsa</span>
+                    {% else %}
+                    <span class="badge bg-danger">Status Tidak Dikenal</span>
+                    {% endif %}
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">{{ transaksi.kelas.nama_kelas }}</h5>
+                    <p class="card-text">Rp. {{ transaksi.amount|intcomma }}</p>
+                    <p class="card-text">
+                      <span>Status Pembayaran: </span>
+                      <span class="status-bayar">
+                        {% if transaksi.status_pembayaran == 'settlement' %}
+                        <span class="text-success">Berhasil</span>
+                        {% elif transaksi.status_pembayaran == 'pending' %}
+                        <span class="text-warning">Menunggu</span>
+                        {% elif transaksi.status_pembayaran == 'cancelled' %}
+                        <span class="text-danger">Dibatalkan</span>
+                        {% elif transaksi.status_pembayaran == 'expired' %}
+                        <span class="text-secondary">Kedaluwarsa</span>
+                        {% else %}
+                        <span class="text-muted">Tidak Diketahui</span>
+                        {% endif %}
+                      </span>
+                    </p>
+                    <p class="card-text">
+                      <span>Tanggal Transaksi: </span>
+                      <span>{{ transaksi.tanggal_transaksi|date:"j F Y, H:i" }}</span>
+                    </p>
+                    {% if transaksi.status_pembayaran == 'pending' %}
+                    <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-primary btn-primary-custom">Lanjutkan Pembayaran</a>
+                    {% else %}
+                    <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-outline-primary btn-primary-custom" style="color: white;">Lihat Detail Pembayaran</a>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              {% else %}
+                <div class="text-center mt-5">
+                  <p class="text-muted">Belum ada transaksi yang tercatat.</p>
+                </div>
+              {% endif %}
           </div>
+        
         </div>
       </section>
     </div>
