@@ -2,9 +2,7 @@
     background-color: rgb(7, 7, 100); /* Set active navbar color to black */
     color: white !important; /* Optional: Change text color to white when active */
   }
-<<<<<<< HEAD
   
-=======
 
   .hover-effect {
     background-color: #6f4dbf;
@@ -21,4 +19,30 @@
     color: white;
     background-color: #5a3aa3; /* Warna lebih gelap saat dihover */
 }
->>>>>>> 9a8f7183ec563006e96b51613403fee4dceaa1fb
+
+.form-control {
+  border-radius: 8px; 
+  border: 1px solid #ddd; 
+  padding: 12px 15px; 
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+/* Efek hover untuk input */
+.form-control:hover {
+  border-color: 
+}
+
+/* Efek focus untuk input */
+.form-control:focus {
+  border-color: #6e49a3; 
+  box-shadow: 0 0 8px #6e49a366; 
+  outline: none; 
+}
+
+.form-label {
+  font-size: 14px; 
+  color: #333; 
+  margin-bottom: 8px; 
+  font-weight: bold; 
+  display: block; 
+}
