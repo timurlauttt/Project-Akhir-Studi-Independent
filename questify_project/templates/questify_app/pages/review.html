@@ -5,6 +5,8 @@
 
 {% block page_css %}
 <link rel="stylesheet" href="{% static 'css/review.css' %}" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 <style>
   .gagal-message {
     background-color: #f8b8ac;
@@ -26,12 +28,12 @@
     <div class="congrats-badge">
         {% if nilai >= 70 %}
             <!-- Tampilkan gambar jika nilai >= 70 -->
-            <img src="{% static 'images/piala.png' %}" alt="Congrats" class="congrats-icon" width="200">
-            <p class="pass-message">Selamat, Kamu Lulus</p>
+            <img src="{% static 'images/piala.png' %}" alt="Congrats" class="congrats-icon">
+            <p class="pass-message">Selamat, Kamu Lulus!</p>
         {% else %}
             <!-- Tampilkan gambar jika nilai < 70 -->
-            <img src="{% static 'images/sad.png' %}" alt="Gagal" class="congrats-icon" width="200">
-            <p class="gagal-message">Mohon Maaf, Kamu Gagal</p>
+            <img src="{% static 'images/sad.png' %}" alt="Gagal" class="gagal-icon">
+            <p class="gagal-message">Sayang sekali, kamu gagal. Coba lagi!</p>
         {% endif %}
     </div>
     <p class="minimum-score">Nilai Minimal: 70</p>
@@ -46,7 +48,7 @@
   <!-- Review Table Section -->
   <table class="review-table">
     <thead>
-      <tr style="color: #4e3980;">
+      <tr style="color: #f5f5f6;">
         <th>Pertanyaan</th>
         <th>Gambar</th>
         <th>Jawaban Kamu</th>
