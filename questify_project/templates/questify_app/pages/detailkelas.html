@@ -6,6 +6,8 @@
 
 {% block page_css %}
   <link rel="stylesheet" href="{% static 'css/detailkelas.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;500&display=swap" rel="stylesheet">
   <style>
     .highlight {
       font-size: 1.1em;
@@ -36,19 +38,29 @@
     <section class="row">
         <div class="col-12 text-center" style="margin-top: 60px; color: #6f4dbf;">
             <h1 class="display-4"><strong><b>{{ modul.judul }}</b></strong></h1>
+            <p class="text-muted">Siap uji kemampuan? 🚀 Langsung kerjakan quiz ini! 🧠✨!</p>
+            <hr class="my-1">
         </div>
     </section>
 
-    <!-- Informasi Modul -->
+        <!-- Informasi Modul -->
     <section class="row section-row">
         <div class="col-12">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Jumlah Soal:</strong> {{ modul.jumlah_soal }}</li>
-                        <li class="list-group-item"><strong>Kategori:</strong> {{ modul.kategori }}</li>
-                        <li class="list-group-item"><strong>Durasi:</strong> {{ modul.waktu_pengajaran }} menit</li>
-                        <li class="list-group-item"><strong>Tata Cara Menjawab:</strong> {{ modul.deskripsi }}</li>
+                        <li class="list-group-item">
+                            <strong class="label-jumlah-soal">Jumlah Soal:</strong> <span class="value-jumlah-soal">{{ modul.jumlah_soal }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong class="label-kategori">Kategori:</strong> <span class="value-kategori">{{ modul.kategori }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong class="label-durasi">Durasi:</strong> <span class="value-durasi">{{ modul.waktu_pengajaran }} menit</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong class="label-tata-cara">Tata Cara Menjawab:</strong> <span class="value-tata-cara">{{ modul.deskripsi }}</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -60,7 +72,7 @@
         <div class="col-12">
             <div class="card shadow-sm border-0">
                 <div class="card-body text-center">
-                    <h5 class="card-title"><i class="bi bi-exclamation-circle card-icon"></i><b>Informasi Penting</b></h5>
+                    <h5 class="card-title"><i class="bi bi-exclamation-circle card-icon"></i><b>Informasi Penting❗</b></h5>
                     <p class="highlight">Kamu harus mencapai skor minimum <strong>70</strong> untuk dinyatakan lulus.</p>
                     <p class="highlight">Semoga sukses dan selamat mengerjakan!</p>
                 </div>
