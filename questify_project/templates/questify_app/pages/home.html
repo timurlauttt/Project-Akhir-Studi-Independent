@@ -14,13 +14,13 @@ Home
 <main class="container-fluid mt-2">
     <div class="container-fluid py-5 position-relative">
         <img src="{% static 'images/trophy.png' %}" alt="Trophy" class="img-fluid d-none d-md-block position-absolute trophy-img" style="margin-top: 30px;">
-        <div class="mt-5 mb-5 p-5 rounded-3 position-relative shadow-sm" style="background: linear-gradient(270deg, #EE9AE5 0%, #5961F9 100%); min-height: 65vh; opacity: 0.8;">
+        <div class="mt-5 mb-5 p-5 rounded-3 position-relative shadow-sm highlight" style="background: linear-gradient(270deg, #EE9AE5 0%, #5961F9 100%); min-height: 65vh; opacity: 0.8;">
             <div class="mt-5">
                 <img src="{% static 'images/avatarboy.png' %}" alt="avatar" class="img-fluid d-none d-md-block position-absolute avatar-img" style="height: 339px; width: auto;">
             </div>
             <div class="p-3 mb-3">
                 <h1 class="fs-1 text-white text-start"><strong>Hallo</strong></h1>
-                <h2 class="fs-2 text-white text-start"><strong>{{ user.first_name }} {{ user.last_name }}</strong></h2>
+                <h1 id="userName" class="fs-1 text-white text-start"><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
                 <div class="p-2 mt-3">
                     <h1 class="fs-1 text-white fw-bold">
                         <span class="badge bg-warning rounded-pill">Total skor kamu : {{ skor }}</span>
@@ -166,4 +166,19 @@ Home
 
 </script>
 
+<script>
+    const userNameElement = document.getElementById('userName');
+    const fullName = "{{ user.first_name }} {{ user.last_name }}"; // Nama yang akan ditampilkan
+    let index = 0;
+    
+    function typeEffect() {
+      if (index < fullName.length) {
+        userNameElement.innerHTML = fullName.substring(0, index + 1); // Menampilkan huruf per huruf
+        index++;
+        setTimeout(typeEffect, 150); // Kecepatan mengetik (150ms per huruf)
+      }
+    }
+    typeEffect();
+</script>
+  
 {% endblock %}
