@@ -347,22 +347,23 @@ def halamanselesai(request, modul_id, nilai_total):
 
 @login_required(login_url='/questify_app/login/')
 def langganan(request):
-    # Ambil semua transaksi settlement dengan tanggal berakhir lebih besar dari hari ini
+    now_date = now()
+    last_month_date = now_date - timedelta(days=30)
     transaksi_aktif = Transaksi.objects.filter(
         user=request.user,
         status_pembayaran='settlement',
-        tanggal_transaksi__lte=now(),
-        tanggal_transaksi__gt=now() - timedelta(days=365)
+        tanggal_transaksi__lte=now_date,
+        tanggal_transaksi__gt=last_month_date
     )
     
-    # Ambil kelas terkait transaksi aktif
     kelas_list = Kelas.objects.filter(transaksi__in=transaksi_aktif).distinct()
     
-    # Tambahkan properti transaksi_terbaru untuk ditampilkan di template
     for kelas in kelas_list:
-        kelas.transaksi_terbaru = transaksi_aktif.filter(kelas=kelas).latest('tanggal_transaksi')
+        transaksi_terbaru = transaksi_aktif.filter(kelas=kelas).latest('tanggal_transaksi')
+        kelas.transaksi_terbaru = transaksi_terbaru
     
     return render(request, 'questify_app/pages/langganan.html', {'kelas_list': kelas_list})
+
 
 
 @login_required(login_url='/questify_app/login/')
@@ -431,14 +432,6 @@ def review(request, percobaan_ke, modul_id):
 
     return render(request, 'questify_app/pages/review.html', context)
 
-
-@login_required(login_url='/questify_app/login/')
-def metodepembayaran(request):
-    return render(request, 'questify_app/pages/metodepembayaran.html')
-
-@login_required(login_url='/questify_app/login/')
-def cekbeli(request):
-    return render(request, 'questify_app/pages/cekbeli.html')
 
 @login_required(login_url='/questify_app/login/')
 def daftartransaksi(request):

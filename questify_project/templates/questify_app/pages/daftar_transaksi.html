@@ -107,7 +107,7 @@
                     {% if transaksi.status_pembayaran == 'pending' %}
                     <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-primary btn-primary-custom">Lanjutkan Pembayaran</a>
                     {% else %}
-                    <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-outline-primary btn-primary-custom" style="color: white;">Lihat Detail Pembayaran</a>
+                    <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-outline-primary btn-primary-custom" style="color: white;">Cek Status</a>
                     {% endif %}
                   </div>
                 </div>
