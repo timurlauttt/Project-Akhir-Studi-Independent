@@ -4,6 +4,7 @@
 
 {% block page_css %}
   <link rel="stylesheet" href="{% static 'css/daftar_transaksi.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
   <style>
     .nav-pills .nav-link.active {
       background-color: rgb(7, 7, 100) !important;
@@ -83,9 +84,12 @@
                   </div>
                   <div class="card-body">
                     <h5 class="card-title text-primary">{{ transaksi.kelas.nama_kelas }}</h5>
-                    <p class="card-text">Rp. {{ transaksi.amount|intcomma }}</p>
                     <p class="card-text">
-                      <span>Status Pembayaran: </span>
+                      <span class="currency-symbol">Rp.</span>
+                      <span class="amount">{{ transaksi.amount|intcomma }}</span>
+                    </p>
+                    <p class="card-text">
+                      <span class="status-pembayaran-judul">Status Pembayaran:</span>
                       <span class="status-bayar">
                         {% if transaksi.status_pembayaran == 'settlement' %}
                         <span class="text-success">Berhasil</span>
@@ -101,9 +105,9 @@
                       </span>
                     </p>
                     <p class="card-text">
-                      <span>Tanggal Transaksi: </span>
-                      <span>{{ transaksi.tanggal_transaksi|date:"j F Y, H:i" }}</span>
-                    </p>
+                      <span class="tanggal-transaksi-label">&#128197; Tanggal Transaksi: </span>
+                      <span class="tanggal-transaksi">{{ transaksi.tanggal_transaksi|date:"j F Y, H:i" }}</span>
+                    </p>                    
                     {% if transaksi.status_pembayaran == 'pending' %}
                     <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-primary btn-primary-custom">Lanjutkan Pembayaran</a>
                     {% else %}
