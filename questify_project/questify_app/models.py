@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -84,13 +84,6 @@ class JawabanUser(models.Model):
     def __str__(self):
         return f"{self.user.username} - Percobaan {self.percobaan_ke} - {self.soal.pertanyaan}"
 
-class MetodePembayaran(models.Model):
-    nama_metode = models.CharField(max_length=50)
-    no_rek = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.nama_metode
-
 class Transaksi(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),       # Saat pembayaran belum selesai
@@ -101,7 +94,6 @@ class Transaksi(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaksi')
     kelas = models.ForeignKey(Kelas, on_delete=models.CASCADE, related_name='transaksi')
-    metode_pembayaran = models.ForeignKey(MetodePembayaran, on_delete=models.CASCADE, related_name='transaksi', null=True)
     status_pembayaran = models.CharField(max_length=10, choices=STATUS_CHOICES, default='settlement')
     tanggal_transaksi = models.DateTimeField(auto_now_add=True)
     batas_waktu_pembayaran = models.DateTimeField(default=datetime.now)
@@ -116,10 +108,27 @@ class Transaksi(models.Model):
     @property
     def tanggal_berakhir(self):
         """
-        Menghitung batas akhir langganan (1 tahun setelah settlement).
+        Menghitung batas akhir langganan (1 bulan setelah settlement, tanggal yang sama).
         """
         if self.status_pembayaran == 'settlement':
-            return self.tanggal_transaksi + timedelta(days=365)
+            try:
+                # Tambahkan 1 bulan ke tanggal transaksi
+                next_month = self.tanggal_transaksi.month + 1
+                year = self.tanggal_transaksi.year
+                if next_month > 12:  # Jika melewati Desember, pindah ke Januari tahun berikutnya
+                    next_month = 1
+                    year += 1
+                # Pastikan tanggal valid
+                day = self.tanggal_transaksi.day
+                return date(year, next_month, day)
+            except ValueError:
+                # Jika tanggal tidak valid (misalnya, 31 Februari), gunakan akhir bulan
+                next_month = self.tanggal_transaksi.month + 1
+                year = self.tanggal_transaksi.year
+                if next_month > 12:
+                    next_month = 1
+                    year += 1
+                return date(year, next_month, 1) - timedelta(days=1)
         return None
 
 def get_default_batas_waktu():

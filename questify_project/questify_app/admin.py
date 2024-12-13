@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 from .models import (
-    UserProfile, Kelas, MetodePembayaran,
+    UserProfile, Kelas,
     Transaksi, ModulPembelajaran, Soal, Nilai, JawabanUser, ContactMessage
 )
 
@@ -54,24 +54,12 @@ class ModulPembelajaranAdmin(admin.ModelAdmin):
                 soal.save(update_fields=['nilai_jawaban'])
 
 
-
-# @admin.register(Soal)
-# class SoalAdmin(admin.ModelAdmin):
-#     list_display = ('modul', 'pertanyaan', 'jawaban', 'nilai_jawaban')
-#     search_fields = ('pertanyaan',)
-#     list_filter = ('modul',)
-
 @admin.register(Nilai)
 class NilaiAdmin(admin.ModelAdmin):
     list_display = ('user', 'modul', 'jumlah_nilai', 'tanggal_percobaan', 'percobaan_ke')
     search_fields = ('user__email', 'modul__judul')
     list_filter = ('tanggal_percobaan',)
 
-# @admin.register(JawabanUser)
-# class JawabanUserAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'soal', 'pilihan_user', 'status', 'waktu_jawab')
-#     search_fields = ('user__email', 'soal__pertanyaan')
-#     list_filter = ('status',)
 
 @admin.register(JawabanUser)
 class JawabanUserAdmin(admin.ModelAdmin):
@@ -84,16 +72,12 @@ class JawabanUserAdmin(admin.ModelAdmin):
     modul.admin_order_field = 'soal__modul'  # Enable sorting
     modul.short_description = 'Modul Pembelajaran'
 
-@admin.register(MetodePembayaran)
-class MetodePembayaranAdmin(admin.ModelAdmin):
-    list_display = ('nama_metode', 'no_rek')
-    search_fields = ('nama_metode', 'no_rek')
 
 @admin.register(Transaksi)
 class TransaksiAdmin(admin.ModelAdmin):
-    list_display = ('user', 'kelas', 'metode_pembayaran', 'status_pembayaran', 'tanggal_transaksi','batas_waktu_pembayaran','amount')
-    search_fields = ('user__email', 'kelas__nama_kelas', 'metode_pembayaran__nama_metode')
-    list_filter = ('status_pembayaran', 'metode_pembayaran')
+    list_display = ('user', 'kelas', 'status_pembayaran', 'tanggal_transaksi','batas_waktu_pembayaran','amount')
+    search_fields = ('user__email', 'kelas__nama_kelas')
+    list_filter = ['status_pembayaran']
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):

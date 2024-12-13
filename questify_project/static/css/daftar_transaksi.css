@@ -1,7 +1,6 @@
 .nav-pills .nav-link.active {
   background-color: rgb(7, 7, 100) !important; /* Set active navbar color to black */
   color: white !important; /* Optional: Change text color to white when active */
-<<<<<<< HEAD
 }
 
 .card-custom {
@@ -30,9 +29,88 @@
   background-color: #574bd6;
   border-color: #574bd6;
 }
-  
-=======
+
+/* Kelas untuk label tanggal transaksi */
+.tanggal-transaksi-label {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;  /* Membuat label lebih tebal */
+  color: #333;  /* Warna teks lebih gelap untuk label */
 }
 
-  
->>>>>>> 9a8f7183ec563006e96b51613403fee4dceaa1fb
+/* Kelas untuk tanggal transaksi */
+.tanggal-transaksi {
+  font-family: 'Playfair Display', serif;  /* Ganti dengan font yang diinginkan */
+  color: #007bff;  /* Warna biru untuk tanggal */
+  font-size: 1rem;
+  font-weight: normal;  /* Mengatur ketebalan font */
+}
+
+/* Kelas untuk judul status pembayaran */
+.status-pembayaran-judul {
+  font-family: 'Playfair Display', sans-serif;  
+  font-weight: bold;  /* Menebalkan teks untuk penekanan */
+  color: #333;  /* Warna teks gelap */
+  font-size: 1rem;  /* Ukuran font lebih besar */
+  display: inline-block;  
+}
+
+/* Umum untuk status bayar */
+.status-bayar {
+  padding: 5px 10px;  
+  font-size: 1rem;  
+  font-weight: bold;  
+  border-radius: 12px;  /* Sudut yang membulat */
+  display: inline-block;  
+  text-transform: uppercase;  
+  letter-spacing: 0.5px;  
+  text-align: center;  
+  font-family: 'Roboto', sans-serif; 
+}
+
+/* Status 'Langganan Aktif' */
+.status-bayar.bg-success {
+  background-color: #28a745;  /* Hijau */
+  color: white;  /* Warna teks putih */
+}
+
+/* Status 'Menunggu Pembayaran' */
+.status-bayar.bg-warning {
+  background-color: #ffc107;  /* Kuning */
+  color: #856404;  /* Warna teks gelap agar kontras */
+}
+
+/* Status 'Transaksi Dibatalkan' */
+.status-bayar.bg-danger {
+  background-color: #dc3545;  /* Merah */
+  color: white;  /* Warna teks putih */
+}
+
+/* Status 'Pembayaran Kedaluwarsa' */
+.status-bayar.bg-secondary {
+  background-color: #6c757d;  
+  color: white;  
+}
+
+.card-title.text-primary {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #6C63FF !important;
+  text-align: center;
+  border-bottom: 2px solid #131414;
+}
+
+.currency-symbol {
+  font-family: 'Playfair Display', sans-serif; 
+  font-size: 1.1rem; 
+  color: #1b1d1b; 
+  font-weight: 700; 
+  margin-right: 5px; 
+}
+
+.amount {
+  font-family: 'Montserrat', sans-serif; 
+  font-size: 1rem; 
+  color: #47972f;
+  letter-spacing: 0.5px; 
+}
