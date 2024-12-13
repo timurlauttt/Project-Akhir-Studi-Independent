@@ -1,116 +1,131 @@
+/* Navbar Active Link */
 .nav-pills .nav-link.active {
-  background-color: rgb(7, 7, 100) !important; /* Set active navbar color to black */
-  color: white !important; /* Optional: Change text color to white when active */
+  background-color: #0066cc !important; 
+  color: white !important; 
 }
 
+/* Card Utama */
 .card-custom {
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card-custom .card-header {
-  background-color: #f7f7f7;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 0.75rem 1rem;
-}
-
-.card-custom .card-body {
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff; /* Warna latar putih */
   padding: 1.5rem;
-  background-color: #f9f9f9;
+  transition: transform 0.2s ease-in-out;
 }
 
-.btn-primary-custom {
-  background-color: #6C63FF;
-  border-color: #6C63FF;
-  color: white;
+.card-custom:hover {
+  transform: scale(1.02); /
 }
 
-.btn-primary-custom:hover {
-  background-color: #574bd6;
-  border-color: #574bd6;
-}
-
-/* Kelas untuk label tanggal transaksi */
-.tanggal-transaksi-label {
-  font-family: 'Playfair Display', serif;
-  font-weight: bold;  /* Membuat label lebih tebal */
-  color: #333;  /* Warna teks lebih gelap untuk label */
-}
-
-/* Kelas untuk tanggal transaksi */
-.tanggal-transaksi {
-  font-family: 'Playfair Display', serif;  /* Ganti dengan font yang diinginkan */
-  color: #007bff;  /* Warna biru untuk tanggal */
+/* Header Penyedia Program */
+.card-custom .card-header {
+  background-color: #f0f8ff; 
+  border-bottom: 2px solid #d0d0ff; 
+  padding: 1rem;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
-  font-weight: normal;  /* Mengatur ketebalan font */
+  font-weight: bold;
+  color: #333;
 }
 
-/* Kelas untuk judul status pembayaran */
-.status-pembayaran-judul {
-  font-family: 'Playfair Display', sans-serif;  
-  font-weight: bold;  /* Menebalkan teks untuk penekanan */
-  color: #333;  /* Warna teks gelap */
-  font-size: 1rem;  /* Ukuran font lebih besar */
-  display: inline-block;  
-}
-
-/* Umum untuk status bayar */
-.status-bayar {
-  padding: 5px 10px;  
-  font-size: 1rem;  
-  font-weight: bold;  
-  border-radius: 12px;  /* Sudut yang membulat */
-  display: inline-block;  
-  text-transform: uppercase;  
-  letter-spacing: 0.5px;  
-  text-align: center;  
-  font-family: 'Roboto', sans-serif; 
-}
-
-/* Status 'Langganan Aktif' */
-.status-bayar.bg-success {
-  background-color: #28a745;  /* Hijau */
-  color: white;  /* Warna teks putih */
-}
-
-/* Status 'Menunggu Pembayaran' */
-.status-bayar.bg-warning {
-  background-color: #ffc107;  /* Kuning */
-  color: #856404;  /* Warna teks gelap agar kontras */
-}
-
-/* Status 'Transaksi Dibatalkan' */
-.status-bayar.bg-danger {
-  background-color: #dc3545;  /* Merah */
-  color: white;  /* Warna teks putih */
-}
-
-/* Status 'Pembayaran Kedaluwarsa' */
-.status-bayar.bg-secondary {
-  background-color: #6c757d;  
-  color: white;  
-}
-
+/* Header Program */
 .card-title.text-primary {
-  font-family: 'Arial', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #6C63FF !important;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem; /* Ukuran font lebih besar */
+  font-weight: bold;
+  color: #0000ff; /* Warna biru gelap */
   text-align: center;
-  border-bottom: 2px solid #131414;
+  background: linear-gradient(to right, #94caf7, #d9f0fb); 
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
 }
 
+/* Harga */
 .currency-symbol {
-  font-family: 'Playfair Display', sans-serif; 
-  font-size: 1.1rem; 
-  color: #1b1d1b; 
-  font-weight: 700; 
-  margin-right: 5px; 
+  font-family: 'Playfair Display', serif; 
+  font-size: 1.5rem;
+  color: #47972f; /* Warna hijau untuk mata uang */
+  font-weight: bold; 
 }
 
 .amount {
   font-family: 'Montserrat', sans-serif; 
-  font-size: 1rem; 
-  color: #47972f;
+  font-size: 1.5rem; 
+  color: #47972f; /* Warna hijau cerah */
+  font-weight: bold;
   letter-spacing: 0.5px; 
+}
+
+.status-pembayaran-judul{
+font-family: 'Playfair+Display', sans-serif;
+font-weight: bold;
+color: #333;
+font-size: 1rem;
+}
+
+/* Status Pembayaran */
+.status-bayar {
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 20px; 
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Playfair+Display', sans-serif;
+}
+
+.status-bayar.bg-success {
+  background-color: #28a745; /* Hijau cerah */
+  color: white;
+}
+
+.status-bayar.bg-warning {
+  background-color: #ffc107; 
+  color: #856404;
+}
+
+.status-bayar.bg-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Tombol Cek Status */
+.btn-primary-custom {
+  background-color: #0066ff;
+  border: none;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 2rem; /* Sudut lebih membulat */
+  padding: 10px 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary-custom:hover {
+  background-color: #0052cc; /* Biru lebih gelap saat hover */
+  transform: scale(1.05); 
+}
+
+/* Keterangan Tanggal Transaksi */
+.tanggal-transaksi-label {
+  font-family: 'Playfair+Display', sans-serif;
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+
+.tanggal-transaksi {
+  font-family: 'Roboto', sans-serif;
+  color: #007bff;
+  font-size: 1rem;
+  font-weight: normal;
+  text-decoration: underline; 
 }
