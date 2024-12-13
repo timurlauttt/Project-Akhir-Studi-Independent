@@ -36,7 +36,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rhreisye@gmail.com'  # Ganti dengan email Anda
 EMAIL_HOST_PASSWORD = 'pdijdwslvdqckhkr'  # Ganti dengan password atau app password
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'a415-36-73-33-23.ngrok-free.app',
+]
 
 
 # Application definition

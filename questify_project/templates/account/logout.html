@@ -9,13 +9,13 @@
 
 {% block content %}
 <div class="d-flex justify-content-center align-items-center min-vh-100 pt-5 px-5">
-    <div class="card text-center" style="max-width: 500px; width: 100%; margin-top: 50px; margin-bottom: 50px;">
+    <div class="card text-center" style="max-width: 900px; width: 100%; margin-top: 25px;">
         <div class="card-body d-flex flex-column align-items-center justify-content-center">
             <h1 class="card-title text-center mt-2">
-                <b>{% trans "Sign Out" %}</b>
+                <b>{% trans "Log Out" %}</b>
             </h1>
             
-            <p class="text-center mt-3">{% trans "Are you sure you want to sign out?" %}</p>
+            <p class="text-center mt-3">{% trans "Anda yakin inign Log Out?" %}</p>
             
             {% url 'account_logout' as action_url %}
             <form method="post" action="{{ action_url }}" class="d-flex flex-column align-items-center">
@@ -23,35 +23,44 @@
                 {{ redirect_field }}
                 
                 <button type="submit" class="btn btn-danger mt-3" style="width: 200px;">
-                    {% trans "Sign Out" %}
+                    {% trans "Log Out" %}
                 </button>
+
+                <a style="color: white; width: 200px;" class="btn btn-primary mt-3 mb-3" href="{% url 'questify_app:userprofile' %}">
+                    Kembali
+                </a>
+
             </form>
 
-            <strong class="mt-4">{% trans "Menu:" %}</strong>
-            <div class="d-flex justify-content-between flex-wrap mt-3 gap-2">
+
+            <div class="text-center" >
+                <strong class="mt-3 mb-3" >{% trans "Menu:" %}</strong>
+            </div>
+            <div class="d-flex justify-content-center flex-wrap mt-3 mb-3 gap-2">
                 {% if user.is_authenticated %}
                     {% url 'account_email' as email_url_ %}
                     {% if email_url_ %}
                         <a href="{{ email_url_ }}" class="btn btn-sm" style="color: #5b3e9f; background-color: #e6def8; padding: 5px 15px;">
-                            {% trans "Change Email" %}
+                            {% trans "Ubah Email" %}
                         </a>
                     {% endif %}
                     
                     {% url 'account_change_password' as change_password_url_ %}
                     {% if change_password_url_ %}
                         <a href="{{ change_password_url_ }}" class="btn btn-sm" style="color: #5b3e9f; background-color: #e6def8; padding: 5px 15px;">
-                            {% trans "Change Password" %}
+                            {% trans "Ubah Password" %}
                         </a>     
                     {% endif %}
                 
+                    
                     {% url 'account_logout' as logout_url_ %}
                     {% if logout_url_ %}
                         <a href="{{ logout_url_ }}" class="btn btn-sm" style="color: #5b3e9f; background-color: #e6def8; padding: 5px 15px;">
-                            {% trans "Sign Out" %}
+                            {% trans "Log Out" %}
                         </a>
                     {% endif %}
                 {% else %}
-                    <!-- Add guest options if necessary -->
+                    
                 {% endif %}
             </div>
         </div>
