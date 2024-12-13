@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 from .models import (
-    UserProfile, Kelas,
+    UserProfile, Kelas, Pencapaian,
     Transaksi, ModulPembelajaran, Soal, Nilai, JawabanUser, ContactMessage
 )
 
@@ -84,3 +84,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'email', 'comment')
     search_fields = ('name', 'email')
     list_filter = ('name',)
+
+
+@admin.register(Pencapaian)
+class PencapaianAdmin(admin.ModelAdmin):
+    list_display = ('nama', 'skor_minimum')

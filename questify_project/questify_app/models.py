@@ -171,3 +171,12 @@ class PercobaanTerakhir(models.Model):
     
     def __str__(self):
         return f"{self.user.username} - {self.modul.judul} - Percobaan {self.percobaan_ke}"
+    
+
+class Pencapaian(models.Model):
+    nama = models.CharField(max_length=255)
+    skor_minimum = models.PositiveIntegerField()
+    gambar = models.ImageField(upload_to='pencapaian/')
+
+    def __str__(self):
+        return self.nama

@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileUpdateForm
-from .models import UserProfile
+from .models import Pencapaian, UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Kelas
@@ -130,6 +130,9 @@ def home(request):
     # Total skor user
     total_skor = nilai_lebih_70.aggregate(total=Sum('jumlah_nilai'))['total'] or 0
 
+     # Ambil pencapaian tertinggi sesuai skor pengguna
+    pencapaian = Pencapaian.objects.filter(skor_minimum__lte=total_skor).order_by('-skor_minimum').first()
+
     # Data penyelesaian per kelas
     data_kelas = []
     for kelas in semua_kelas:
@@ -151,6 +154,7 @@ def home(request):
         'persentase': round(persentase_penyelesaian, 2),
         'skor': total_skor,
         'data_kelas': data_kelas,
+        'pencapaian': pencapaian,
     })
 
 

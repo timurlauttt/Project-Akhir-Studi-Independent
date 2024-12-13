@@ -64,11 +64,11 @@
           </nav>
 
           <!-- Transaksi Section -->
-          <div class="row justify-content-center">
+          <div class="row justify-content-center p-4">
               {% if transaksi_list %}
                 {% for transaksi in transaksi_list %}
-                <div class="card card-custom mt-4">
-                  <div class="card-header d-flex justify-content-between align-items-center">
+              
+                  <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #845edd; color: white;">
                     <span>Penyedia Program: <strong>Questify</strong></span>
                     {% if transaksi.status_pembayaran == 'settlement' %}
                     <span class="badge bg-success">Langganan Aktif</span>
@@ -82,7 +82,7 @@
                     <span class="badge bg-danger">Status Tidak Dikenal</span>
                     {% endif %}
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="background-color: rgb(247, 247, 247);">
                     <h5 class="card-title text-primary">{{ transaksi.kelas.nama_kelas }}</h5>
                     <p class="card-text">
                       <span class="currency-symbol">Rp.</span>
@@ -114,7 +114,7 @@
                     <a href="{{ transaksi.link_payment }}" target="_blank" class="btn btn-outline-primary btn-primary-custom" style="color: white;">Cek Status</a>
                     {% endif %}
                   </div>
-                </div>
+                
                 {% endfor %}
               {% else %}
                 <div class="text-center mt-5">
