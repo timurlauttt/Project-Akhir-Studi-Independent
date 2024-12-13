@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     togglePasswordButton1.addEventListener('click', function() {
         if (passwordField1.type === 'password') {
             passwordField1.type = 'text';
-            togglePasswordButton1.textContent = 'Hid    e';
+            togglePasswordButton1.textContent = 'Hide';
         } else {
             passwordField1.type = 'password';
             togglePasswordButton1.textContent = 'Show';
