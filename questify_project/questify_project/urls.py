@@ -26,8 +26,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('questify_app/', include('questify_app.urls')),
     path('accounts/', include('allauth.urls')),
-    path('midtrans-webhook/', views.midtrans_webhook, name='midtrans_webhook'),
-
 ]
 
 if settings.DEBUG:

@@ -45,7 +45,6 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
-
 class ProfileUpdateForm(forms.ModelForm):
     profile_picture = forms.ImageField(required=False)  # Menangani gambar profil (opsional)
 
