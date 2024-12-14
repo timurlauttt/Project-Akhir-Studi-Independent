@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.views.decorators.csrf import csrf_exempt
 
 
 app_name = "questify_app"
@@ -22,4 +23,6 @@ urlpatterns = [
     path('soal/<int:modul_id>/soal/', views.soal, name='soal'),
     path('soal/<int:modul_id>/soal/<int:soal_id>/', views.soal, name='soal_detail'),
     path('home/', views.home, name='home'),
+
+    path('midtrans_webhook', csrf_exempt(views.midtrans_webhook), name='midtrans_webhook'),
 ]

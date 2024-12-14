@@ -75,8 +75,8 @@ class JawabanUserAdmin(admin.ModelAdmin):
 
 @admin.register(Transaksi)
 class TransaksiAdmin(admin.ModelAdmin):
-    list_display = ('user', 'kelas', 'status_pembayaran', 'tanggal_transaksi','batas_waktu_pembayaran','amount')
-    search_fields = ('user__email', 'kelas__nama_kelas')
+    list_display = ('user', 'kelas', 'status_pembayaran', 'tanggal_transaksi','batas_waktu_pembayaran','amount','order_id',)
+    search_fields = ('user_email', 'kelas_nama_kelas','order_id',)
     list_filter = ['status_pembayaran']
 
 @admin.register(ContactMessage)

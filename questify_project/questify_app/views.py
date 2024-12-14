@@ -565,49 +565,20 @@ def soal(request, modul_id, soal_id=None):
 # Konfigurasi logger untuk debugging
 logger = logging.getLogger(__name__)
 
-@csrf_exempt
 def midtrans_webhook(request):
+    print('masukk atau ga? ')
+    print(request)
     if request.method == 'POST':
-        try:
-            # Log data notifikasi untuk debugging
-            logger.info(f"Midtrans webhook received: {request.body}")
-
-            # Parse data JSON dari notifikasi Midtrans
-            data = json.loads(request.body)
-            order_id = data.get('order_id')  # Ambil order_id
-            transaction_status = data.get('transaction_status')  # Status transaksi dari Midtrans
-            transaction_time = data.get('transaction_time')  # Waktu transaksi dari Midtrans
-
-            # Cari transaksi berdasarkan order_id
-            transaksi = Transaksi.objects.get(link_payment__icontains=order_id)
-
-            # Konversi waktu transaksi ke timezone lokal (Asia/Jakarta)
-            jakarta_tz = pytz.timezone('Asia/Jakarta')
-            waktu_transaksi = datetime.strptime(transaction_time, "%Y-%m-%d %H:%M:%S")
-            waktu_transaksi = waktu_transaksi.replace(tzinfo=pytz.utc).astimezone(jakarta_tz)
-            transaksi.tanggal_transaksi = waktu_transaksi  # Update waktu transaksi
-
-            # Update status pembayaran berdasarkan transaction_status Midtrans
-            if transaction_status == 'settlement':
-                transaksi.status_pembayaran = 'berhasil'
-            elif transaction_status == 'pending':
-                transaksi.status_pembayaran = 'pending'
-            elif transaction_status in ['cancel', 'deny']:
-                transaksi.status_pembayaran = 'gagal'
-            elif transaction_status == 'expire':
-                transaksi.status_pembayaran = 'expired'
-            else:
-                logger.warning(f"Unhandled transaction status: {transaction_status}")
-
-            # Simpan perubahan status di database
+        json_midtrans = json.loads(request.body)
+        print(json_midtrans['transaction_status'])
+        print('request', request)
+        transaksi = Transaksi.objects.filter(order_id=json_midtrans['order_id']).last()
+        print(transaksi)
+        if transaksi : 
+            transaksi.status_pembayaran=json_midtrans['transaction_status']
+            print(transaksi.status_pembayaran)
+            print(json_midtrans['transaction_status'])
             transaksi.save()
-            return JsonResponse({"message": "Transaction status updated successfully"}, status=200)
+            print(transaksi.status_pembayaran)
 
-        except Transaksi.DoesNotExist:
-            logger.error(f"Transaction not found for order_id {order_id}")
-            return JsonResponse({"error": "Transaction not found"}, status=404)
-        except Exception as e:
-            logger.error(f"Error processing webhook: {str(e)}")
-            return JsonResponse({"error": str(e)}, status=500)
-
-    return JsonResponse({"error": "Invalid request method"}, status=400)
+    return JsonResponse({"error": "Invalid request method"}, status=200)

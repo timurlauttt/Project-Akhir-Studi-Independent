@@ -85,16 +85,10 @@ class JawabanUser(models.Model):
         return f"{self.user.username} - Percobaan {self.percobaan_ke} - {self.soal.pertanyaan}"
 
 class Transaksi(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),       # Saat pembayaran belum selesai
-        ('settlement', 'Settlement'), # Pembayaran berhasil
-        ('cancelled', 'Cancelled'),   # Pembayaran dibatalkan
-        ('expired', 'Expired'),       # Waktu pembayaran habis
-    ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transaksi')
     kelas = models.ForeignKey(Kelas, on_delete=models.CASCADE, related_name='transaksi')
-    status_pembayaran = models.CharField(max_length=10, choices=STATUS_CHOICES, default='settlement')
+    status_pembayaran = models.CharField(max_length=10,)
     tanggal_transaksi = models.DateTimeField(auto_now_add=True)
     batas_waktu_pembayaran = models.DateTimeField(default=datetime.now)
     # total_pembayaran = models.DecimalField(max_digits=10, decimal_places=2)
@@ -102,7 +96,7 @@ class Transaksi(models.Model):
     link_payment = models.CharField(max_length=255,blank=True, null=True)
     order_id = models.CharField(max_length=255, blank=True, null=True)
 
-    def __str__(self):
+    def _str_(self):
         return f"Transaksi oleh {self.user.username} untuk {self.kelas.nama_kelas}"
     
     @property
