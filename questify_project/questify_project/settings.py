@@ -39,12 +39,12 @@ EMAIL_HOST_PASSWORD = 'pdijdwslvdqckhkr'  # Ganti dengan password atau app passw
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'dbe2-36-77-223-219.ngrok-free.app',
+    '8fa7-2400-9800-a01-c1d3-10ee-5e2f-15-870c.ngrok-free.app',
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'https://dbe2-36-77-223-219.ngrok-free.app',
+    'https://8fa7-2400-9800-a01-c1d3-10ee-5e2f-15-870c.ngrok-free.app',   
 ]
-
+    
 
 # Application definition
 

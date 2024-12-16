@@ -582,3 +582,6 @@ def midtrans_webhook(request):
             print(transaksi.status_pembayaran)
 
     return JsonResponse({"error": "Invalid request method"}, status=200)
+
+def midtrans_end(request):
+    return render(request, 'langganan.html')

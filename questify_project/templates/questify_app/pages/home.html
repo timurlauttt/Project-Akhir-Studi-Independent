@@ -3,93 +3,9 @@
 
 {% block page_css %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    .modal-dialog {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-    }
 
-    .modal-content {
-        border-radius: 15px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #FFFFFF, #E3F2FD); /* Putih ke biru muda */
-    }
-
-    .modal-header {
-        background: linear-gradient(135deg, #2196F3, #64B5F6); /* Biru cerah ke biru muda */
-        color: white;
-        padding: 20px;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-        border-bottom: 2px solid #90CAF9; /* Biru pastel */
-    }
-
-    .modal-title {
-        font-size: 1.8rem;
-        font-weight: bold;
-        text-shadow: 1px 1px #1976D2; /* Bayangan teks biru gelap */
-    }
-
-    .modal-body {
-        text-align: center;
-        font-family: 'Quicksand', sans-serif;
-        color: #1A237E; /* Biru navy untuk kontras */
-        font-size: 1.2rem;
-        font-weight: 700;
-        padding: 20px;
-        border-radius: 10px;
-        background: #F3F9FF; /* Putih dengan nuansa biru muda */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        letter-spacing: 0.5px;
-        line-height: 1.6;
-    }
-
-    .modal-body p {
-        font-size: 1.2rem;
-        color: #1A237E; /* Teks biru navy */
-        line-height: 1.5;
-    }
-
-    .modal-footer {
-        border-top: none;
-        background: #E3F2FD; /* Biru muda */
-        padding: 10px;
-        text-align: center;
-    }
-
-    .btn-secondary {
-        background: #2196F3; /* Biru cerah */
-        border: none;
-        color: white;
-        font-weight: bold;
-        font-size: 1rem;
-        padding: 10px 20px;
-        border-radius: 30px; /* Tombol melingkar */
-        transition: 0.3s ease;
-    }
-
-    .btn-secondary:hover {
-        background: #1976D2; /* Biru gelap saat hover */
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    .modal-content {
-        animation: fadeIn 1.5s ease-in-out; /* Efek animasi */
-    }
-</style>
 {% endblock %}
 
 {% block title %}
@@ -289,6 +205,6 @@ Home
         sessionStorage.removeItem('isNewLogin');
       }
     });
-  </script>  
+</script>  
   
 {% endblock %}

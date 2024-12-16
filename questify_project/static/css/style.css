@@ -10,14 +10,14 @@ body {
 .trophy-img {
   width: 40%; /* Responsif untuk desktop */
   max-width: 400px;
-  top: 25%;
+  top: 28%;
   left: 20%;
 }
 
 .avatar-img{
-  width: 40%;
+  width: 50%;
   max-width: 300px;
-  top: 21%;
+  top: 26.5%;
   right: 10%;
   object-fit: cover;
 }

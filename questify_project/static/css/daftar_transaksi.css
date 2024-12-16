@@ -1,91 +1,104 @@
-/* Navbar Active Link */
+/* Aktifkan Tab Navigation */
 .nav-pills .nav-link.active {
-  background-color: #0066cc !important; 
-  color: white !important; 
+  background-color: #003366 !important; /* Warna biru tua */
+  color: #ffffff !important;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Card Utama */
+/* Hover Effect */
+.hover-effect {
+  background-color: #6f4dbf;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.hover-effect:hover {
+  background-color: #5a3aa3;
+  transform: translateY(-3px); /* Menambahkan efek hover */
+}
+
+/* Kartu Utama */
 .card-custom {
   border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
-  border: 1px solid #e0e0e0;
-  background-color: #ffffff; /* Warna latar putih */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  background-color: #ffffff;
   padding: 1.5rem;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
 .card-custom:hover {
-  transform: scale(1.02); /
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Header Penyedia Program */
+/* Header Kartu */
 .card-custom .card-header {
-  background-color: #f0f8ff; 
-  border-bottom: 2px solid #d0d0ff; 
+  background-color: #f9f9ff;
+  border-bottom: 1px solid #d6d6f0;
   padding: 1rem;
   font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444;
 }
 
-/* Header Program */
+/* Judul Program */
 .card-title.text-primary {
   font-family: 'Roboto', sans-serif;
-  font-size: 2rem; /* Ukuran font lebih besar */
-  font-weight: bold;
-  color: #0000ff; /* Warna biru gelap */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #003399; /* Warna biru yang lebih profesional */
   text-align: center;
-  background: linear-gradient(to right, #94caf7, #d9f0fb); 
-  padding: 1.5rem;
-  border-radius: 1rem;
+  background: linear-gradient(90deg, #94caf7, #d9f0fb);
+  padding: 1rem;
+  border-radius: 0.75rem;
   margin: 1rem 0;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Harga */
-.currency-symbol {
-  font-family: 'Playfair Display', serif; 
-  font-size: 1.5rem;
-  color: #47972f; /* Warna hijau untuk mata uang */
-  font-weight: bold; 
-}
-
+.currency-symbol,
 .amount {
-  font-family: 'Montserrat', sans-serif; 
-  font-size: 1.5rem; 
-  color: #47972f; /* Warna hijau cerah */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  color: #3a9b34; /* Hijau modern */
   font-weight: bold;
-  letter-spacing: 0.5px; 
+  letter-spacing: 0.5px;
 }
 
-.status-pembayaran-judul{
-font-family: 'Playfair+Display', sans-serif;
-font-weight: bold;
-color: #333;
-font-size: 1rem;
+.status-pembayaran-judul {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
 }
 
 /* Status Pembayaran */
 .status-bayar {
-  padding: 8px 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 20px; 
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.75px;
   text-align: center;
-  font-weight: bold;
-  font-family: 'Playfair+Display', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .status-bayar.bg-success {
-  background-color: #28a745; /* Hijau cerah */
+  background-color: #28a745;
   color: white;
 }
 
 .status-bayar.bg-warning {
-  background-color: #ffc107; 
+  background-color: #ffc107;
   color: #856404;
 }
 
@@ -94,38 +107,40 @@ font-size: 1rem;
   color: white;
 }
 
-/* Tombol Cek Status */
+/* Tombol Utama */
 .btn-primary-custom {
-  background-color: #070764;
+  background-color: #003366;
   border: none;
   color: white;
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
-  font-weight: bold;
-  border-radius: 2rem; /* Sudut lebih membulat */
-  padding: 10px 20px;
+  font-weight: 700;
+  border-radius: 1.5rem;
+  padding: 0.75rem 1.5rem;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary-custom:hover {
-  background-color: #0052cc; /* Biru lebih gelap saat hover */
-  transform: scale(1.05); 
+  background-color: #002244;
+  transform: scale(1.05);
 }
 
-/* Keterangan Tanggal Transaksi */
-.tanggal-transaksi-label {
-  font-family: 'Playfair+Display', sans-serif;
-  font-weight: bold;
-  color: #333;
+/* Tanggal Transaksi */
+.tanggal-transaksi-label,
+.tanggal-transaksi {
+  font-family: 'Jost', sans-serif;
   font-size: 1rem;
+}
+
+.tanggal-transaksi-label {
+  font-weight: 700;
+  color: #333;
 }
 
 .tanggal-transaksi {
-  font-family: 'Roboto', sans-serif;
   color: #007bff;
-  font-size: 1rem;
-  font-weight: normal;
-  text-decoration: underline; 
+  font-weight: 400;
+  text-decoration: underline;
 }

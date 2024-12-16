@@ -25,4 +25,5 @@ urlpatterns = [
     path('home/', views.home, name='home'),
 
     path('midtrans_webhook', csrf_exempt(views.midtrans_webhook), name='midtrans_webhook'),
+    path('midtrans_end', views.midtrans_end, name='midtrans_end'),
 ]
