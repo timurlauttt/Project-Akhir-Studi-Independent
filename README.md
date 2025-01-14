@@ -1,7 +1,9 @@
-EDUCOURSE
+Studi Idependent Batch 7 Educourse.id
 
 KELOMPOK 5 Mentor: Mr. Muhammad Khairul Ahmad
 
+
+  8. 11420934 URIP YOGA PANGESTU 
   1. 9764095 Reisye Remagari Hidayatullah
   2. 11206516 Kalsum Burhani Putri
   3. 10595100 Nazma Hevano
@@ -9,4 +11,4 @@ KELOMPOK 5 Mentor: Mr. Muhammad Khairul Ahmad
   5. 9869494 Mohamad Rizki Baktiar
   6. 9938931 Novia Fitriani
   7. 11434646 Kharisma Yogi Prika Oktaviandra
-  8. 11420934 Urip Yoga Pangestu
+
