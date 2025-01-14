@@ -37,12 +37,10 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rhreisye@gmail.com'  # Ganti dengan email Anda
 EMAIL_HOST_PASSWORD = 'pdijdwslvdqckhkr'  # Ganti dengan password atau app password
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    '8fa7-2400-9800-a01-c1d3-10ee-5e2f-15-870c.ngrok-free.app',
+    '.vercel.app',
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'https://8fa7-2400-9800-a01-c1d3-10ee-5e2f-15-870c.ngrok-free.app',   
+    '.vercel.app',   
 ]
     
 
